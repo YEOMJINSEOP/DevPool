@@ -8,7 +8,7 @@ const App: React.FC = () => {
   useEffect(() => {
     getUserById(1).then((data) => {
       // setUsers(data);
-      console.log(data);
+      console.log(data)
     })
   }, []);
   return (
