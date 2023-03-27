@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import './App.css';
 import { getUserById, getUsers } from './api/api';
+import { Routes, Route, Link } from 'react-router-dom';
+import UserInfo from './components/UserInfo/UserInfo';
 
 const App: React.FC = () => {
   const [users, setUsers] = useState([]);
@@ -21,6 +23,9 @@ const App: React.FC = () => {
           </li>
         ))}
       </ul> */}
+      <Routes>
+        <Route path='/userInfo' element={<UserInfo />} />
+      </Routes>
     </>
   );
 }
