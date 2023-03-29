@@ -69,7 +69,7 @@ function TeamForm(){
       <div className='current-count-container'>
         <label htmlFor="current-count">현재 인원</label>
         <select name="currentCount" id='current-count' value={team.currentCount} onChange={handleInputChange}>
-          <option defaultValue="1">1</option>
+          <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
@@ -91,7 +91,7 @@ function TeamForm(){
       <div className='recruit-domain-container'>
         <label htmlFor="recruit-domain">모집 분야</label>
         <select name="recruitDomain" id="recruit-domain" value={team.recruitDomain} onChange={handleInputChange}>
-          <option defaultValue="front-end">Front-end</option>
+          <option value="front-end">Front-end</option>
           <option value="back-end">Back-end</option>
           <option value="android">Android</option>
           <option value="ios">IOS</option>

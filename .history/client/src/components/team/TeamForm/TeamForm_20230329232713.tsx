@@ -91,7 +91,7 @@ function TeamForm(){
       <div className='recruit-domain-container'>
         <label htmlFor="recruit-domain">모집 분야</label>
         <select name="recruitDomain" id="recruit-domain" value={team.recruitDomain} onChange={handleInputChange}>
-          <option defaultValue="front-end">Front-end</option>
+          <option value="front-end">Front-end</option>
           <option value="back-end">Back-end</option>
           <option value="android">Android</option>
           <option value="ios">IOS</option>
