@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-type teamFormProps = {
-  name: string;
-  mark: string;
-  optional?: string;
-};
+function TeamForm(){
+  const [teamName, setTeamName] = useState<string>('');
+  const [projectCategory, setProjectCategory] = useState<string>('');
+  const [recruitCount, setRecruitCount] = useState<number>(0);
+  const [recruitCategory, setRecruitCategory] = useState<string>('');
+  const [recruitStack, setRecruitStack] = useState<Array<string>>([]);
 
-function TeamForm({name, mark, optional}: teamFormProps){
+  const handleTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTeamName(event.target.value);
+  }
   return (
     <div className='team_form'>
       <div className='team_name'>
         <span>팀 이름</span>
-        <input type="text" />
+        <input type="text" value={teamName} onChange={handleTeamName}/>
       </div>
       <div className='project_categroy'>
         <label htmlFor="project_category_select">프로젝트 카테고리</label>
