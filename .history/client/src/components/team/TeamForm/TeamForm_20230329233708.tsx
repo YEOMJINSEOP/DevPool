@@ -57,7 +57,7 @@ function TeamForm(){
     <form className='team-form' action="/post할URL" method="post">
       <div className='name-container'>
         <label htmlFor='name'>팀 이름</label>
-        <input type="text" name='name' id='name' value={team.name} onChange={handleInputChange} maxLength={20}/>
+        <input type="text" name='name' id='name' value={team.name} onChange={handleInputChange} maxLength={15}/>
       </div>
       <div className='category-container'>
         <label htmlFor='category'>프로젝트 카테고리</label>
