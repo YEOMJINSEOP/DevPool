@@ -9,9 +9,10 @@ const App: React.FC = () => {
   return (
     <>
       <Header logo="devPool" />
+      <TeamForm name="태우" mark="!!"/>
       <Routes>
         <Route path='/userInfo' element={<UserInfo />} />
-        <Route path='/teamForm' element={<TeamForm name="Team_Name" mark="!!"/>} />
+        <Route path='/teamForm' element={<UserInfo />} />
       </Routes>
     </>
   );

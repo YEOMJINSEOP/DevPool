@@ -11,7 +11,7 @@ const App: React.FC = () => {
       <Header logo="devPool" />
       <Routes>
         <Route path='/userInfo' element={<UserInfo />} />
-        <Route path='/teamForm' element={<TeamForm name="Team_Name" mark="!!"/>} />
+        <Route path='/teamForm' element={<TeamForm name="태우" mark="!!"/>} />
       </Routes>
     </>
   );
