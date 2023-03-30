@@ -6,6 +6,7 @@ import UserInfo from './components/user/UserInfo/UserInfo';
 import TeamForm from './components/team/TeamForm/TeamForm';
 
 const App: React.FC = () => {
+  
   return (
     <>
       <Header logo="devPool" />
