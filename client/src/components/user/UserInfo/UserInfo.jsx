@@ -50,18 +50,30 @@ export default function UserInfo() {
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
 
-  const handleInterest = (e) => {
+  // 리스트에 추가하기
+  const handleAddBtn = (e) => {
     const { id, value } = e.target;
-    setSelectedInterest(value);
+    if(id == 'interest') {
+      setSelectedInterest(value);
+    } 
+    else if(id == 'certificate') {
+      if(certificate == '') return;
+      setMember((prev) => ({
+        ...prev,
+        certificate: [...prev.certificate, certificate],
+      }));
+      setCertificate('');
+    }
   }
 
+  // 리스트 삭제하기(parentId는 "항목 내용"의 형태로 되어 있음. )
   const handleDeleteBtn = (e) => {
-    const parent = e.target.parentNode.id;
-    console.log(parent);
+    const parentId = e.target.parentNode.id.split(' ');
+    console.log(parentId);
     setMember((prev) => {
       let current = {...prev};
-      console.log(current.interest.filter((item) => parent !== item));
-      current.interest = current.interest.filter((item) => parent !== item);
+      console.log(current[parentId[0]].filter((item) => parentId[1] !== item));
+      current[parentId[0]] = current[parentId[0]].filter((item) => parentId[1] !== item);
       return current
     });
   }
@@ -108,7 +120,7 @@ export default function UserInfo() {
       onChange={handleUserInput} />
       <div>
         <label htmlFor='interest'>관심분야</label>
-        <select id="interest" value={selectedInterest} onChange={handleInterest}>
+        <select id="interest" value={selectedInterest} onChange={handleAddBtn}>
           {interestList.map((item) => {
             return (
               <option value={item}>{item}</option>
@@ -117,7 +129,7 @@ export default function UserInfo() {
         </select>
         {member.interest.map((item) => {
           return (
-            <li id={item}>
+            <li id={"interest " + item}>
               {item}
               <button onClick={handleDeleteBtn}>삭제</button>
             </li>
@@ -160,16 +172,19 @@ export default function UserInfo() {
     {/* 자격증 */}
     <div className='user_certificate'>
       <label htmlFor='certificate'>자격증</label>
-      <input 
-      placeholder='' 
-      type="text" 
-      value={certificate}
-      onChange={(e) => setCertificate(e.target.value)}/>
-      <button onClick={showMember}>추가하기</button>
+        <input 
+        placeholder='' 
+        type="text" 
+        value={certificate}
+        onChange={(e) => setCertificate(e.target.value)}/>
+        <button id="certificate" onClick={handleAddBtn}>추가하기</button>
     </div>
     {member.certificate.map((item) => {
       return (
-        <div>{item}</div>
+        <li id={"certificate " + item}>
+          {item}
+          <button onClick={handleDeleteBtn}>삭제</button>
+        </li>
       );
     })}
   </div>
