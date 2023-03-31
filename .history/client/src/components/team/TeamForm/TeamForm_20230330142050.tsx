@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { textState } from '../../../recoil/text';
 import { userState } from '../../../recoil/user';
 
 type Team = {
@@ -24,7 +25,7 @@ function TeamForm(){
     recruitStack: [],
   });
 
-  const [newStack, setNewStack] = useState<string>('');
+  const [newStack, setNewStack] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = event.target;
@@ -57,13 +58,8 @@ function TeamForm(){
     }
   };
 
-  const handleSubmit = (): void => {
-    return;
-  }
-
   return (
     <form className='team-form' action="/post할URL" method="post">
-      <p>{user.name}</p>
       <div className='name-container'>
         <label htmlFor='name'>팀 이름</label>
         <input type="text" name='name' id='name' value={team.name} onChange={handleInputChange} maxLength={20}/>
@@ -119,7 +115,6 @@ function TeamForm(){
           </ul>
         </div>
       </div>
-      <button type="button" onClick={handleSubmit}>팀 등록하기</button>
     </form>
   )
 }

@@ -57,10 +57,6 @@ function TeamForm(){
     }
   };
 
-  const handleSubmit = (): void => {
-    return;
-  }
-
   return (
     <form className='team-form' action="/post할URL" method="post">
       <p>{user.name}</p>
@@ -119,7 +115,6 @@ function TeamForm(){
           </ul>
         </div>
       </div>
-      <button type="button" onClick={handleSubmit}>팀 등록하기</button>
     </form>
   )
 }

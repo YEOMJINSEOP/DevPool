@@ -5,9 +5,7 @@ type HeaderProps = {
 };
 
 const Header = ({logo}: HeaderProps) => (
-  <>
-    <h2>HEADER {logo}</h2>
-  </>
+  <div>HEADER {logo}</div>
 );
 
 export default Header;

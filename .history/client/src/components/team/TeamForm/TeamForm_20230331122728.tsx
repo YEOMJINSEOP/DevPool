@@ -57,7 +57,7 @@ function TeamForm(){
     }
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = () => {
     return;
   }
 
@@ -119,7 +119,7 @@ function TeamForm(){
           </ul>
         </div>
       </div>
-      <button type="button" onClick={handleSubmit}>팀 등록하기</button>
+      <button type="button" onClick={handleSumbit}>팀 등록하기</button>
     </form>
   )
 }
