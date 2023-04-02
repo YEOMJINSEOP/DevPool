@@ -59,7 +59,7 @@ function TeamForm(){
 
   const [contentCharCount, setContentCharCount] = useState<number>(0);
   const handleContentCharCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContentCharCount(event.target.value.length);
+    setContentCharCount(parseInt(event.target.value));
   }
 
   const handleSubmit = (): void => {

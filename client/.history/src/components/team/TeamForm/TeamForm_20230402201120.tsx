@@ -57,11 +57,6 @@ function TeamForm(){
     }
   };
 
-  const [contentCharCount, setContentCharCount] = useState<number>(0);
-  const handleContentCharCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContentCharCount(event.target.value.length);
-  }
-
   const handleSubmit = (): void => {
     return;
   }
@@ -123,10 +118,6 @@ function TeamForm(){
             ))}
           </ul>
         </div>
-      </div>
-      <div className='content'>
-        <textarea name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentCharCount}></textarea>
-        <p>{contentCharCount} / 300</p>
       </div>
       <button type="button" onClick={handleSubmit}>팀 등록하기</button>
     </form>
