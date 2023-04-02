@@ -62,7 +62,7 @@ function TeamInfo(){
         <p>{team.recruitDomain}</p>
       </div>
       <div className='recruit-stack-container'>
-        <p>팀 스택</p>
+        
       <div className='stack-container'>
           <ul className='stack'>
             {team.recruitStack.map((stack, idx) => (
@@ -72,7 +72,6 @@ function TeamInfo(){
         </div>
       </div>
       <div className='content'>
-        <p>모집 글</p>
         <textarea name="content" id="content" cols={30} rows={10} maxLength={300}></textarea>
       </div>
       <button type="button">팀 참여하기</button>

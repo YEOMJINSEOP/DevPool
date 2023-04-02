@@ -1,0 +1,11 @@
+{
+    "team_id": 1,
+    "name": "team name",
+    "host_email": "kau@kau.kr",
+    "title": "title",
+    "body": "bodybodybodybodybodybodybodybodybodybody",
+    "recruitment": 5,
+    "cur_recruitment": 3,
+    "category": "Web",
+    "required_stack": ["React", "TypeScript"]
+}
