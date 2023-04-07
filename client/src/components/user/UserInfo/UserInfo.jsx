@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getMemberInfo } from '../../../api/api';
 import Autocomplete from './Autocomplete';  
+import Modal from 'react-modal';
 
 const Member = {
   name: '',
@@ -14,12 +15,19 @@ const Member = {
 const interestList = ["선택하기", "Front-end", "Back-end", "Mobile", "AI"];
 
 export default function UserInfo() {
+  // stack input 입력값
   const [stackInput, setStackInput] = useState('');
-  const [projectSearch, setProjectSearch] = useState('');
-  const [experience, setExperience] = useState('');
+  // certificate 입력값
   const [certificate, setCertificate] = useState('');
+  // 관심사 state
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
+  // 선택된 스택 state
   const [selectedStack, setSelectedStack] = useState('');
+  // Modal open, close 결정
+  const [modal, setModal] = useState(false);
+  // Project state
+  const [project, setProject] = useState();
+  // 전체 member의 state
   const [member, setMember] = useState({
     name: '',
     email: '',
@@ -80,6 +88,19 @@ export default function UserInfo() {
         certificate: [...prev.certificate, certificate],
       }));
       setCertificate('');
+    }
+    else if(id == 'project') {
+      if(project == '') return;
+      if(member.project.filter((item) => item == project).length != 0) {
+        alert('중복되는 프로젝트가 있습니다.');
+        setProject('');
+        return;
+      }
+      setMember((prev) => ({
+        ...prev,
+        project: [...prev.project, project],
+      }));
+      setProject('');
     }
   }
 
@@ -184,23 +205,29 @@ export default function UserInfo() {
     {/* 프로젝트 */}
     <div className='user_project'>
       <label htmlFor='project'>프로젝트 경험</label>
-      <button>추가하기</button>
-      <input placeholder='' type="text" value={projectSearch} onChange={(e) => setProjectSearch(e.target.value)} />
-    </div>
-    {/* 활동 경험 */}
-    {experience && experience.map((item, idx) => {
-      return (
-        <div className='experience_box' key={idx}>
-        <div>{item.project_name}</div>
-        {item.project_icon.map((icon) => {
-          return (
-            <i class={icon} style={{"fontSize": "35px"}}></i>
-          );
-        })}
-        <div>{item.project_start} ~ {item.project_end}</div>
+      <button onClick={()=>setModal(true)}>추가하기</button>
+      <Modal isOpen={modal} onRequestClose={()=>setModal(false)}>
+        이것은 모달창 입니다.
+        <input 
+        value={project}
+        type='text'
+        onChange={(event)=>setProject(event.target.value)}
+        />
+        <button
+        id="project"
+        onClick={handleAddBtn}>추가하기</button>
+        <button 
+        onClick={()=>setModal(false)}>창 닫기</button>
+      </Modal>
+      {member.project.map((item, idx) => {
+        return (
+        <div id={"project " + item} key={idx}>
+          {item}
+          <button onClick={handleDeleteBtn}>삭제</button>
         </div>
-      );
-    })}
+        )
+      })}
+    </div>
     {/* 자격증 */}
     <div className='user_certificate'>
       <label htmlFor='certificate'>자격증</label>
