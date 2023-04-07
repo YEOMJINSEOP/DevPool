@@ -44,6 +44,7 @@ export default function UserInfo() {
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
 
+    // 멤버 stack 설정
     useEffect(() => {
       if (selectedStack=='' || selectedStack==undefined) return;
       if (member.stack.indexOf(selectedStack) != -1) {
@@ -52,7 +53,6 @@ export default function UserInfo() {
         setSelectedStack('');
         return;
       }
-      console.log('HI');
       setMember((prev) => ({
         ...prev,
         stack: [...prev.stack, selectedStack],
@@ -145,15 +145,19 @@ export default function UserInfo() {
       <div>
         <label htmlFor='interest'>관심분야</label>
         <select id="interest" value={selectedInterest} onChange={handleAddBtn}>
-          {interestList.map((item) => {
+          {interestList.map((item, idx) => {
             return (
-              <option value={item}>{item}</option>
+              <option 
+              value={item}
+              key={idx}>{item}</option>
             );
           })}
         </select>
-        {member.interest.map((item) => {
+        {member.interest.map((item, idx) => {
           return (
-            <li id={"interest " + item}>
+            <li 
+            id={"interest " + item}
+            key={idx}>
               {item}
               <button onClick={handleDeleteBtn}>삭제</button>
             </li>
@@ -168,10 +172,11 @@ export default function UserInfo() {
       stackInput={stackInput} 
       handleInputChange={handleInputChange}
       handleAddStack={handleAddStack}/>
-      {member.stack.map((item) => {
+      {member.stack.map((item, idx) => {
         return (
-        <div>
+        <div id={"stack " + item} key={idx}>
           {item}
+          <button onClick={handleDeleteBtn}>삭제</button>
         </div>
         )
       })}
@@ -183,9 +188,9 @@ export default function UserInfo() {
       <input placeholder='' type="text" value={projectSearch} onChange={(e) => setProjectSearch(e.target.value)} />
     </div>
     {/* 활동 경험 */}
-    {experience && experience.map((item) => {
+    {experience && experience.map((item, idx) => {
       return (
-        <div className='experience_box'>
+        <div className='experience_box' key={idx}>
         <div>{item.project_name}</div>
         {item.project_icon.map((icon) => {
           return (
@@ -204,11 +209,13 @@ export default function UserInfo() {
         type="text" 
         value={certificate}
         onChange={(event)=>setCertificate(event.target.value)}/>
-        <button id="certificate" onClick={handleMember}>추가하기</button>
+        <button id="certificate" onClick={handleAddBtn}>추가하기</button>
     </div>
-    {member.certificate.map((item) => {
+    {member.certificate.map((item, idx) => {
       return (
-        <li id={"certificate " + item}>
+        <li 
+        id={"certificate " + item}
+        key={idx}>
           {item}
           <button onClick={handleDeleteBtn}>삭제</button>
         </li>

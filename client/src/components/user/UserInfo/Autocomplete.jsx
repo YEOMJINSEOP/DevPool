@@ -63,11 +63,13 @@ export const DropDown = ({ options, handleDropDownClick, handleAddStack }) => {
       <ul>
         {options.map((option, index) => {
           return (
+            <>
             <li key = {index}
             onClick = {()=>handleAddStack(option)}
             id="stack">
               {option}
             </li>
+            </>
           )
         })}
       </ul>
