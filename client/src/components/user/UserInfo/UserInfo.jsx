@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getMemberInfo } from '../../../api/api';
+import Autocomplete from './Autocomplete';  
 
 const Member = {
   name: '',
@@ -13,13 +14,12 @@ const Member = {
 const interestList = ["선택하기", "Front-end", "Back-end", "Mobile", "AI"];
 
 export default function UserInfo() {
-  const [stack, setStack] = useState();
-  const [stackSearch, setStackSearch] = useState('');
+  const [stackInput, setStackInput] = useState('');
   const [projectSearch, setProjectSearch] = useState('');
   const [experience, setExperience] = useState('');
   const [certificate, setCertificate] = useState('');
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
-
+  const [selectedStack, setSelectedStack] = useState('');
   const [member, setMember] = useState({
     name: '',
     email: '',
@@ -29,13 +29,7 @@ export default function UserInfo() {
     certificate: [],
   });
 
-  useEffect(() => {
-    getMemberInfo().then((res) => {
-      console.log(res.data);
-      setStack(res.data.stack);
-      setExperience(res.data.experience);})
-    }, []);
-
+  // member interest 설정
     useEffect(() => {
       if (selectedInterest == '선택하기') {
         return;
@@ -50,14 +44,37 @@ export default function UserInfo() {
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
 
+    useEffect(() => {
+      if (selectedStack=='' || selectedStack==undefined) return;
+      if (member.stack.indexOf(selectedStack) != -1) {
+        alert('이미 선택된 항목입니다.');
+        setStackInput('');
+        setSelectedStack('');
+        return;
+      }
+      console.log('HI');
+      setMember((prev) => ({
+        ...prev,
+        stack: [...prev.stack, selectedStack],
+      }));
+      setStackInput('');
+      setSelectedStack('');
+    }, [selectedStack]);
+
   // 리스트에 추가하기
   const handleAddBtn = (e) => {
     const { id, value } = e.target;
+    // 관심사를 추가한다면 selectedInterest 바꿈. useEffect로 연결되어 있어 member에 저장함. 
     if(id == 'interest') {
       setSelectedInterest(value);
-    } 
+    }
     else if(id == 'certificate') {
       if(certificate == '') return;
+      if(member.certificate.filter((item) => item == certificate).length != 0) {
+        alert('중복되는 자격증이 있습니다.');
+        setCertificate('');
+        return;
+      }
       setMember((prev) => ({
         ...prev,
         certificate: [...prev.certificate, certificate],
@@ -66,13 +83,16 @@ export default function UserInfo() {
     }
   }
 
+  const handleAddStack = (selected) => {
+    setSelectedStack(selected);
+  }
+
   // 리스트 삭제하기(parentId는 "항목 내용"의 형태로 되어 있음. )
   const handleDeleteBtn = (e) => {
     const parentId = e.target.parentNode.id.split(' ');
     console.log(parentId);
     setMember((prev) => {
       let current = {...prev};
-      console.log(current[parentId[0]].filter((item) => parentId[1] !== item));
       current[parentId[0]] = current[parentId[0]].filter((item) => parentId[1] !== item);
       return current
     });
@@ -80,7 +100,6 @@ export default function UserInfo() {
 
   const handleUserInput =  (e) => {
     const { id, value } = e.target;
-    console.log(value);
     setMember((prev) => {
       const cur = {...prev};
       cur[id] = value;
@@ -88,7 +107,12 @@ export default function UserInfo() {
     })
   }
 
-  const showMember = () => {
+  const handleInputChange = (item) => {
+    setStackInput(item);
+  };
+  // input의 onChange 이벤트 때, 입력값을 inputValue에 저장하고 hasText값 갱신
+
+  const handleMember = () => {
     console.log(member);
   }
   
@@ -140,15 +164,18 @@ export default function UserInfo() {
     </div>
     <div className='user_stack'>
       <label htmlFor='stack'>기술 스택</label>
-      <input placeholder='' type="text" value={stackSearch} onChange={(e) => setStackSearch(e.target.value)}/>
+      <Autocomplete  
+      stackInput={stackInput} 
+      handleInputChange={handleInputChange}
+      handleAddStack={handleAddStack}/>
+      {member.stack.map((item) => {
+        return (
+        <div>
+          {item}
+        </div>
+        )
+      })}
     </div>
-    {stack && stack.map((item) => {
-      return (
-        <>
-        <i class={item.stack_icon} style={{"fontSize": "60px"}}></i>
-        </>
-      );
-    })}
     {/* 프로젝트 */}
     <div className='user_project'>
       <label htmlFor='project'>프로젝트 경험</label>
@@ -176,8 +203,8 @@ export default function UserInfo() {
         placeholder='' 
         type="text" 
         value={certificate}
-        onChange={(e) => setCertificate(e.target.value)}/>
-        <button id="certificate" onClick={handleAddBtn}>추가하기</button>
+        onChange={(event)=>setCertificate(event.target.value)}/>
+        <button id="certificate" onClick={handleMember}>추가하기</button>
     </div>
     {member.certificate.map((item) => {
       return (
