@@ -19,14 +19,17 @@ export default function UserInfo() {
   const [stackInput, setStackInput] = useState('');
   // certificate 입력값
   const [certificate, setCertificate] = useState('');
+  const [certificateId, setCertificateId] = useState(1);
   // 관심사 state
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
   // 선택된 스택 state
   const [selectedStack, setSelectedStack] = useState('');
+  const [stackId, setStackId] = useState(1);
   // Modal open, close 결정
   const [modal, setModal] = useState(false);
   // Project state
   const [project, setProject] = useState();
+  const [projectId, setProjectId] = useState(1);
   // 전체 member의 state
   const [member, setMember] = useState({
     name: '',
@@ -76,6 +79,7 @@ export default function UserInfo() {
     if(id == 'interest') {
       setSelectedInterest(value);
     }
+    // 자격증 추가할 때
     else if(id == 'certificate') {
       if(certificate == '') return;
       if(member.certificate.filter((item) => item == certificate).length != 0) {
@@ -83,12 +87,22 @@ export default function UserInfo() {
         setCertificate('');
         return;
       }
-      setMember((prev) => ({
-        ...prev,
-        certificate: [...prev.certificate, certificate],
-      }));
+      setMember((prev) => {
+        const newCertificate = [...prev.certificate];
+        console.log(newCertificate.filter((item)=>item.id == 1));
+        newCertificate.push({
+          id: certificateId,
+          content: certificate
+        });
+        return {
+          ...prev,
+          certificate: newCertificate,
+        };
+      });
       setCertificate('');
+      setCertificateId(count => count + 1);
     }
+    // 프로젝트 추가할 때
     else if(id == 'project') {
       if(project == '') return;
       if(member.project.filter((item) => item == project).length != 0) {
@@ -119,6 +133,20 @@ export default function UserInfo() {
     });
   }
 
+
+  // 자격증 삭제하기 (일단 자격증만 id로 구현해 놓음.)
+  const handleDeleteBtn2 = (e) => {
+    const parentId = e.target.parentNode.id.split(' ');
+    setMember((prev) => {
+      let newCertificate = [...prev.certificate]; 
+      newCertificate = newCertificate.filter((item)=> item.id != parentId[1]);
+      return {
+        ...prev,
+        certificate: newCertificate,
+      };
+    });
+  }
+
   const handleUserInput =  (e) => {
     const { id, value } = e.target;
     setMember((prev) => {
@@ -134,7 +162,7 @@ export default function UserInfo() {
   // input의 onChange 이벤트 때, 입력값을 inputValue에 저장하고 hasText값 갱신
 
   const handleMember = () => {
-    console.log(member);
+    console.log(member.certificate);
   }
   
   return (
@@ -151,18 +179,24 @@ export default function UserInfo() {
     </div>
     {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
     <div className='user_box_right'>
-      <input 
+      <p>
+      이름 :<input 
       id='name'
+      name='name'
       placeholder='이름' 
       type="text" value={member.name} 
-      onChange={handleUserInput}
-      style={{"display":"block"}} />
+      onChange={handleUserInput}/>
+      </p>
+      <p>
+      이메일 :
       <input 
-      id='email' 
+      id='email'
+      name='email'
       placeholder='이메일' 
       type="text" 
       value={member.email} 
       onChange={handleUserInput} />
+      </p>
       <div>
         <label htmlFor='interest'>관심분야</label>
         <select id="interest" value={selectedInterest} onChange={handleAddBtn}>
@@ -241,13 +275,14 @@ export default function UserInfo() {
     {member.certificate.map((item, idx) => {
       return (
         <li 
-        id={"certificate " + item}
+        id={"certificate " + item.id}
         key={idx}>
-          {item}
-          <button onClick={handleDeleteBtn}>삭제</button>
+          {item.content}
+          <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
       );
     })}
+    <button onClick={handleMember}>제출하기</button>
   </div>
   )
 }
