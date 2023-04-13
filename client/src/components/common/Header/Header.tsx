@@ -4,9 +4,9 @@ type HeaderProps = {
   logo: string;
 };
 
-const Header = ({logo}: HeaderProps) => (
+const Header = () => (
   <>
-    <h2>HEADER {logo}</h2>
+    <h2>HEADER</h2>
   </>
 );
 
