@@ -13,11 +13,12 @@ type Team = {
 };
 
 function TeamInfo(){
+
   useEffect(() => {
     axios.get('data/team.json').then(
       (res) => {
-        const teamInfo = res.data[0];
-        setTeam(teamInfo as Team);
+        console.log(res.data[0]);
+        setTeam(res.data[0] as Team);
       })
       .catch(
         console.error

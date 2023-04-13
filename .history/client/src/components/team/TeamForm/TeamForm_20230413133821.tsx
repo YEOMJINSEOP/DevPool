@@ -64,14 +64,14 @@ function TeamForm(){
   }
 
   const handleSubmit = (): void => {
-    console.log(team);
-    axios.post(`${process.env.REACT_APP_API_URL}`, team)
+    axios.post('postURL', team)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
     })
     .catch(err => {
       console.error(err, 'team post에 실패했습니다.' );
     })
+    console.log(team);
     return;
   }
 

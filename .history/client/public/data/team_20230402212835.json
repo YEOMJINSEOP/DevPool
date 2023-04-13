@@ -1,0 +1,8 @@
+[{
+    "name": "team name",
+    "category": "Web",
+    "currentCount": 3,
+    "recruitCount": 5,
+    "recruitDomain": "Front-end",
+    "recruitStack": ["React", "TypeScript"]
+}]
