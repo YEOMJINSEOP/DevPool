@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil/user';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 type Team = {
   name: string;
@@ -13,9 +14,9 @@ type Team = {
 };
 
 function TeamForm(){
-
+  const navigate = useNavigate();
   const user = useRecoilValue(userState);
-
+  
   const [team, setTeam] = useState<Team>({
     name: '',
     category: '',
@@ -25,7 +26,6 @@ function TeamForm(){
     recruitStack: [],
   });
 
-  const [newStack, setNewStack] = useState<string>('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = event.target;
@@ -35,6 +35,26 @@ function TeamForm(){
       [name]: name.includes('Count') ? parseInt(value) : value,
     }));
   };
+
+  const [contentCount, setContentCount] = useState<number>(0);
+  const handleContentInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContentCount(event.target.value.length);
+    setTeam((prevTeam) => ({
+      ...prevTeam,
+      ['content']: event.target.value,
+    }));
+  };
+
+  const [teamNameCount, setTeamNameCount] = useState(0);
+  const handleTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTeamNameCount(event.target.value.length);
+    setTeam((prevTeam) => ({
+      ...prevTeam,
+      ['name']: event.target.value,
+    }));
+  };
+  
+  const [newStack, setNewStack] = useState<string>('');
 
   const handleStackInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setNewStack(event.target.value);
@@ -58,16 +78,15 @@ function TeamForm(){
     }
   };
 
-  const [contentCharCount, setContentCharCount] = useState<number>(0);
-  const handleContentCharCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContentCharCount(event.target.value.length);
-  }
+
 
   const handleSubmit = (): void => {
+    navigate('/teamList')
     console.log(team);
-    axios.post(`${process.env.REACT_APP_API_URL}`, team)
+    axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
+      
     })
     .catch(err => {
       console.error(err, 'team post에 실패했습니다.' );
@@ -80,7 +99,8 @@ function TeamForm(){
       <p>{user.name}</p>
       <div className='name-container'>
         <label htmlFor='name'>팀 이름</label>
-        <input type="text" name='name' id='name' value={team.name} onChange={handleInputChange} maxLength={20}/>
+        <input type="text" name='name' id='name' value={team.name} onChange={handleTeamName} maxLength={20}/>
+        <span>{teamNameCount}/20</span>
       </div>
       <div className='category-container'>
         <label htmlFor='category'>프로젝트 카테고리</label>
@@ -134,8 +154,8 @@ function TeamForm(){
         </div>
       </div>
       <div className='content'>
-        <textarea name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentCharCount}></textarea>
-        <p>{contentCharCount} / 300</p>
+        <textarea name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentInput}></textarea>
+        <p>{contentCount} / 300</p>
       </div>
       <button type="button" onClick={handleSubmit}>팀 등록하기</button>
     </form>

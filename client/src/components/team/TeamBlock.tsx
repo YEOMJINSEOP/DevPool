@@ -16,9 +16,9 @@ function TeamBlock(props: TeamProps): JSX.Element{
   const teamClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     const navDestination = props.name;
     event.preventDefault();
-    navigate(`/${navDestination}`);
+    navigate(`/teamInfo/${navDestination}`);
   };
-  
+
   return (
     <div onClick={teamClickHandler}>
       <h3>{props.name}</h3>

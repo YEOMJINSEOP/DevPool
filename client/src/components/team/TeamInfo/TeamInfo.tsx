@@ -33,11 +33,6 @@ function TeamInfo(){
     recruitStack: [],
   });
 
-  const getTeamInfo = async () => {
-    console.log(fetch('public/data/team.json'))
-    return;
-  }
-
   return (
     <>
       <div className='name-container'>

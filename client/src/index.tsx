@@ -1,9 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {RecoilRoot} from 'recoil';
 import MainBanner from './components/main/MainBanner/MainBanner';
 import TeamForm from './components/team/TeamForm/TeamForm';

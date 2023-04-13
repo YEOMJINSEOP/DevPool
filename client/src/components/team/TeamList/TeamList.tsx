@@ -17,7 +17,7 @@ function TeamList(){
   const [teamList, setTeamList] = useState<Team[]>([]);
 
   useEffect(() => {
-    axios.get('data/team.json')
+    axios.get(`${process.env.REACT_APP_API_URL}/teamList`)
     .then((res) => {
       setTeamList(res.data);
       console.log(res);

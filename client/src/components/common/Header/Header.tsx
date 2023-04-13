@@ -1,13 +1,20 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './Header.module.css';
 
-type HeaderProps = {
-  logo: string;
+function Header(){
+  const navigate = useNavigate();
+  return(
+    <div className={styles.header}>
+      <h2>HEADER</h2>
+      <div className={styles.category_container}>
+        <button onClick={() => navigate('/')}>홈</button>
+        <button>팀원 찾기</button>
+        <button onClick={() => navigate('/teamList')}>팀 모집</button>        
+        <button>쪽지함</button>
+        <button>로그인</button>
+      </div>
+    </div>
+  )
 };
-
-const Header = () => (
-  <>
-    <h2>HEADER</h2>
-  </>
-);
 
 export default Header;
