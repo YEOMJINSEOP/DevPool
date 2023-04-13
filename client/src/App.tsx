@@ -6,6 +6,7 @@ import { Routes, Route} from 'react-router-dom';
 import UserInfo from './components/user/UserInfo/UserInfo';
 import TeamForm from './components/team/TeamForm/TeamForm';
 import TeamInfo from './components/team/TeamInfo/TeamInfo';
+import UserInfoPrac from './components/user/UserInfo/UserInfoPrac';
 
 const App: React.FC = () => {
   
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path='/userInfo' element={<UserInfo/>} />
         <Route path='/teamForm' element={<TeamForm/>} />
         <Route path='/teamInfo' element={<TeamInfo/>} />
+        <Route path='/userInfoPrac' element={<UserInfoPrac/>} />
       </Routes>
       <Footer/>
     </>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getMemberInfo } from '../../../api/api';
 import Autocomplete from './Autocomplete';  
 import Modal from 'react-modal';
+import BasicModal from './BasicModal';
 
 const Member = {
   name: '',
@@ -28,8 +29,11 @@ export default function UserInfo() {
   // Modal open, close 결정
   const [modal, setModal] = useState(false);
   // Project state
-  const [project, setProject] = useState();
+  const [project, setProject] = useState('');
   const [projectId, setProjectId] = useState(1);
+  const [projectStart, setProjectStart] = useState();
+  const [projectEnd, setProjectEnd] = useState();
+  const [projectStack, setProjectStack] = useState('');
   // 전체 member의 state
   const [member, setMember] = useState({
     name: '',
@@ -72,6 +76,11 @@ export default function UserInfo() {
       setSelectedStack('');
     }, [selectedStack]);
 
+    useEffect(()=> {
+      console.log(project);
+    }, [project]);
+
+    
   // 리스트에 추가하기
   const handleAddBtn = (e) => {
     const { id, value } = e.target;
@@ -106,15 +115,28 @@ export default function UserInfo() {
     else if(id == 'project') {
       if(project == '') return;
       if(member.project.filter((item) => item == project).length != 0) {
-        alert('중복되는 프로젝트가 있습니다.');
+        alert('중복되는 프로젝트 있습니다.');
         setProject('');
         return;
       }
-      setMember((prev) => ({
-        ...prev,
-        project: [...prev.project, project],
-      }));
+      setMember((prev) => {
+        const newProject = [...prev.project];
+        console.log(newProject.filter((item)=>item.id == 1));
+        newProject.push({
+          id: projectId,
+          start: projectStart,
+          end: projectEnd,
+          content: project
+        });
+        return {
+          ...prev,
+          project: newProject,
+        };
+      });
       setProject('');
+      setProjectStart('');
+      setProjectEnd('');
+      setProjectId(count => count + 1);
     }
   }
 
@@ -137,14 +159,26 @@ export default function UserInfo() {
   // 자격증 삭제하기 (일단 자격증만 id로 구현해 놓음.)
   const handleDeleteBtn2 = (e) => {
     const parentId = e.target.parentNode.id.split(' ');
-    setMember((prev) => {
-      let newCertificate = [...prev.certificate]; 
-      newCertificate = newCertificate.filter((item)=> item.id != parentId[1]);
-      return {
-        ...prev,
-        certificate: newCertificate,
-      };
-    });
+    if(parentId[0] == 'certificate') {
+      setMember((prev) => {
+        let newCertificate = [...prev.certificate]; 
+        newCertificate = newCertificate.filter((item)=> item.id != parentId[1]);
+        return {
+          ...prev,
+          certificate: newCertificate,
+        };
+      });
+    }
+    else if(parentId[0] == 'project') {
+      setMember((prev) => {
+        let newProject = [...prev.project]; 
+        newProject = newProject.filter((item)=> item.id != parentId[1]);
+        return {
+          ...prev,
+          project: newProject,
+        };
+      });
+    }
   }
 
   const handleUserInput =  (e) => {
@@ -162,8 +196,10 @@ export default function UserInfo() {
   // input의 onChange 이벤트 때, 입력값을 inputValue에 저장하고 hasText값 갱신
 
   const handleMember = () => {
-    console.log(member.certificate);
+    console.log(member);
   }
+
+  const handleProject = (e) => {setProject(e.target.value)};
   
   return (
   <div className='user'>
@@ -240,25 +276,19 @@ export default function UserInfo() {
     <div className='user_project'>
       <label htmlFor='project'>프로젝트 경험</label>
       <button onClick={()=>setModal(true)}>추가하기</button>
-      <Modal isOpen={modal} onRequestClose={()=>setModal(false)}>
-        이것은 모달창 입니다.
-        <input 
-        value={project}
-        type='text'
-        onChange={(event)=>setProject(event.target.value)}
-        />
-        <button
-        id="project"
-        onClick={handleAddBtn}>추가하기</button>
-        <button 
-        onClick={()=>setModal(false)}>창 닫기</button>
-      </Modal>
+      <BasicModal 
+      project={project}
+      handleProject={handleProject}
+      projectStart={projectStart}
+      projectEnd={projectEnd}
+      handleAddBtn={handleAddBtn}/>
       {member.project.map((item, idx) => {
         return (
-        <div id={"project " + item} key={idx}>
-          {item}
-          <button onClick={handleDeleteBtn}>삭제</button>
-        </div>
+        <li id={"project " + item.id}
+         key={idx}>
+          {item.content}  {item.start} ~ {item.end}
+          <button onClick={handleDeleteBtn2}>삭제</button>
+        </li>
         )
       })}
     </div>
@@ -274,12 +304,14 @@ export default function UserInfo() {
     </div>
     {member.certificate.map((item, idx) => {
       return (
+        <ul>
         <li 
         id={"certificate " + item.id}
         key={idx}>
           {item.content}
           <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
+        </ul>
       );
     })}
     <button onClick={handleMember}>제출하기</button>
