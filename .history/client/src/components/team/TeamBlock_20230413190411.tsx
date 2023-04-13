@@ -1,0 +1,35 @@
+import React from 'react';
+
+type TeamProps = {
+  name: string;
+  category: string;
+  currentCount: number;
+  recruitCount: number;
+  recruitDomain: string;
+  recruitStack: string[];
+  teamClickHandler?: React.MouseEventHandler<HTMLDivElement>;
+};
+
+function TeamBlock(props: TeamProps): JSX.Element{
+  return (
+    <div onClick={props.teamClickHandler}>
+      <h3>{props.name}</h3>
+      <div>
+        <div>
+          <p>카테고리</p>
+          <span>{props.category}</span>
+        </div>
+        <div>
+          <p>모집</p>    
+          <span>{props.recruitDomain}</span>
+        </div>
+        <div>
+          <p>목표인원</p>
+          <p>{props.currentCount}명/{props.recruitCount}명</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default TeamBlock;
