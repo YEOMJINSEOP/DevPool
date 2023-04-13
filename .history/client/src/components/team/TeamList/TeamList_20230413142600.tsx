@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import TeamBlock from '../TeamBlock';
+import Team from '../Team';
 
 type Team = {
   name: string;
@@ -32,7 +32,7 @@ function TeamList(){
           {teamList.map((team) => {
             return(
               <li key={team.name}>
-                <TeamBlock {...team} />
+                <Team name={team.name}/>
               </li>
             )
           })}

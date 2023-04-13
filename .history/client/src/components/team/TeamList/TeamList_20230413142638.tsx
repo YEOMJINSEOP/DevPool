@@ -32,7 +32,7 @@ function TeamList(){
           {teamList.map((team) => {
             return(
               <li key={team.name}>
-                <TeamBlock {...team} />
+                <TeamBlock name={team.name}/>
               </li>
             )
           })}
