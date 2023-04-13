@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil/user';
-import axios from 'axios';
 
 type Team = {
   name: string;
@@ -64,14 +63,6 @@ function TeamForm(){
   }
 
   const handleSubmit = (): void => {
-    console.log(team);
-    axios.post(`${process.env.REACT_APP_API_URL}`, team)
-    .then(res => {
-      console.log(res, 'team post가 완료되었습니다.');
-    })
-    .catch(err => {
-      console.error(err, 'team post에 실패했습니다.' );
-    })
     return;
   }
 

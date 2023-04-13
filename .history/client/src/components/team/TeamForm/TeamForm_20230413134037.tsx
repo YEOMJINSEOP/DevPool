@@ -65,7 +65,7 @@ function TeamForm(){
 
   const handleSubmit = (): void => {
     console.log(team);
-    axios.post(`${process.env.REACT_APP_API_URL}`, team)
+    axios.post(process.env.REACT_APP_API_URL, team);
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
     })

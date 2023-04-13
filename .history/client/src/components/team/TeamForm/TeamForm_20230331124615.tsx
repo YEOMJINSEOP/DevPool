@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil/user';
-import axios from 'axios';
 
 type Team = {
   name: string;
@@ -34,6 +33,7 @@ function TeamForm(){
       ...prevTeam,
       [name]: name.includes('Count') ? parseInt(value) : value,
     }));
+    return;
   };
 
   const handleStackInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -49,6 +49,7 @@ function TeamForm(){
       recruitStack: [...prevTeam.recruitStack, newStack],
     }));
     setNewStack('');
+    return;
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -56,22 +57,11 @@ function TeamForm(){
       event.preventDefault();
       handleAddStack();
     }
+    return;
   };
 
-  const [contentCharCount, setContentCharCount] = useState<number>(0);
-  const handleContentCharCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContentCharCount(event.target.value.length);
-  }
-
-  const handleSubmit = (): void => {
+  const handleSubmit = async () => {
     console.log(team);
-    axios.post(`${process.env.REACT_APP_API_URL}`, team)
-    .then(res => {
-      console.log(res, 'team post가 완료되었습니다.');
-    })
-    .catch(err => {
-      console.error(err, 'team post에 실패했습니다.' );
-    })
     return;
   }
 
@@ -132,10 +122,6 @@ function TeamForm(){
             ))}
           </ul>
         </div>
-      </div>
-      <div className='content'>
-        <textarea name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentCharCount}></textarea>
-        <p>{contentCharCount} / 300</p>
       </div>
       <button type="button" onClick={handleSubmit}>팀 등록하기</button>
     </form>
