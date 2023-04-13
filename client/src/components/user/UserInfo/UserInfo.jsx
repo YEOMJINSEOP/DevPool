@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getMemberInfo } from '../../../api/api';
-import Autocomplete from './Autocomplete';  
-import Modal from 'react-modal';
 import BasicModal from './BasicModal';
+import Tags from './Tags';
 
 const Member = {
   name: '',
@@ -24,15 +22,12 @@ export default function UserInfo() {
   // 관심사 state
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
   // 선택된 스택 state
-  const [selectedStack, setSelectedStack] = useState('');
-  const [stackId, setStackId] = useState(1);
-  // Modal open, close 결정
-  const [modal, setModal] = useState(false);
+  const [selectedStack, setSelectedStack] = useState([]);
   // Project state
   const [project, setProject] = useState('');
   const [projectId, setProjectId] = useState(1);
-  const [projectStart, setProjectStart] = useState();
-  const [projectEnd, setProjectEnd] = useState();
+  const [projectStart, setProjectStart] = useState('');
+  const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState('');
   // 전체 member의 state
   const [member, setMember] = useState({
@@ -61,26 +56,12 @@ export default function UserInfo() {
 
     // 멤버 stack 설정
     useEffect(() => {
-      if (selectedStack=='' || selectedStack==undefined) return;
-      if (member.stack.indexOf(selectedStack) != -1) {
-        alert('이미 선택된 항목입니다.');
-        setStackInput('');
-        setSelectedStack('');
-        return;
-      }
       setMember((prev) => ({
         ...prev,
-        stack: [...prev.stack, selectedStack],
+        stack: selectedStack,
       }));
-      setStackInput('');
-      setSelectedStack('');
     }, [selectedStack]);
 
-    useEffect(()=> {
-      console.log(project);
-    }, [project]);
-
-    
   // 리스트에 추가하기
   const handleAddBtn = (e) => {
     const { id, value } = e.target;
@@ -98,7 +79,6 @@ export default function UserInfo() {
       }
       setMember((prev) => {
         const newCertificate = [...prev.certificate];
-        console.log(newCertificate.filter((item)=>item.id == 1));
         newCertificate.push({
           id: certificateId,
           content: certificate
@@ -121,12 +101,12 @@ export default function UserInfo() {
       }
       setMember((prev) => {
         const newProject = [...prev.project];
-        console.log(newProject.filter((item)=>item.id == 1));
         newProject.push({
           id: projectId,
+          content: project,
           start: projectStart,
           end: projectEnd,
-          content: project
+          stack: projectStack
         });
         return {
           ...prev,
@@ -134,6 +114,7 @@ export default function UserInfo() {
         };
       });
       setProject('');
+      setProjectStack('');
       setProjectStart('');
       setProjectEnd('');
       setProjectId(count => count + 1);
@@ -200,6 +181,14 @@ export default function UserInfo() {
   }
 
   const handleProject = (e) => {setProject(e.target.value)};
+  const handleProjectStack = (e) => setProjectStack(e.target.value);
+  const handleProjectStart = (e) => setProjectStart(e.target.value);
+  const handleProjectEnd = (e) => setProjectEnd(e.target.value);
+  const handleSelectedStack = (event, values) => {
+    setSelectedStack(values);
+    console.log(values);
+  };
+  
   
   return (
   <div className='user'>
@@ -259,34 +248,29 @@ export default function UserInfo() {
     </div>
     <div className='user_stack'>
       <label htmlFor='stack'>기술 스택</label>
-      <Autocomplete  
-      stackInput={stackInput} 
-      handleInputChange={handleInputChange}
-      handleAddStack={handleAddStack}/>
-      {member.stack.map((item, idx) => {
-        return (
-        <div id={"stack " + item} key={idx}>
-          {item}
-          <button onClick={handleDeleteBtn}>삭제</button>
-        </div>
-        )
-      })}
+      <Tags 
+      selectedStack={selectedStack}
+      handleSelectedStack={handleSelectedStack}
+      />
     </div>
     {/* 프로젝트 */}
     <div className='user_project'>
       <label htmlFor='project'>프로젝트 경험</label>
-      <button onClick={()=>setModal(true)}>추가하기</button>
       <BasicModal 
       project={project}
       handleProject={handleProject}
+      projectStack={projectStack}
+      handleProjectStack={handleProjectStack}
       projectStart={projectStart}
+      handleProjectStart={handleProjectStart}
       projectEnd={projectEnd}
+      handleProjectEnd={handleProjectEnd}
       handleAddBtn={handleAddBtn}/>
       {member.project.map((item, idx) => {
         return (
         <li id={"project " + item.id}
          key={idx}>
-          {item.content}  {item.start} ~ {item.end}
+          {item.content} {item.stack} {item.start} ~ {item.end}
           <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
         )
@@ -304,14 +288,12 @@ export default function UserInfo() {
     </div>
     {member.certificate.map((item, idx) => {
       return (
-        <ul>
         <li 
         id={"certificate " + item.id}
-        key={idx}>
+        key={"certificate" + idx}>
           {item.content}
           <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
-        </ul>
       );
     })}
     <button onClick={handleMember}>제출하기</button>
