@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil/user';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styles from './TeamForm.module.css';
+type TechStack = {
+  name: string;
+}
 
 type Team = {
   name: string;
@@ -45,7 +49,7 @@ function TeamForm(){
     }));
   };
 
-  const [teamNameCount, setTeamNameCount] = useState(0);
+  const [teamNameCount, setTeamNameCount] = useState<number>(0);
   const handleTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeamNameCount(event.target.value.length);
     setTeam((prevTeam) => ({
@@ -53,22 +57,35 @@ function TeamForm(){
       ['name']: event.target.value,
     }));
   };
-  
-  const [newStack, setNewStack] = useState<string>('');
 
-  const handleStackInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setNewStack(event.target.value);
+  const [techStack, setTechStack] = useState<string[]>([]);
+  useEffect(() => {
+    axios.get('data/techStack.json')
+    .then((res) => res.data.map((stack:TechStack) => {
+        console.log(stack.name);
+        setTechStack((prev) => [...prev, stack.name]);
+      }
+    ))
+  }, [])
+  
+  const [stackInput, setStackInput] = useState<string>('');
+  const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setStackInput(event.target.value);
   };
 
+  const updateStackInput = (event: React.MouseEvent<HTMLLIElement> ): void => {
+    setStackInput(event.currentTarget.innerText);
+  }
+
   const handleAddStack = () => { 
-    if(newStack === ''){
+    if(stackInput === ''){
       return;
     };
     setTeam((prevTeam) => ({
       ...prevTeam,
-      recruitStack: [...prevTeam.recruitStack, newStack],
+      recruitStack: [...prevTeam.recruitStack, stackInput],
     }));
-    setNewStack('');
+    setStackInput('');
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -77,8 +94,6 @@ function TeamForm(){
       handleAddStack();
     }
   };
-
-
 
   const handleSubmit = (): void => {
     navigate('/teamList')
@@ -141,14 +156,28 @@ function TeamForm(){
           <option value="ai">AI</option>
         </select>
       </div>
+
       <div className='recruit-stack-container'>
         <label htmlFor="stack-search">스택 추가</label>
-        <input type="text" id='stack-search' value={newStack} onChange={handleStackInputChange} onKeyDown={handleKeyDown}/>
+        <input type="text" id='stack-search' value={stackInput} onChange={handleStackInput} onKeyDown={handleKeyDown}/>
         <button type="button" onClick={handleAddStack}>추가</button>
-        <div className='stack-container'>
+        <div className='techStackSearch'>
+          <ul>
+            {
+              (techStack.filter((stack) => 
+                stackInput && (stack.includes(stackInput.toLowerCase()) || stack.includes(stackInput.toUpperCase()))
+              ))
+              .map(
+                (stack) => {
+                return <li key={stack} onClick={updateStackInput}>{stack}</li>
+              })
+            }
+          </ul>
+        </div>
+        <div className={styles.recruitStack}>
           <ul className='stack'>
-            {team.recruitStack.map((stack, idx) => (
-              <li key={idx}>{stack}</li>
+            {team.recruitStack.map((stack) => (
+              <li key={stack}>{stack}</li>
             ))}
           </ul>
         </div>

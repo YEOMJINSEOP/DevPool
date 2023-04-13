@@ -5,7 +5,7 @@ function Header(){
   const navigate = useNavigate();
   return(
     <div className={styles.header}>
-      <h2>HEADER</h2>
+      <h2>DevPool</h2>
       <div className={styles.category_container}>
         <button onClick={() => navigate('/')}>홈</button>
         <button>팀원 찾기</button>
