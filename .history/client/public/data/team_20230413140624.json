@@ -1,0 +1,18 @@
+[
+    {
+        "name": "team name",
+        "category": "Web",
+        "currentCount": 3,
+        "recruitCount": 5,
+        "recruitDomain": "Front-end",
+        "recruitStack": ["React", "TypeScript"]
+    }, 
+    {
+        "name": "team name2",
+        "category": "Web",
+        "currentCount": 1,
+        "recruitCount": 2,
+        "recruitDomain": "Back-end",
+        "recruitStack": ["Node.js", "Spring"]
+    }
+]
