@@ -3,24 +3,18 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
-export default function Tags({ selectedStack, handleSelectedStack }) {
-  const [selectedOptions, setSelectedOptions] = React.useState([]);
-
-  const handleSelectOption = (event, values) => {
-    setSelectedOptions(values);
-    console.log(values);
-  };
-
-  
+export default function ProjectTags({ projectStasck, handleProjectStack }) {
+    
   return (
-    <Stack spacing={3} sx={{ width: 500 }}>
+    <Stack spacing={3} sx={{ width: 300 }}>
       <Autocomplete
         multiple
         id="tags-standard"
+        limitTags={2}
         options={stackOptions}
         getOptionLabel={(option) => option}
-        value={selectedStack}
-        onChange={handleSelectedStack}
+        value={projectStasck}
+        onChange={handleProjectStack}
         renderInput={(params) => (
           <TextField
             {...params}

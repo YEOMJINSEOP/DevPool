@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BasicModal from './BasicModal';
-import Tags from './Tags';
+import Tags from './StackTags';
 
 const Member = {
   name: '',
@@ -28,7 +28,7 @@ export default function UserInfo() {
   const [projectId, setProjectId] = useState(1);
   const [projectStart, setProjectStart] = useState('');
   const [projectEnd, setProjectEnd] = useState('');
-  const [projectStack, setProjectStack] = useState('');
+  const [projectStack, setProjectStack] = useState([]);
   // 전체 member의 state
   const [member, setMember] = useState({
     name: '',
@@ -94,19 +94,20 @@ export default function UserInfo() {
     // 프로젝트 추가할 때
     else if(id == 'project') {
       if(project == '') return;
-      if(member.project.filter((item) => item == project).length != 0) {
+      if(member.project.filter((item) => item == project.content).length != 0) {
         alert('중복되는 프로젝트 있습니다.');
         setProject('');
         return;
       }
       setMember((prev) => {
         const newProject = [...prev.project];
+        const newProjectStack = projectStack;
         newProject.push({
           id: projectId,
           content: project,
           start: projectStart,
           end: projectEnd,
-          stack: projectStack
+          stack: newProjectStack
         });
         return {
           ...prev,
@@ -114,15 +115,11 @@ export default function UserInfo() {
         };
       });
       setProject('');
-      setProjectStack('');
       setProjectStart('');
       setProjectEnd('');
       setProjectId(count => count + 1);
+      setProjectStack([]);
     }
-  }
-
-  const handleAddStack = (selected) => {
-    setSelectedStack(selected);
   }
 
   // 리스트 삭제하기(parentId는 "항목 내용"의 형태로 되어 있음. )
@@ -171,21 +168,19 @@ export default function UserInfo() {
     })
   }
 
-  const handleInputChange = (item) => {
-    setStackInput(item);
-  };
-  // input의 onChange 이벤트 때, 입력값을 inputValue에 저장하고 hasText값 갱신
-
   const handleMember = () => {
     console.log(member);
   }
 
   const handleProject = (e) => {setProject(e.target.value)};
-  const handleProjectStack = (e) => setProjectStack(e.target.value);
   const handleProjectStart = (e) => setProjectStart(e.target.value);
   const handleProjectEnd = (e) => setProjectEnd(e.target.value);
   const handleSelectedStack = (event, values) => {
     setSelectedStack(values);
+    console.log(values);
+  };
+  const handleProjectStack = (event, values) => {
+    setProjectStack(values);
     console.log(values);
   };
   
@@ -270,7 +265,16 @@ export default function UserInfo() {
         return (
         <li id={"project " + item.id}
          key={idx}>
-          {item.content} {item.stack} {item.start} ~ {item.end}
+          {item.content} 
+          {item.stack.map((stack, idx)=>{
+            return (
+              <span key={idx}>
+                {stack}
+              </span>
+            )
+          })}
+          {item.start} ~ {item.end}
+
           <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
         )

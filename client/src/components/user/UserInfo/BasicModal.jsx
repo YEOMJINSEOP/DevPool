@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import ProjectTags from './ProjectTags';
 
 const style = {
   position: 'absolute',
@@ -41,9 +42,9 @@ export default function BasicModal({project, handleProject, projectStack, handle
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             사용 스택
           </Typography>
-          <input
-          value={projectStack}
-          onChange={handleProjectStack}/>
+          <ProjectTags 
+          projectStack={projectStack}
+          handleProjectStack={handleProjectStack}/>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             프로젝트 기간
           </Typography>
