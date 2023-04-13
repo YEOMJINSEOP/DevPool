@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import TeamBlock from '../TeamBlock';
-import { useNavigate } from 'react-router-dom';
 
 type Team = {
   name: string;
@@ -13,7 +12,7 @@ type Team = {
 };
 
 function TeamList(){
-  const navigate = useNavigate();
+
   const [teamList, setTeamList] = useState<Team[]>([]);
 
   useEffect(() => {
@@ -25,14 +24,10 @@ function TeamList(){
     .catch((err) => console.log('get teamList failed', err))
   }, []);
 
-  const teamCreateHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate(`/teamForm`);
-  }
 
   return (
     <>
-      <button onClick={teamCreateHandler}>팀 만들기</button>
+      <button>팀 만들기</button>
       <div>
         <ul>
           {teamList.map((team) => {

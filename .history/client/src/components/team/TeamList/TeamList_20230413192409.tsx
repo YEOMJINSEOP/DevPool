@@ -27,7 +27,7 @@ function TeamList(){
 
   const teamCreateHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    navigate(`/teamForm`);
+    navigate(`/teamForm`)
   }
 
   return (
