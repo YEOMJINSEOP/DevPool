@@ -31,7 +31,7 @@ export default function ProjectTags({ projectStasck, handleProjectStack }) {
 const stackOptions = [
     'HTML',
     'CSS',
-    'Java Script',
+    'JavaScript',
     'Vue.js',
     'React',
     'Angular',

@@ -31,7 +31,7 @@ export default function StackTags({ selectedStack, handleSelectedStack }) {
 const stackOptions = [
     'HTML',
     'CSS',
-    'Java Script',
+    'JavaScript',
     'Vue.js',
     'React',
     'Angular',

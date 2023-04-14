@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import BasicModal from './BasicModal';
-import Tags from './StackTags';
+import BasicModal from '../BasicModal';
+import StackTags from '../StackTags';
 
 const Member = {
-  name: '',
-  email: '',
-  interest: [],
-  stack: [],
-  project: [],
-  certificate: [],
-}
+    name: '이영진',
+    email: 'leesu0229@naver.com',
+    interest: ['Front-end', 'Back-end'],
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    project: [{id: 1, content: '산학프로젝트', start: '2023-01', end: '2023-05', stack: ['Angular', 'Spring']},
+              {id: 2, content: '프로젝트 X', start: '2023-07', end:'2023-09', stack:['Deep learning(AI)', 'Computer Vision(AI)']}],
+    certificate: [{id: 1, content: 'AWS'},
+                  {id: 2, content: 'SQLD'},
+                  {id: 3, content: '정보처리기사'}],
+  }
 
 const interestList = ["선택하기", "Front-end", "Back-end", "Mobile", "AI"];
 
-export default function UserInfo(Member) {
+export default function MyPage() {
+  const [updateMode, setUpdateMode] = useState(false);
   // stack input 입력값
   const [stackInput, setStackInput] = useState('');
   // certificate 입력값
@@ -22,7 +26,7 @@ export default function UserInfo(Member) {
   // 관심사 state
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
   // 선택된 스택 state
-  const [selectedStack, setSelectedStack] = useState([]);
+  const [selectedStack, setSelectedStack] = useState(Member.stack);
   // Project state
   const [project, setProject] = useState('');
   const [projectId, setProjectId] = useState(1);
@@ -30,14 +34,7 @@ export default function UserInfo(Member) {
   const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState([]);
   // 전체 member의 state
-  const [member, setMember] = useState({
-    name: '',
-    email: '',
-    interest: [],
-    stack: [],
-    project: [],
-    certificate: [],
-  });
+  const [member, setMember] = useState(Member);
 
   // member interest 설정
     useEffect(() => {
@@ -184,8 +181,16 @@ export default function UserInfo(Member) {
     console.log(values);
   };
   
-  
-  return (
+
+  const handleUpdateMode = () => {
+    updateMode ? setUpdateMode(false) : setUpdateMode(true);
+    console.log(member);
+  }
+    return (
+    <div>
+        {updateMode ? <button onClick={handleUpdateMode}>수정완료</button> : <button onClick={handleUpdateMode}>수정하기</button>}
+        {/* updateMode가 true 라면 */}
+        {updateMode ? 
   <div className='user'>
     <div className='user_box'>
     {/* 유저 박스 왼쪽(이미지) */}
@@ -243,7 +248,7 @@ export default function UserInfo(Member) {
     </div>
     <div className='user_stack'>
       <label htmlFor='stack'>기술 스택</label>
-      <Tags 
+      <StackTags
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
       />
@@ -251,7 +256,7 @@ export default function UserInfo(Member) {
     {/* 프로젝트 */}
     <div className='user_project'>
       <label htmlFor='project'>프로젝트 경험</label>
-      <BasicModal 
+      <BasicModal
       project={project}
       handleProject={handleProject}
       projectStack={projectStack}
@@ -301,6 +306,85 @@ export default function UserInfo(Member) {
       );
     })}
     <button onClick={handleMember}>제출하기</button>
+  </div> 
+  : 
+  <div className='user'>
+    <div className='user_box'>
+    {/* 유저 박스 왼쪽(이미지) */}
+    <div className="user_box_left">
+      <img 
+      className='user_img'
+      alt='User Img' 
+      style={{"width":"150px"}}
+      src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
+      <button className='uer_img_btn' style={{"width":"150px"}}>이미지 등록</button>
+    </div>
+    {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
+    <div className='user_box_right'>
+      <p>
+      이름 :{member.name}
+      </p>
+      <p>
+      이메일 :{member.email}
+      </p>
+      <div className='user_interest'>
+        {member.interest.map((interest, idx)=> {
+            return (
+                <li key={idx}>{interest}</li>
+            )
+        })}
+      </div>
+    </div>
+    </div>
+    <div className='user_stack'>
+      <label htmlFor='stack'>기술 스택</label>
+      {member.stack.map((stack, idx)=> {
+        return (
+            <li key={idx}>{stack}</li>
+        )
+      })}
+    </div>
+    {/* 프로젝트 */}
+    <div className='user_project'>
+      <label htmlFor='project'>프로젝트 경험</label>
+      {member.project.map((item, idx) => {
+        return (
+        <li id={"project " + item.id}
+         key={idx}>
+          {item.content} 
+          {item.stack.map((stack, idx)=>{
+            return (
+              <span key={idx}>
+                {stack}
+              </span>
+            )
+          })}
+          {item.start} ~ {item.end}
+
+          <button onClick={handleDeleteBtn2}>삭제</button>
+        </li>
+        )
+      })}
+    </div>
+    {/* 자격증 */}
+    <div className='user_certificate'>
+      <label htmlFor='certificate'>자격증</label>
+    </div>
+    {member.certificate.map((item, idx) => {
+      return (
+        <li 
+        id={"certificate " + item.id}
+        key={"certificate" + idx}>
+          {item.content}
+          <button onClick={handleDeleteBtn2}>삭제</button>
+        </li>
+      );
+    })}
+    <button onClick={handleMember}>제출하기</button>
   </div>
+  }
+    </div>
   )
 }
+
+
