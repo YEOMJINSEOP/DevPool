@@ -78,8 +78,7 @@ function TeamForm(){
   }
 
   const handleAddStack = () => { 
-    if(stackInput === '' || team.recruitStack.includes(stackInput)){
-      setStackInput('');
+    if(stackInput === ''){
       return;
     };
     setTeam((prevTeam) => ({
@@ -111,22 +110,22 @@ function TeamForm(){
 
   return (
     <form className='teamForm' action="/post할URL" method="post">
-
+      <p>{user.name}</p>
       <div className={`${styles.container} ${styles.name}`}>
-        <label className={styles.title}htmlFor='name'>팀 이름</label>
+        <label htmlFor='name'>팀 이름</label>
         <input type="text" name='name' id='name' value={team.name} onChange={handleTeamName} maxLength={20}/>
         <span>{teamNameCount}/20</span>
       </div>
       <div className={`${styles.container} ${styles.category}`}>
-        <label className={styles.title}htmlFor='category'>프로젝트 카테고리</label>
+        <label htmlFor='category'>프로젝트 카테고리</label>
         <select name='category' id='category' value={team.category} onChange={handleInputChange}>
           <option value="web">Web</option>
           <option value="mobile">Mobile App</option>
         </select>
       </div>
       <div className={`${styles.container} ${styles.currentCount}`}>
-        <label className={styles.title}htmlFor="currentCount">현재 인원</label>
-        <select name="currentCount" id='currentCount' value={team.currentCount} onChange={handleInputChange}>
+        <label htmlFor="current-count">현재 인원</label>
+        <select name="currentCount" id='current-count' value={team.currentCount} onChange={handleInputChange}>
           <option defaultValue="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -134,9 +133,9 @@ function TeamForm(){
           <option value="5">5</option>
         </select>
       </div>
-      <div className={`${styles.container} ${styles.recruitCount}`}>
-        <label className={styles.title}htmlFor="recruitCount">모집 인원</label>
-        <select name="recruitCount" id="recruitCount" value={team.recruitCount} onChange={handleInputChange}>
+      <div className='recruit-count-container'>
+        <label htmlFor="recruit-count">모집 인원</label>
+        <select name="recruitCount" id="recruit-count" value={team.recruitCount} onChange={handleInputChange}>
           <option defaultValue="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -146,9 +145,9 @@ function TeamForm(){
           <option value="미정">미정</option>
         </select>
       </div>
-      <div className={`${styles.container} ${styles.recruitField}`}>
-        <label className={styles.title}htmlFor="recruitField">모집 분야</label>
-        <select name="recruitField" id="recruitField" value={team.recruitDomain} onChange={handleInputChange}>
+      <div className='recruit-domain-container'>
+        <label htmlFor="recruit-domain">모집 분야</label>
+        <select name="recruitDomain" id="recruit-domain" value={team.recruitDomain} onChange={handleInputChange}>
           <option defaultValue="front-end">Front-end</option>
           <option value="back-end">Back-end</option>
           <option value="android">Android</option>
@@ -157,8 +156,8 @@ function TeamForm(){
         </select>
       </div>
 
-      <div className={`${styles.container} ${styles.recruitStack}`}>
-        <label className={styles.title}htmlFor="stack-search">스택 추가</label>
+      <div className='recruit-stack-container'>
+        <label htmlFor="stack-search">스택 추가</label>
         <input type="text" id='stack-search' value={stackInput} onChange={handleStackInput} onKeyDown={handleKeyDown}/>
         <button type="button" onClick={handleAddStack}>추가</button>
         <div className='techStackSearch'>
@@ -182,7 +181,7 @@ function TeamForm(){
           </ul>
         </div>
       </div>
-      <div className={`${styles.container} ${styles.content}`}>
+      <div className='content'>
         <textarea name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentInput}></textarea>
         <p>{contentCount} / 300</p>
       </div>

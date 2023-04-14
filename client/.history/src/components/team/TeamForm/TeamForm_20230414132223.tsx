@@ -79,7 +79,6 @@ function TeamForm(){
 
   const handleAddStack = () => { 
     if(stackInput === '' || team.recruitStack.includes(stackInput)){
-      setStackInput('');
       return;
     };
     setTeam((prevTeam) => ({

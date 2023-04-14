@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styles from './CommentBox.module.css';
 
 type CommentBoxProps = {
   teamId: number;
@@ -55,28 +54,9 @@ function CommentBox(props: CommentBoxProps): JSX.Element {
   }, [])
   return (
     <div>
-      <ul>
-        {
-          comment.map(
-            cmnt => {
-              return (
-                <li className={styles.comment} key={cmnt.id}>
-                  <div>{cmnt.text}</div>
-                  <ul>
-                    {cmnt.replies.map((reply) =>
-                      {return (
-                        <li className={styles.reply} key={reply.id}>
-                          {reply.text}
-                        </li>
-                      )}
-                    )}
-                  </ul>
-                </li>
-              )
-            }
-          )
-        }
-      </ul>
+      {comment.map(
+        com => {return (<li>{com.text}</li>)}
+      )}
     </div>
   );
 }
