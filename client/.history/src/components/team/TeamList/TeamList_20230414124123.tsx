@@ -18,7 +18,7 @@ function TeamList(){
   const [teamList, setTeamList] = useState<Team[]>([]);
 
   useEffect(() => {
-    // ✅ team 데이터를 모두 get 하는 API 필요
+    // team 데이터를 모두 get 하는 API 필요
     axios.get(`${process.env.REACT_APP_API_URL}/teamList`)
     .then((res) => {
       setTeamList(res.data);

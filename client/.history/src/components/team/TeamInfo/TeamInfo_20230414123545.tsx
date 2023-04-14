@@ -15,7 +15,6 @@ type Team = {
 
 function TeamInfo(){
   useEffect(() => {
-    // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
     axios.get('/data/team.json').then(
       (res) => {
         const teamInfo = res.data[0];
