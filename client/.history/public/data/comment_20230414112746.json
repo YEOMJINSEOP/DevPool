@@ -1,0 +1,23 @@
+[
+  {
+    "articleId": 1,
+    "id": 1,
+    "text": "This is a comment.",
+    "replies": [
+      {
+        "id": 2,
+        "text": "This is a reply to the first comment."
+      },
+      {
+        "id": 3,
+        "text": "This is another reply to the first comment."
+      }
+    ]
+  },
+  {
+    "articleId":2,
+    "id": 1,
+    "text": "This is another top-level comment.",
+    "replies": []
+  }
+]

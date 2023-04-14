@@ -14,7 +14,7 @@ type Team = {
 
 function TeamInfo(){
   useEffect(() => {
-    axios.get('public/data/team.json').then(
+    axios.get('data/team.json').then(
       (res) => {
         const teamInfo = res.data[0];
         setTeam(teamInfo as Team);

@@ -100,7 +100,7 @@ function TeamForm(){
     axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
-      navigate('/teamList');
+      navigate('/teamList')
     })
     .catch(err => {
       console.error(err, 'team post에 실패했습니다.' );

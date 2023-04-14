@@ -8,13 +8,13 @@ type Team = {
   category: string;
   currentCount: number;
   recruitCount: number;
-  recruitField: string;
+  recruitDomain: string;
   recruitStack: string[];
 };
 
 function TeamInfo(){
   useEffect(() => {
-    axios.get('public/data/team.json').then(
+    axios.get('data/team.json').then(
       (res) => {
         const teamInfo = res.data[0];
         setTeam(teamInfo as Team);
@@ -30,35 +30,35 @@ function TeamInfo(){
     category: '',
     currentCount: 1,
     recruitCount: 1,
-    recruitField: '',
+    recruitDomain: '',
     recruitStack: [],
   });
 
   return (
     <div className={styles.teamInfo}>
-      <div className={`${styles.container} ${styles.name}`}>
+      <div className='container name'>
         <p>팀 이름</p>
         <p>{team.name}</p>
       </div>
-      <div className={`${styles.container} ${styles.category}`}>
+      <div className='container category'>
         <p>프로젝트 카테고리</p>
         <p>{team.category}</p>
       </div>
-      <div className={`${styles.container} ${styles.currentCount}`}>
+      <div className='container current-count'>
         <p>현재 인원</p>
         <p>{team.currentCount}</p>
       </div>
-      <div className={`${styles.container} ${styles.recruitCount}`}>
+      <div className='container recruit-count'>
         <p>모집 인원</p>
         <p>{team.recruitCount}</p>
       </div>
-      <div className={`${styles.container} ${styles.recruitField}`}>
+      <div className='container recruit-domain'>
         <p>모집 분야</p>
-        <p>{team.recruitField}</p>
+        <p>{team.recruitDomain}</p>
       </div>
-      <div className={`${styles.container} ${styles.recruitStack}`}>
+      <div className='container recruit-stack'>
         <p>팀 스택</p>
-      <div className={`${styles.container} ${styles.stackContainer}`}>
+      <div className='container stack-container'>
           <ul className='stack'>
             {team.recruitStack.map((stack, idx) => (
               <li key={idx}>{stack}</li>

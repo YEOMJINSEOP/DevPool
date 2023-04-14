@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import TeamBlock from '../TeamBlock';
 import { useNavigate } from 'react-router-dom';
-import styles from './TeamList.module.css';
 
 type Team = {
   name: string;
@@ -32,7 +31,7 @@ function TeamList(){
   }
 
   return (
-    <div className={styles.teamList}>
+    <>
       <button onClick={teamCreateHandler}>팀 만들기</button>
       <div>
         <ul>
@@ -45,7 +44,7 @@ function TeamList(){
           })}
         </ul>
       </div>
-    </div>
+    </>
   )
 }
 

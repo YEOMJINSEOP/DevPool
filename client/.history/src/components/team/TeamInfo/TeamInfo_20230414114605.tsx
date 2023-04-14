@@ -14,7 +14,7 @@ type Team = {
 
 function TeamInfo(){
   useEffect(() => {
-    axios.get('public/data/team.json').then(
+    axios.get('data/team.json').then(
       (res) => {
         const teamInfo = res.data[0];
         setTeam(teamInfo as Team);
@@ -30,7 +30,7 @@ function TeamInfo(){
     category: '',
     currentCount: 1,
     recruitCount: 1,
-    recruitField: '',
+    recruitDomain: '',
     recruitStack: [],
   });
 
@@ -54,7 +54,7 @@ function TeamInfo(){
       </div>
       <div className={`${styles.container} ${styles.recruitField}`}>
         <p>모집 분야</p>
-        <p>{team.recruitField}</p>
+        <p>{team.recruitDomain}</p>
       </div>
       <div className={`${styles.container} ${styles.recruitStack}`}>
         <p>팀 스택</p>
