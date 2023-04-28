@@ -1,13 +1,12 @@
-.teamListContainer {
+.teamList {
   width: 100%;
   height: 92.5vh;
 }
 
 .recruitFieldList {
   margin: auto;
-  margin-top: 20px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -35,9 +34,4 @@
 .recruitFieldIcon:hover {
   background-color: var(--color-devPool);
   transition: 100ms linear;
-}
-
-.teamList{
-  display: flex;
-  justify-content: space-around;
 }

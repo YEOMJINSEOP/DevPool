@@ -48,6 +48,7 @@ function TeamList(){
 
   return (
     <div className={styles.teamListContainer}>
+      <img className={styles.hostImg} src="" alt="host" />
       <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/javaScript.png" alt="" />

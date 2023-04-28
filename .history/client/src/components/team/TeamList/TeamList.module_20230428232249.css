@@ -36,8 +36,3 @@
   background-color: var(--color-devPool);
   transition: 100ms linear;
 }
-
-.teamList{
-  display: flex;
-  justify-content: space-around;
-}

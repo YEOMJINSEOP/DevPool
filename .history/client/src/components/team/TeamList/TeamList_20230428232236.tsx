@@ -47,7 +47,7 @@ function TeamList(){
 
 
   return (
-    <div className={styles.teamListContainer}>
+    <div className={styles.teamList}>
       <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/javaScript.png" alt="" />

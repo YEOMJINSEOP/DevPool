@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import TeamBlock from '../TeamBlock/TeamBlock';
+import TeamBlock from '../TeamBlock';
 import { useNavigate } from 'react-router-dom';
 import styles from './TeamList.module.css';
 
@@ -47,7 +47,7 @@ function TeamList(){
 
 
   return (
-    <div className={styles.teamListContainer}>
+    <div className={styles.teamList}>
       <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/javaScript.png" alt="" />
@@ -71,7 +71,7 @@ function TeamList(){
             </div>
           </div>
       <div>
-        <ul className={styles.teamList}>
+        <ul>
           {teamList.map((team) => {
             return(
               <li key={team.name}>
