@@ -11,6 +11,7 @@ import TeamList from './components/team/TeamList/TeamList';
 import UserInfo from './components/user/UserInfo/UserInfo';
 import Mypage from './components/user/UserInfo/MyPage/Mypage';
 import SignUp from './components/user/UserInfo/SignUp/SignUp';
+import LogIn from './components/user/UserInfo/LogIn/LogIn';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       {path: '/userInfo', element: <UserInfo />},
       {path: '/myPage', element: <Mypage />},
       {path: '/signUp', element: <SignUp />},
+      {path: '/logIn', element: <LogIn />},
       {path: '/teamForm', element: <TeamForm />},
       {path: '/teamInfo/:teamID', element: <TeamInfo />},
       {path: '/teamList', element: <TeamList />}

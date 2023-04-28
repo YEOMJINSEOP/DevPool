@@ -14,7 +14,7 @@ function Header(){
         <button onClick={() => navigate('/teamForm')}>팀 모집하기</button>
       </div>
       <div className={styles.loginAndUser_container}>
-        <button>로그인</button>
+        <button onClick={()=>navigate('/logIn')}>로그인</button>
       </div>
     </div>
   )
