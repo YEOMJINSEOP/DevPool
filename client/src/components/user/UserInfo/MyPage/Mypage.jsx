@@ -279,7 +279,6 @@ export default function MyPage() {
             )
           })}
           {item.start} ~ {item.end}
-
           <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
         )
@@ -360,8 +359,6 @@ export default function MyPage() {
             )
           })}
           {item.start} ~ {item.end}
-
-          <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
         )
       })}
@@ -376,7 +373,6 @@ export default function MyPage() {
         id={"certificate " + item.id}
         key={"certificate" + idx}>
           {item.content}
-          <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
       );
     })}

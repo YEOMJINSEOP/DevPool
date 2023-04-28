@@ -195,7 +195,7 @@ export default function UserInfo(Member) {
       alt='User Img' 
       style={{"width":"150px"}}
       src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
-      <button className='uer_img_btn' style={{"width":"150px"}}>이미지 등록</button>
+      <button className='uer_img_btn' style={{"width":"150px"}}>프로필 변경</button>
     </div>
     {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
     <div className='user_box_right'>

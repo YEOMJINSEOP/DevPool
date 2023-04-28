@@ -10,7 +10,7 @@ import TeamInfo from './components/team/TeamInfo/TeamInfo';
 import TeamList from './components/team/TeamList/TeamList';
 import UserInfo from './components/user/UserInfo/UserInfo';
 import Mypage from './components/user/UserInfo/MyPage/Mypage';
-import SignUp from './components/user/UserInfo/SignUp';
+import SignUp from './components/user/UserInfo/SignUp/SignUp';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
