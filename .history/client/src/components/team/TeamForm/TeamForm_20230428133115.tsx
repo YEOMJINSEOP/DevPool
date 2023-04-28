@@ -110,8 +110,8 @@ function TeamForm(){
   }
 
   return (
-    <div className={styles.teamForm_container}>
-      <div className={styles.teamForm}>
+    <div>
+      <div className='teamForm' action="/post할URL" method="post">
         <div className={`${styles.container} ${styles.name}`}>
           <label className={styles.title}htmlFor='name'>팀 이름</label>
           <input type="text" name='name' id='name' value={team.name} onChange={handleTeamName} maxLength={20}/>

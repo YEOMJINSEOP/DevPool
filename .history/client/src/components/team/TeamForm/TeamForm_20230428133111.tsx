@@ -110,8 +110,8 @@ function TeamForm(){
   }
 
   return (
-    <div className={styles.teamForm_container}>
-      <div className={styles.teamForm}>
+    <div>
+      <form className='teamForm' action="/post할URL" method="post">
         <div className={`${styles.container} ${styles.name}`}>
           <label className={styles.title}htmlFor='name'>팀 이름</label>
           <input type="text" name='name' id='name' value={team.name} onChange={handleTeamName} maxLength={20}/>
@@ -187,7 +187,7 @@ function TeamForm(){
           <p>{contentCount} / 300</p>
         </div>
         <button type="button" onClick={handleSubmit}>팀 등록하기</button>
-      </div>
+      </form>
     </div>
   )
 }

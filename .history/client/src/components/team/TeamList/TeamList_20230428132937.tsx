@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from './TeamList.module.css';
 
 type Team = {
-  teamId: number;
   name: string;
   category: string;
   currentCount: number;
@@ -16,24 +15,7 @@ type Team = {
 
 function TeamList(){
   const navigate = useNavigate();
-  const [teamList, setTeamList] = useState<Team[]>([ {
-    "teamId": 1,
-    "name": "team name",
-    "category": "Web",
-    "currentCount": 3,
-    "recruitCount": 5,
-    "recruitDomain": "Front-end",
-    "recruitStack": ["React", "TypeScript"]
-}, 
-{
-    "teamId": 2,
-    "name": "team name2",
-    "category": "Web",
-    "currentCount": 1,
-    "recruitCount": 2,
-    "recruitDomain": "Back-end",
-    "recruitStack": ["Node.js", "Spring"]
-}]);
+  const [teamList, setTeamList] = useState<Team[]>([]);
 
   useEffect(() => {
     // ✅ team 데이터를 모두 get 하는 API 필요

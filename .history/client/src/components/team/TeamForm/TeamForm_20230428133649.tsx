@@ -110,7 +110,7 @@ function TeamForm(){
   }
 
   return (
-    <div className={styles.teamForm_container}>
+    <div>
       <div className={styles.teamForm}>
         <div className={`${styles.container} ${styles.name}`}>
           <label className={styles.title}htmlFor='name'>팀 이름</label>

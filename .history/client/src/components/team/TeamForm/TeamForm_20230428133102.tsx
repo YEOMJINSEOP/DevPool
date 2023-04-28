@@ -110,8 +110,8 @@ function TeamForm(){
   }
 
   return (
-    <div className={styles.teamForm_container}>
-      <div className={styles.teamForm}>
+    <>
+      <form className='teamForm' action="/post할URL" method="post">
         <div className={`${styles.container} ${styles.name}`}>
           <label className={styles.title}htmlFor='name'>팀 이름</label>
           <input type="text" name='name' id='name' value={team.name} onChange={handleTeamName} maxLength={20}/>
@@ -156,7 +156,7 @@ function TeamForm(){
             <option value="ai">AI</option>
           </select>
         </div>
-
+    
         <div className={`${styles.container} ${styles.recruitStack}`}>
           <label className={styles.title}htmlFor="stack-search">스택 추가</label>
           <input type="text" id='stack-search' value={stackInput} onChange={handleStackInput} onKeyDown={handleKeyDown}/>
@@ -187,8 +187,8 @@ function TeamForm(){
           <p>{contentCount} / 300</p>
         </div>
         <button type="button" onClick={handleSubmit}>팀 등록하기</button>
-      </div>
-    </div>
+      </form>
+    </>
   )
 }
 

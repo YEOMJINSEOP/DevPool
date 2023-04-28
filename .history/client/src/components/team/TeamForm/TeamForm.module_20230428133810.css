@@ -1,14 +1,5 @@
 @import '../../../App.css';
 
-.teamForm_container {
-  width: var(--width-full);
-  height: 92.5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: red;
-}
 .teamForm {
   width: var(--width-window-large);
   height: 615px;
