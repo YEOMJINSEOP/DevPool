@@ -1,7 +1,7 @@
 :root {
 
   /* font */
-  --font-family-DoHyeon: 'BMDOHYEON';
+  --font-family-DoHyeon: 'Do Hyeon';
 
   /* color */
   --color-devPool: #F25022;
@@ -31,11 +31,4 @@ button {
 
 ul {
   list-style: none;
-}
-
-@font-face {
-  font-family: 'BMDOHYEON';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
 }
