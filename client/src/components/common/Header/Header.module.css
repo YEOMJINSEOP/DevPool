@@ -1,6 +1,8 @@
 @import '../../../App.css';
 
 .header {
+  padding-left: 20px;
+  padding-right: 20px;
   background-color: var(--color-white);
   width: 100%;
   height: var(--height-header);
