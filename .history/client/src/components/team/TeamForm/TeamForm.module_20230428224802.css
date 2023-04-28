@@ -158,10 +158,6 @@
   line-height: 32px;
 }
 
-.stack > span {
-  padding: 20px;
-}
-
 .addBtn{
   font-family: var(--font-family-DoHyeon);
   width: 80px;

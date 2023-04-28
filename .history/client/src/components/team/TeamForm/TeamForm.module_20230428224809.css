@@ -155,11 +155,8 @@
   border-radius: 20px;
   text-align: center;
   margin: 10px;
+  padding-left: 10px;
   line-height: 32px;
-}
-
-.stack > span {
-  padding: 20px;
 }
 
 .addBtn{
