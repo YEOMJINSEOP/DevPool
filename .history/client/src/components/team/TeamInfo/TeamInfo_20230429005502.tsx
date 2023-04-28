@@ -73,8 +73,8 @@ function TeamInfo(){
           <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} readOnly></textarea>
       </div>
       <button className={styles.joinBtn}type="button">팀 참여하기</button>
+      <CommentBox teamId={team.teamId}/>
     </div>
-    <CommentBox teamId={team.teamId}/>
   </div>
   )
 }
