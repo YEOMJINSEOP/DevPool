@@ -24,7 +24,7 @@
   width: 630px;
   height: 35px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 
   border: 1px solid #C5C5C5;
@@ -42,7 +42,7 @@
 }
 
 .divider {
-  width: 22px;
+  width: 26px;
   height: 0px;
   border: 1px solid #C5C5C5;
   transform: rotate(90deg);
