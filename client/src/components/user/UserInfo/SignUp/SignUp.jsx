@@ -43,7 +43,7 @@ export default function SignUp() {
       password: pwd
     });
   }
-    
+
 return (
   <div className={styles.signUp_wrapper}>
     <h1 className={styles.signUp_title}>Welcome to<span className={styles.signUp_title_logo}> Dev Pool!</span></h1>
@@ -117,12 +117,12 @@ return (
       </div>
     </div>
     <div>{image != null ? image.name : ''}</div>
-    <Button variant="contained" component="label" className={styles.submitBtn}>
+    <Button variant="contained" component="label" sx={{ m: "16px" }}>
         사진 업로드
         <input hidden accept="image/*" multiple type="file" onChange={handleImgInput}/>
     </Button>
     <Stack direction="row" spacing={2}>
-      <Button variant="contained" disabled={ableBtn} onClick={handleSignUpBtn} className={styles.submitBtn}>동의하고 가입하기</Button>
+      <Button variant="contained" disabled={ableBtn} onClick={handleSignUpBtn}>동의하고 가입하기</Button>
     </Stack>
   </div>
   )

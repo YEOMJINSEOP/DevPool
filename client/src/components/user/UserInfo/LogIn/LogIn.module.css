@@ -19,10 +19,6 @@
     color: #F25022;
 }
 
-.submitBtn {
-    margin: 24px 0 0 0;
-}
-
 .loginTosignUp_message{
     margin: 0 0 0 20px;
 }
@@ -31,4 +27,8 @@
     cursor: pointer;
     margin: 12px 0 0 14px;
     color: #F25022;
+}
+
+.loginTosignUp_wrapper {
+    margin-top: 20px;
 }

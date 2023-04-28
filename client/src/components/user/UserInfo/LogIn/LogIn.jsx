@@ -42,11 +42,13 @@ export default function LogIn() {
             onChange={(e)=>setPwd(e.target.value)}
             type='password'
             />
+            <div className={styles.loginTosignUp_wrapper}>
             <span className={styles.loginTosignUp_message}>아직 회원가입을 안 하셨나요?</span>
             <span onClick={navigateToSignUp} className={styles.loginTosignUp}>회원가입</span>
+            </div>
         </div>
         <Stack direction="row" spacing={2}>
-          <Button variant="contained" className={styles.submitBtn}>로그인</Button>
+          <Button variant="contained" sx={{ m: "16px"}}>로그인</Button>
         </Stack>
     </div>
   )
