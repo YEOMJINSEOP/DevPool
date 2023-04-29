@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import BasicModal from '../BasicModal';
 import Tags from '../StackTags';
-import styles from './UserInfo.module.css'
+import styles from './UserForm.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
 import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
@@ -26,9 +26,6 @@ export default function UserInfo(Member) {
   const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState([]);
   const [ProjectStackIcons, setProjectStackIcons] = useState([]);
-  // 관련 사이트
-  const [relatedSite, setRelatedSite] = useState([]);
-  const [relatedSiteId, setRelatedSiteId] = useState(1);
   // 전체 member의 state
   const [member, setMember] = useState({
     name: '',
@@ -37,7 +34,6 @@ export default function UserInfo(Member) {
     stack: [],
     project: [],
     certificate: [],
-    relatedSite: [],
   });
 
   const stackOptions = [
@@ -114,28 +110,6 @@ export default function UserInfo(Member) {
       setCertificate('');
       setCertificateId(count => count + 1);
     }
-    // 사이트 추가할 때
-    else if(id == 'relatedSite') {
-      if(relatedSite == '') return;
-      if(member.relatedSite.filter((item) => item == relatedSite).length != 0) {
-        alert('중복되는 사이트가 있습니다.');
-        setRelatedSite('');
-        return;
-      }
-      setMember((prev) => {
-        const newSite = [...prev.relatedSite];
-        newSite.push({
-          id: relatedSiteId,
-          content: relatedSite
-        });
-        return {
-          ...prev,
-          relatedSite: newSite,
-        };
-      });
-      setRelatedSite('');
-      setRelatedSiteId(count => count + 1);
-    }
     // 프로젝트 추가할 때
     else if(id == 'project') {
       if(project == '') return;
@@ -191,16 +165,6 @@ export default function UserInfo(Member) {
         };
       });
     }
-    else if(parentId[0] == 'relatedSite') {
-      setMember((prev) => {
-        let newSite = [...prev.relatedSite]; 
-        newSite = newSite.filter((item)=> item.id != parentId[1]);
-        return {
-          ...prev,
-          relatedSite: newSite,
-        };
-      });
-    }
     else if(parentId[0] == 'project') {
       setMember((prev) => {
         let newProject = [...prev.project];
@@ -240,11 +204,6 @@ export default function UserInfo(Member) {
     });
     setProjectStack(newValues);
   };
-  
-  function handleClick(url) {
-  if(url.includes('https://')) window.open(`${url}`);
-  else window.open(`https://${url}`);
-  }
 
   return (
   <div className={styles.user_wrapper}>
@@ -355,41 +314,17 @@ export default function UserInfo(Member) {
         onChange={(event)=>setCertificate(event.target.value)}/>
         <button id="certificate" onClick={handleAddBtn} className={styles.certificateBtn}>추가하기</button>
     </div>
-    <div className={styles.certificate_wrapper}>
-      {member.certificate.map((item, idx) => {
-        return (
-          <li 
-          className={styles.certificate_list}
-          id={"certificate " + item.id}
-          key={"certificate" + idx}>
-            {item.content}
-            <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
-          </li>
-        );
-      })}
-    </div>
-    <div className={styles.relatedSite_wrapper}>
-      <label htmlFor='relatedSited'>관련 사이트</label>
-      <input 
-          className={styles.certificate_input}
-          placeholder='' 
-          type="text" 
-          value={relatedSite}
-          onChange={(event)=>setRelatedSite(event.target.value)}/>
-          <button id="relatedSite" onClick={handleAddBtn} className={styles.relatedSiteBtn}>추가하기</button>
-      {member.relatedSite.map((item, idx) => {
-        return (
-          <li 
-          className={styles.certificate_list}
-          id={"relatedSite " + item.id}
-          key={"relatedSite" + idx}
-          onClick={()=>handleClick(item.content)}>
-            {item.content}
-            <button onClick={handleDeleteBtn2} className={styles.relatedSite_deleteBtn}>삭제</button>
-          </li>
-        );
-      })}
-    </div>
+    {member.certificate.map((item, idx) => {
+      return (
+        <li 
+        className={styles.certificate_list}
+        id={"certificate " + item.id}
+        key={"certificate" + idx}>
+          {item.content}
+          <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
+        </li>
+      );
+    })}
     <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
   </div>
   )

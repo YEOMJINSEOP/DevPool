@@ -1,40 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BasicModal from '../BasicModal';
-import StackTags from '../StackTags';
+import Tags from '../StackTags';
+import styles from './MyPage.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
+import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 
-const Member = {
-    name: '이영진',
-    email: 'leesu0229@naver.com',
-    interest: ['Front-end', 'Back-end'],
-    stack: ['HTML', 'CSS', 'JavaScript'],
-    project: [{id: 1, content: '산학프로젝트', start: '2023-01', end: '2023-05', stack: ['Angular', 'Spring']},
-              {id: 2, content: '프로젝트 X', start: '2023-07', end:'2023-09', stack:['Deep learning(AI)', 'Computer Vision(AI)']}],
-    certificate: [{id: 1, content: 'AWS'},
-                  {id: 2, content: 'SQLD'},
-                  {id: 3, content: '정보처리기사'}],
-  }
+const interestList = ["선택하기", "Front-end", "Back-end", "IOS",  "Android", "AI"];
 
-const interestList = ["선택하기", "Front-end", "Back-end", "Mobile", "AI"];
+//나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
-export default function MyPage() {
-  const [updateMode, setUpdateMode] = useState(false);
-  // stack input 입력값
-  const [stackInput, setStackInput] = useState('');
+export default function UserInfo(Member) {
   // certificate 입력값
   const [certificate, setCertificate] = useState('');
   const [certificateId, setCertificateId] = useState(1);
   // 관심사 state
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
   // 선택된 스택 state
-  const [selectedStack, setSelectedStack] = useState(Member.stack);
+  const [selectedStack, setSelectedStack] = useState([]);
+  const [selectedStackIcons, setSelectedStackIcons] = useState([]);
   // Project state
   const [project, setProject] = useState('');
   const [projectId, setProjectId] = useState(1);
   const [projectStart, setProjectStart] = useState('');
   const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState([]);
+  const [ProjectStackIcons, setProjectStackIcons] = useState([]);
   // 전체 member의 state
-  const [member, setMember] = useState(Member);
+  const [member, setMember] = useState({
+    name: '',
+    email: '',
+    interest: [],
+    stack: [],
+    project: [],
+    certificate: [],
+  });
+
+  const stackOptions = [
+    { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
+    { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
+    { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
+    { id: '4', label: 'Vue.js', icon: <FontAwesomeIcon className={styles.icon} icon={faVuejs} size="xl" style={{color: "#4d8217",}} /> },
+    { id: '5', label: 'React.js', icon: <FontAwesomeIcon className={styles.icon} icon={faReact} size="xl" style={{color: "#3a8fcf",}} /> },
+    { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
+    { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
+    { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
+    { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
+    { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
+    { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
+    { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
+  ];
 
   // member interest 설정
     useEffect(() => {
@@ -51,12 +66,19 @@ export default function MyPage() {
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
 
+    useEffect(() => {
+      let projectIcons = member.project.map(now => stackOptions.filter(option => now.stack.includes(option.label)));
+      setProjectStackIcons(projectIcons);
+    }, [member.project]);
+
     // 멤버 stack 설정
     useEffect(() => {
       setMember((prev) => ({
         ...prev,
         stack: selectedStack,
       }));
+      // 스택의 Icon을 filter해서 보여줌
+      setSelectedStackIcons(stackOptions.filter(option => selectedStack.includes(option.label)));
     }, [selectedStack]);
 
   // 리스트에 추가하기
@@ -130,7 +152,6 @@ export default function MyPage() {
     });
   }
 
-
   // 자격증 삭제하기 (일단 자격증만 id로 구현해 놓음.)
   const handleDeleteBtn2 = (e) => {
     const parentId = e.target.parentNode.id.split(' ');
@@ -146,7 +167,7 @@ export default function MyPage() {
     }
     else if(parentId[0] == 'project') {
       setMember((prev) => {
-        let newProject = [...prev.project]; 
+        let newProject = [...prev.project];
         newProject = newProject.filter((item)=> item.id != parentId[1]);
         return {
           ...prev,
@@ -177,86 +198,84 @@ export default function MyPage() {
     console.log(values);
   };
   const handleProjectStack = (event, values) => {
-    setProjectStack(values);
-    console.log(values);
+    let newValues= [];
+    values.map((value) => {
+      newValues.push(value.label);
+    });
+    setProjectStack(newValues);
   };
-  
 
-  const handleUpdateMode = () => {
-    updateMode ? setUpdateMode(false) : setUpdateMode(true);
-    console.log(member);
-  }
-    return (
-    <div>
-        {updateMode ? <button onClick={handleUpdateMode}>수정완료</button> : <button onClick={handleUpdateMode}>수정하기</button>}
-        {/* updateMode가 true 라면 */}
-        {updateMode ? 
-  <div className='user'>
-    <div className='user_box'>
-    {/* 유저 박스 왼쪽(이미지) */}
-    <div className="user_box_left">
-      <img 
-      className='user_img'
-      alt='User Img' 
-      style={{"width":"150px"}}
-      src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
-      <button className='uer_img_btn' style={{"width":"150px"}}>이미지 등록</button>
-    </div>
-    {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
-    <div className='user_box_right'>
-      <p>
-      이름 :<input 
-      id='name'
-      name='name'
-      placeholder='이름' 
-      type="text" value={member.name} 
-      onChange={handleUserInput}/>
-      </p>
-      <p>
-      이메일 :
-      <input 
-      id='email'
-      name='email'
-      placeholder='이메일' 
-      type="text" 
-      value={member.email} 
-      onChange={handleUserInput} />
-      </p>
-      <div>
-        <label htmlFor='interest'>관심분야</label>
-        <select id="interest" value={selectedInterest} onChange={handleAddBtn}>
-          {interestList.map((item, idx) => {
+  return (
+  <div className={styles.user_wrapper}>
+    <div className={styles.user_box}>
+      {/* 유저 박스 왼쪽(이미지) */}
+      <div className={styles.userBox_left}>
+        <img 
+        className='user_img'
+        alt='User Img' 
+        style={{"width":"150px"}}
+        src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
+        <button className={styles.profileBtn}>프로필 변경</button>
+      </div>
+      <div className='user_box_middel'>
+        <p>
+          이름 :<input 
+          className={styles.name_input}
+          id='name'
+          name='name'
+          placeholder='이름' 
+          type="text" value={member.name} 
+          onChange={handleUserInput}/>
+        </p>
+        <div className={styles.interest_wrapper}>
+          <label htmlFor='interest'>관심분야</label>
+          <select id="interest" value={selectedInterest} onChange={handleAddBtn} className={styles.interest_input}>
+            {interestList.map((item, idx) => {
+              return (
+                <option 
+                className={styles.interest_option}
+                value={item}
+                key={idx}>{item}</option>
+              );
+            })}
+          </select>
+          {member.interest.map((item, idx) => {
             return (
-              <option 
-              value={item}
-              key={idx}>{item}</option>
+              <li 
+              className={styles.interest_list}
+              id={"interest " + item}
+              key={idx}>
+                {item}
+                <button onClick={handleDeleteBtn} className={styles.interest_deleteBtn}>삭제</button>
+              </li>
             );
           })}
-        </select>
-        {member.interest.map((item, idx) => {
-          return (
-            <li 
-            id={"interest " + item}
-            key={idx}>
-              {item}
-              <button onClick={handleDeleteBtn}>삭제</button>
-            </li>
-          );
-        })}
+        </div>
+      </div>
+      {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
+      <div className='user_box_right'>
+        <button className={styles.message_btn}>쪽지 보내기</button>
       </div>
     </div>
-    </div>
-    <div className='user_stack'>
+    <div className={styles.user_stack_wrapper}>
       <label htmlFor='stack'>기술 스택</label>
-      <StackTags
+      <Tags 
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
       />
+      <div className={styles.user_stack}>
+        {selectedStackIcons && selectedStackIcons.map((items) => {
+          return (
+            <div>{items.icon}</div>
+          )
+        })}
+      </div>
     </div>
     {/* 프로젝트 */}
-    <div className='user_project'>
+    <div className={styles.user_project}>
       <label htmlFor='project'>프로젝트 경험</label>
-      <BasicModal
+      <BasicModal 
+      className={styles.project_modal}
       project={project}
       handleProject={handleProject}
       projectStack={projectStack}
@@ -270,117 +289,43 @@ export default function MyPage() {
         return (
         <li id={"project " + item.id}
          key={idx}>
+          <span>
           {item.content} 
-          {item.stack.map((stack, idx)=>{
-            return (
-              <span key={idx}>
-                {stack}
-              </span>
-            )
-          })}
+          </span>
+          {stackOptions.filter(option => item.stack.includes(option.label)).map((option, index) => (
+            <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
+          )}
+          <span className={styles.project_span}>
           {item.start} ~ {item.end}
-          <button onClick={handleDeleteBtn2}>삭제</button>
+          </span>
+          <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button>
         </li>
         )
       })}
     </div>
     {/* 자격증 */}
-    <div className='user_certificate'>
+    <div className={styles.user_certificate}>
       <label htmlFor='certificate'>자격증</label>
         <input 
+        className={styles.certificate_input}
         placeholder='' 
         type="text" 
         value={certificate}
         onChange={(event)=>setCertificate(event.target.value)}/>
-        <button id="certificate" onClick={handleAddBtn}>추가하기</button>
+        <button id="certificate" onClick={handleAddBtn} className={styles.certificateBtn}>추가하기</button>
     </div>
     {member.certificate.map((item, idx) => {
       return (
         <li 
+        className={styles.certificate_list}
         id={"certificate " + item.id}
         key={"certificate" + idx}>
           {item.content}
-          <button onClick={handleDeleteBtn2}>삭제</button>
+          <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
         </li>
       );
     })}
-    <button onClick={handleMember}>제출하기</button>
-  </div> 
-  : 
-  <div className='user'>
-    <div className='user_box'>
-    {/* 유저 박스 왼쪽(이미지) */}
-    <div className="user_box_left">
-      <img 
-      className='user_img'
-      alt='User Img' 
-      style={{"width":"150px"}}
-      src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
-      <button className='uer_img_btn' style={{"width":"150px"}}>이미지 등록</button>
-    </div>
-    {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
-    <div className='user_box_right'>
-      <p>
-      이름 :{member.name}
-      </p>
-      <p>
-      이메일 :{member.email}
-      </p>
-      <div className='user_interest'>
-        {member.interest.map((interest, idx)=> {
-            return (
-                <li key={idx}>{interest}</li>
-            )
-        })}
-      </div>
-    </div>
-    </div>
-    <div className='user_stack'>
-      <label htmlFor='stack'>기술 스택</label>
-      {member.stack.map((stack, idx)=> {
-        return (
-            <li key={idx}>{stack}</li>
-        )
-      })}
-    </div>
-    {/* 프로젝트 */}
-    <div className='user_project'>
-      <label htmlFor='project'>프로젝트 경험</label>
-      {member.project.map((item, idx) => {
-        return (
-        <li id={"project " + item.id}
-         key={idx}>
-          {item.content} 
-          {item.stack.map((stack, idx)=>{
-            return (
-              <span key={idx}>
-                {stack}
-              </span>
-            )
-          })}
-          {item.start} ~ {item.end}
-        </li>
-        )
-      })}
-    </div>
-    {/* 자격증 */}
-    <div className='user_certificate'>
-      <label htmlFor='certificate'>자격증</label>
-    </div>
-    {member.certificate.map((item, idx) => {
-      return (
-        <li 
-        id={"certificate " + item.id}
-        key={"certificate" + idx}>
-          {item.content}
-        </li>
-      );
-    })}
-    <button onClick={handleMember}>제출하기</button>
+    <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
   </div>
-  }
-    </div>
   )
 }
-
-

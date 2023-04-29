@@ -144,7 +144,7 @@
   font-size: 16px;
 }
 
-.interest_deleteBtn, .certificate_deleteBtn, .project_deleteBtn, .relatedSite_deleteBtn {
+.interest_deleteBtn, .certificate_deleteBtn, .project_deleteBtn {
     margin-left: 8px;
     padding: 3px 6px;
     font-size: 12px;
@@ -174,7 +174,7 @@
     height: 40px;
 }
 
-.certificateBtn, .relatedSiteBtn {
+.certificateBtn {
     padding: 4px 8px;
     font-size: 15px;
     font-family: var(--font-family-DoHyeon);
@@ -186,7 +186,7 @@
     cursor: pointer;
 }
 
-.certificateBtn:hover, .relatedSiteBtn:hover {
+.certificateBtn:hover {
     background-color: #a9abaa;
 }
 
@@ -200,10 +200,6 @@
     background-color: #E9E9E9;
     color: black;
     cursor: pointer;
-}
-
-.certificate_wrapper, .relatedSite_wrapper {
-    margin: 20px 0 0 0;
 }
 
 .submitBtn:hover {
