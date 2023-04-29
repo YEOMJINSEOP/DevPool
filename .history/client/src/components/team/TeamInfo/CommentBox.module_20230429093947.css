@@ -86,11 +86,7 @@
     width: 20px;
     height: 20px;
     background-color: var(--color-devPool);
-    border-radius: 100%;   
-}
-
-.commentText{
-  padding-left: 10px;
+    border-radius: 100%;
 }
 
 .reply {
@@ -100,11 +96,4 @@
   border: 1px solid #C5C5C5;
   padding-left: 60px;
   padding-right: 10px;
-
-  display: flex;
-  align-items: center;
-}
-
-.replyText{
-  padding-left: 10px;
 }

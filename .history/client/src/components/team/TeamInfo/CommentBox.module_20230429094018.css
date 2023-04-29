@@ -90,7 +90,7 @@
 }
 
 .commentText{
-  padding-left: 10px;
+  padding-left: 20px;
 }
 
 .reply {
@@ -100,11 +100,4 @@
   border: 1px solid #C5C5C5;
   padding-left: 60px;
   padding-right: 10px;
-
-  display: flex;
-  align-items: center;
-}
-
-.replyText{
-  padding-left: 10px;
 }

@@ -74,8 +74,7 @@ function CommentBox(props: CommentBoxProps): JSX.Element {
                       {cmnt.replies.map((reply) =>
                         {return (
                           <li className={styles.reply} key={reply.replyId}>
-                            <div className={styles.userImg}></div>
-                            <span className={styles.replyText}>{reply.text}</span>
+                            <span>{reply.text}</span>
                           </li>
                         )}
                       )}

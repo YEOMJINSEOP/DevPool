@@ -66,16 +66,12 @@ function CommentBox(props: CommentBoxProps): JSX.Element {
               cmnt => {
                 return (
                   <li className={styles.commentContainer} key={cmnt.commentId}>
-                    <div className={styles.comment}>
-                      <div className={styles.userImg}></div>
-                      <span className={styles.commentText}>{cmnt.text}</span>
-                    </div>
+                    <div className={styles.comment}>{cmnt.text}</div>
                     <ul>
                       {cmnt.replies.map((reply) =>
                         {return (
                           <li className={styles.reply} key={reply.replyId}>
-                            <div className={styles.userImg}></div>
-                            <span className={styles.replyText}>{reply.text}</span>
+                            {reply.text}
                           </li>
                         )}
                       )}

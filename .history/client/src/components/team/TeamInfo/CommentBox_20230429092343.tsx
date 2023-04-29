@@ -6,13 +6,13 @@ type CommentBoxProps = {
 }
 
 type Reply = {
-  replyId: number;
+  id: number;
   text: string;
 }
 
 type Comment = {
   teamId: number;
-  commentId: number;
+  id: number;
   text: string;
   replies: Reply[];
 }
@@ -20,30 +20,30 @@ type Comment = {
 function CommentBox(props: CommentBoxProps): JSX.Element {
   const [comment, setComment] = useState<Comment[]>([{
     "teamId": 1,
-    "commentId": 1,
+    "id": 1,
     "text": "This is a comment.",
     "replies": [
       {
-        "replyId": 2,
+        "id": 2,
         "text": "This is a reply to the first comment."
       },
       {
-        "replyId": 3,
+        "id": 3,
         "text": "This is another reply to the first comment."
       }
     ]
   },
   {
     "teamId": 1,
-    "commentId": 2,
+    "id": 2,
     "text": "This is a comment.2",
     "replies": [
       {
-        "replyId": 2,
+        "id": 2,
         "text": "This is a reply to the first comment."
       },
       {
-        "replyId": 3,
+        "id": 3,
         "text": "This is another reply to the first comment."
       }
     ]
@@ -56,26 +56,19 @@ function CommentBox(props: CommentBoxProps): JSX.Element {
   return (
     <div className={styles.commentBoxContainer}>
       <div className={styles.commentBox}>
-        <div className={styles.commentHeader}>
-          <input className={styles.inputComment} type="text" />
-          <button className={styles.addBtn}>댓글 달기</button>
-        </div>
+        <input type="text" />
         <ul className={styles.commentList}>
           {
             comment.map(
               cmnt => {
                 return (
-                  <li className={styles.commentContainer} key={cmnt.commentId}>
-                    <div className={styles.comment}>
-                      <div className={styles.userImg}></div>
-                      <span className={styles.commentText}>{cmnt.text}</span>
-                    </div>
+                  <li className={styles.comment} key={cmnt.id}>
+                    <div>{cmnt.text}</div>
                     <ul>
                       {cmnt.replies.map((reply) =>
                         {return (
-                          <li className={styles.reply} key={reply.replyId}>
-                            <div className={styles.userImg}></div>
-                            <span className={styles.replyText}>{reply.text}</span>
+                          <li className={styles.reply} key={reply.id}>
+                            {reply.text}
                           </li>
                         )}
                       )}

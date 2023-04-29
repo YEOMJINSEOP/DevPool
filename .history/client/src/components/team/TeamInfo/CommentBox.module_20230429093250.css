@@ -22,7 +22,7 @@
   padding-top: 20px;
   padding-left: 60px;
   padding-right: 60px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .commentBox > ul {
@@ -66,45 +66,14 @@
   color: black;
 }
 
-.commentContainer {
-
-}
-
 .comment {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
   border: 1px solid #C5C5C5;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  display: flex;
-  align-items: center;
-}
-
-.userImg{
-    width: 20px;
-    height: 20px;
-    background-color: var(--color-devPool);
-    border-radius: 100%;   
-}
-
-.commentText{
-  padding-left: 10px;
+  padding: 6px;
 }
 
 .reply {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
   border: 1px solid #C5C5C5;
-  padding-left: 60px;
-  padding-right: 10px;
-
-  display: flex;
-  align-items: center;
-}
-
-.replyText{
-  padding-left: 10px;
+  padding: 6px;
 }
