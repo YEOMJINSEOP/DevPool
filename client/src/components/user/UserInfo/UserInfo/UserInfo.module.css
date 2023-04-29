@@ -1,0 +1,108 @@
+@import '../../../../App.css';
+
+.user_wrapper {
+    max-width: 1250px;
+    border: solid 2px black;
+    font-family: var(--font-family-DoHyeon);
+    margin: auto;
+    padding: 60px;
+}
+
+.user_box {
+    display: flex;
+    justify-content: space-around;
+}
+
+.interest_wrapper {
+    margin: 24px 0 0 0;
+}
+
+.message_btn {
+    padding: 12px 20px;
+    font-family: var(--font-family-DoHyeon);
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: #FFA500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.message_btn:hover {
+    background-color: #F25022;
+}
+
+.message_btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #F25022(0, 123, 255, 0.5);
+}
+
+.user_stack_wrapper {
+    margin: 24px 0 0 0;
+}
+
+.user_project {
+    margin: 24px 0 0 0;
+}
+
+.user_certificate {
+    margin: 24px 0 0 0;
+}
+
+.user_stack {
+    width: 1100px;
+    height:150px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 20px 0 0 0;
+    display: flex;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.interest_input {
+      /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  /* 스타일링 */
+  padding: 4px 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #E9E9E9;
+  margin: 0 10px;
+  background-color: #E9E9E9;
+  color: black;
+  cursor: pointer;
+}
+
+.interest_option {
+  /* 스타일링 */
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.interest_list {
+      /* 스타일링 */
+  padding: 6px 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.interest_deleteBtn {
+    margin-left: 8px;
+    padding: 3px 6px;
+    font-size: 12px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    cursor: pointer;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    margin: 8px;
+}
+

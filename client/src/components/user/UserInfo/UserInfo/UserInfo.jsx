@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import BasicModal from './BasicModal';
-import Tags from './StackTags';
+import { useEffect, useState } from 'react';
+import BasicModal from '../BasicModal';
+import Tags from '../StackTags';
+import styles from './UserInfo.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
+import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 
-const Member = {
-  name: '',
-  email: '',
-  interest: [],
-  stack: [],
-  project: [],
-  certificate: [],
-}
-
-const interestList = ["선택하기", "Front-end", "Back-end", "Mobile", "AI"];
+const interestList = ["선택하기", "Front-end", "Back-end", "IOS",  "Android", "AI"];
 
 export default function UserInfo(Member) {
-  // stack input 입력값
-  const [stackInput, setStackInput] = useState('');
   // certificate 입력값
   const [certificate, setCertificate] = useState('');
   const [certificateId, setCertificateId] = useState(1);
@@ -23,6 +16,7 @@ export default function UserInfo(Member) {
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
   // 선택된 스택 state
   const [selectedStack, setSelectedStack] = useState([]);
+  const [selectedStackIcons, setSelectedStackIcons] = useState([]);
   // Project state
   const [project, setProject] = useState('');
   const [projectId, setProjectId] = useState(1);
@@ -38,6 +32,21 @@ export default function UserInfo(Member) {
     project: [],
     certificate: [],
   });
+
+  const stackOptions = [
+    { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
+    { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
+    { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
+    { id: '4', label: 'Vue.js', icon: <FontAwesomeIcon className={styles.icon} icon={faVuejs} size="xl" style={{color: "#4d8217",}} /> },
+    { id: '5', label: 'React.js', icon: <FontAwesomeIcon className={styles.icon} icon={faReact} size="xl" style={{color: "#3a8fcf",}} /> },
+    { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
+    { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
+    { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
+    { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
+    { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
+    { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
+    { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
+  ];
 
   // member interest 설정
     useEffect(() => {
@@ -60,6 +69,7 @@ export default function UserInfo(Member) {
         ...prev,
         stack: selectedStack,
       }));
+      setSelectedStackIcons(stackOptions.filter(option => selectedStack.includes(option.label)));
     }, [selectedStack]);
 
   // 리스트에 추가하기
@@ -133,7 +143,6 @@ export default function UserInfo(Member) {
     });
   }
 
-
   // 자격증 삭제하기 (일단 자격증만 id로 구현해 놓음.)
   const handleDeleteBtn2 = (e) => {
     const parentId = e.target.parentNode.id.split(' ');
@@ -149,7 +158,7 @@ export default function UserInfo(Member) {
     }
     else if(parentId[0] == 'project') {
       setMember((prev) => {
-        let newProject = [...prev.project]; 
+        let newProject = [...prev.project];
         newProject = newProject.filter((item)=> item.id != parentId[1]);
         return {
           ...prev,
@@ -180,76 +189,80 @@ export default function UserInfo(Member) {
     console.log(values);
   };
   const handleProjectStack = (event, values) => {
-    setProjectStack(values);
-    console.log(values);
+    let newValues= [];
+    values.map((value) => {
+      newValues.push(value.label);
+    });
+    setProjectStack(newValues);
   };
-  
-  
+
   return (
-  <div className='user'>
-    <div className='user_box'>
-    {/* 유저 박스 왼쪽(이미지) */}
-    <div className="user_box_left">
-      <img 
-      className='user_img'
-      alt='User Img' 
-      style={{"width":"150px"}}
-      src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
-      <button className='uer_img_btn' style={{"width":"150px"}}>프로필 변경</button>
-    </div>
-    {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
-    <div className='user_box_right'>
-      <p>
-      이름 :<input 
-      id='name'
-      name='name'
-      placeholder='이름' 
-      type="text" value={member.name} 
-      onChange={handleUserInput}/>
-      </p>
-      <p>
-      이메일 :
-      <input 
-      id='email'
-      name='email'
-      placeholder='이메일' 
-      type="text" 
-      value={member.email} 
-      onChange={handleUserInput} />
-      </p>
-      <div>
-        <label htmlFor='interest'>관심분야</label>
-        <select id="interest" value={selectedInterest} onChange={handleAddBtn}>
-          {interestList.map((item, idx) => {
+  <div className={styles.user_wrapper}>
+    <div className={styles.user_box}>
+      {/* 유저 박스 왼쪽(이미지) */}
+      <div className="user_box_left">
+        <img 
+        className='user_img'
+        alt='User Img' 
+        style={{"width":"150px"}}
+        src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
+        <button className='uer_img_btn' style={{"width":"150px"}}>프로필 변경</button>
+      </div>
+      <div className='user_box_middel'>
+        <p>
+          이름 :<input 
+          id='name'
+          name='name'
+          placeholder='이름' 
+          type="text" value={member.name} 
+          onChange={handleUserInput}/>
+        </p>
+        <div className={styles.interest_wrapper}>
+          <label htmlFor='interest'>관심분야</label>
+          <select id="interest" value={selectedInterest} onChange={handleAddBtn} className={styles.interest_input}>
+            {interestList.map((item, idx) => {
+              return (
+                <option 
+                className={styles.interest_option}
+                value={item}
+                key={idx}>{item}</option>
+              );
+            })}
+          </select>
+          {member.interest.map((item, idx) => {
             return (
-              <option 
-              value={item}
-              key={idx}>{item}</option>
+              <li 
+              className={styles.interest_list}
+              id={"interest " + item}
+              key={idx}>
+                {item}
+                <button onClick={handleDeleteBtn} className={styles.interest_deleteBtn}>삭제</button>
+              </li>
             );
           })}
-        </select>
-        {member.interest.map((item, idx) => {
-          return (
-            <li 
-            id={"interest " + item}
-            key={idx}>
-              {item}
-              <button onClick={handleDeleteBtn}>삭제</button>
-            </li>
-          );
-        })}
+        </div>
+      </div>
+      {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
+      <div className='user_box_right'>
+        <button className={styles.message_btn}>쪽지 보내기</button>
       </div>
     </div>
-    </div>
-    <div className='user_stack'>
+    <div className={styles.user_stack_wrapper}>
       <label htmlFor='stack'>기술 스택</label>
       <Tags 
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
       />
+      <div className={styles.user_stack}>
+        {selectedStackIcons && selectedStackIcons.map((items) => {
+          return (
+            <div>{items.icon}</div>
+          )
+        })}
+      </div>
     </div>
     {/* 프로젝트 */}
-    <div className='user_project'>
+    <div className={styles.user_project}>
       <label htmlFor='project'>프로젝트 경험</label>
       <BasicModal 
       project={project}
@@ -274,14 +287,13 @@ export default function UserInfo(Member) {
             )
           })}
           {item.start} ~ {item.end}
-
           <button onClick={handleDeleteBtn2}>삭제</button>
         </li>
         )
       })}
     </div>
     {/* 자격증 */}
-    <div className='user_certificate'>
+    <div className={styles.user_certificate}>
       <label htmlFor='certificate'>자격증</label>
         <input 
         placeholder='' 

@@ -8,7 +8,7 @@ import MainBanner from './components/main/MainBanner/MainBanner';
 import TeamForm from './components/team/TeamForm/TeamForm';
 import TeamInfo from './components/team/TeamInfo/TeamInfo';
 import TeamList from './components/team/TeamList/TeamList';
-import UserInfo from './components/user/UserInfo/UserInfo';
+import UserInfo from './components/user/UserInfo/UserInfo/UserInfo';
 import Mypage from './components/user/UserInfo/MyPage/Mypage';
 import SignUp from './components/user/UserInfo/SignUp/SignUp';
 import LogIn from './components/user/UserInfo/LogIn/LogIn';
