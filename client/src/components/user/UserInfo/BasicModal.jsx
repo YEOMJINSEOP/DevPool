@@ -4,16 +4,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import ProjectTags from './ProjectTags';
+import styles from './BasicModal.module.css';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600,
-  height: 400,
+  // width: 600,
+  // height: 400,
   bgcolor: 'background.paper',
   border: '2px solid #000',
+  borderRadius: '20px',
   boxShadow: 24,
   p: 4,
 };
@@ -38,6 +40,7 @@ export default function BasicModal({project, handleProject, projectStack, handle
             프로젝트 내용
           </Typography>
           <input
+          className={styles.project_nameInput}
           value={project}
           onChange={handleProject}/>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -50,15 +53,17 @@ export default function BasicModal({project, handleProject, projectStack, handle
             프로젝트 기간
           </Typography>
           <input 
+          className={styles.project_startInput}
           value={projectStart}
           onChange={handleProjectStart}
           type='month'/>
           <input 
+          className={styles.project_endInput}
           value={projectEnd}
           onChange={handleProjectEnd}
           type='month'/>
-          <p></p><button id='project' onClick={handleAddBtn}>제출하기</button>
-          <p></p><button onClick={handleClose}>창닫기</button>
+          <p></p><button id='project' onClick={handleAddBtn} className={styles.project_submitBtn}>제출하기</button>
+          <p></p><button onClick={handleClose} className={styles.project_closeBtn}>창닫기</button>
         </Box>
       </Modal>
     </div>

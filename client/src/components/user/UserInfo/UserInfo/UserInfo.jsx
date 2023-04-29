@@ -25,6 +25,7 @@ export default function UserInfo(Member) {
   const [projectStart, setProjectStart] = useState('');
   const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState([]);
+  const [ProjectStackIcons, setProjectStackIcons] = useState([]);
   // 전체 member의 state
   const [member, setMember] = useState({
     name: '',
@@ -65,12 +66,18 @@ export default function UserInfo(Member) {
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
 
+    useEffect(() => {
+      let projectIcons = member.project.map(now => stackOptions.filter(option => now.stack.includes(option.label)));
+      setProjectStackIcons(projectIcons);
+    }, [member.project]);
+
     // 멤버 stack 설정
     useEffect(() => {
       setMember((prev) => ({
         ...prev,
         stack: selectedStack,
       }));
+      // 스택의 Icon을 filter해서 보여줌
       setSelectedStackIcons(stackOptions.filter(option => selectedStack.includes(option.label)));
     }, [selectedStack]);
 
@@ -282,16 +289,16 @@ export default function UserInfo(Member) {
         return (
         <li id={"project " + item.id}
          key={idx}>
+          <span>
           {item.content} 
-          {item.stack.map((stack, idx)=>{
-            return (
-              <span key={idx}>
-                {stack}
-              </span>
-            )
-          })}
+          </span>
+          {stackOptions.filter(option => item.stack.includes(option.label)).map((option, index) => (
+            <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
+          )}
+          <span className={styles.project_span}>
           {item.start} ~ {item.end}
-          <button onClick={handleDeleteBtn2}>삭제</button>
+          </span>
+          <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button>
         </li>
         )
       })}

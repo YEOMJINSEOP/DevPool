@@ -1,0 +1,34 @@
+.project_submitBtn, .project_closeBtn {
+    margin: 14px 0 0 0;
+    padding: 4px 8px;
+    font-size: 16px;
+    font-family: var(--font-family-DoHyeon);
+    border-radius: 4px;
+    border: 1px solid #E9E9E9;
+    background-color: #E9E9E9;
+    color: black;
+    cursor: pointer;
+}
+
+.project_startInput, .project_endInput, .project_nameInput {
+/* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  /* 스타일링 */
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  /* 배경색과 글자색 설정 */
+  background-color: #f5f5f5;
+  color: #333;
+  /* 마우스 커서 설정 */
+  cursor: pointer;
+  font-family: var(--font-family-DoHyeon);
+}
+
+.project_startInput, .project_endInput {
+    margin: 0 0 0 10px;
+}
