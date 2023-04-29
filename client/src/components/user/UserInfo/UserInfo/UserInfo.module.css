@@ -13,8 +13,57 @@
     justify-content: space-around;
 }
 
+.userBox_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBtn {
+  /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  /* 스타일링 */
+  padding: 6px 4px;
+  font-size: 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  /* 배경색과 글자색 설정 */
+  background-color: #f5f5f5;
+  color: #333;
+  /* 마우스 커서 설정 */
+  cursor: pointer;
+  margin: 16px 0 0 0;
+  font-family: var(--font-family-DoHyeon);
+}
+
+.profileBtn:hover {
+    background-color: #a9abaa;
+}
+
+.name_input {
+          /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  /* 스타일링 */
+  padding: 8px 12px;
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  /* 배경색과 글자색 설정 */
+  background-color: #f5f5f5;
+  color: #333;
+  /* 마우스 커서 설정 */
+  cursor: pointer;
+  margin: 0 0 0 10px;
+  font-family: var(--font-family-DoHyeon);
+}
+
 .interest_wrapper {
-    margin: 24px 0 0 0;
+    margin: 32px 0 0 0;
 }
 
 .message_btn {
@@ -39,11 +88,11 @@
 }
 
 .user_stack_wrapper {
-    margin: 24px 0 0 0;
+    margin: 36px 0 0 0;
 }
 
 .user_project {
-    margin: 24px 0 0 0;
+    margin: 36px 0 0 0;
 }
 
 .user_certificate {
@@ -66,30 +115,36 @@
   border: none;
   background-color: transparent;
   /* 스타일링 */
-  padding: 4px 8px;
+  padding: 4px 5px;
   font-size: 16px;
+  font-family: var(--font-family-DoHyeon);
   border-radius: 4px;
   border: 1px solid #E9E9E9;
   margin: 0 10px;
   background-color: #E9E9E9;
   color: black;
   cursor: pointer;
+  text-align: center;
 }
+
+/* .interest_input:hover {
+    background-color: #a9abaa;
+} */
 
 .interest_option {
   /* 스타일링 */
   padding: 8px 12px;
+  font-size: 15px;
+  font-family: var(--font-family-DoHyeon);
+}
+
+.interest_list, .certificate_list {
+      /* 스타일링 */
+  padding: 5px 8px;
   font-size: 16px;
 }
 
-.interest_list {
-      /* 스타일링 */
-  padding: 6px 8px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.interest_deleteBtn {
+.interest_deleteBtn, .certificate_deleteBtn {
     margin-left: 8px;
     padding: 3px 6px;
     font-size: 12px;
@@ -104,5 +159,57 @@
     width: 60px;
     height: 60px;
     margin: 8px;
+}
+
+.certificateBtn {
+    padding: 4px 8px;
+    font-size: 15px;
+    font-family: var(--font-family-DoHyeon);
+    border-radius: 4px;
+    border: 1px solid #E9E9E9;
+    margin: 0 10px;
+    background-color: #E9E9E9;
+    color: black;
+    cursor: pointer;
+}
+
+.certificateBtn:hover {
+    background-color: #a9abaa;
+}
+
+.submitBtn {
+    margin: 30px 0 0 0;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-family: var(--font-family-DoHyeon);
+    border-radius: 4px;
+    border: 1px solid #E9E9E9;
+    background-color: #E9E9E9;
+    color: black;
+    cursor: pointer;
+}
+
+.submitBtn:hover {
+    background-color: #a9abaa;
+}
+
+.certificate_input {
+      /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  /* 스타일링 */
+  padding: 8px 12px;
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  /* 배경색과 글자색 설정 */
+  background-color: #f5f5f5;
+  color: #333;
+  /* 마우스 커서 설정 */
+  cursor: pointer;
+  margin: 0 0 0 10px;
+  font-family: var(--font-family-DoHyeon);
 }
 

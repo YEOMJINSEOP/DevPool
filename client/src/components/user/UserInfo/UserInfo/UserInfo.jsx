@@ -8,6 +8,8 @@ import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 
 const interestList = ["선택하기", "Front-end", "Back-end", "IOS",  "Android", "AI"];
 
+//나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
+
 export default function UserInfo(Member) {
   // certificate 입력값
   const [certificate, setCertificate] = useState('');
@@ -200,17 +202,18 @@ export default function UserInfo(Member) {
   <div className={styles.user_wrapper}>
     <div className={styles.user_box}>
       {/* 유저 박스 왼쪽(이미지) */}
-      <div className="user_box_left">
+      <div className={styles.userBox_left}>
         <img 
         className='user_img'
         alt='User Img' 
         style={{"width":"150px"}}
         src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
-        <button className='uer_img_btn' style={{"width":"150px"}}>프로필 변경</button>
+        <button className={styles.profileBtn}>프로필 변경</button>
       </div>
       <div className='user_box_middel'>
         <p>
           이름 :<input 
+          className={styles.name_input}
           id='name'
           name='name'
           placeholder='이름' 
@@ -265,6 +268,7 @@ export default function UserInfo(Member) {
     <div className={styles.user_project}>
       <label htmlFor='project'>프로젝트 경험</label>
       <BasicModal 
+      className={styles.project_modal}
       project={project}
       handleProject={handleProject}
       projectStack={projectStack}
@@ -296,23 +300,25 @@ export default function UserInfo(Member) {
     <div className={styles.user_certificate}>
       <label htmlFor='certificate'>자격증</label>
         <input 
+        className={styles.certificate_input}
         placeholder='' 
         type="text" 
         value={certificate}
         onChange={(event)=>setCertificate(event.target.value)}/>
-        <button id="certificate" onClick={handleAddBtn}>추가하기</button>
+        <button id="certificate" onClick={handleAddBtn} className={styles.certificateBtn}>추가하기</button>
     </div>
     {member.certificate.map((item, idx) => {
       return (
         <li 
+        className={styles.certificate_list}
         id={"certificate " + item.id}
         key={"certificate" + idx}>
           {item.content}
-          <button onClick={handleDeleteBtn2}>삭제</button>
+          <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
         </li>
       );
     })}
-    <button onClick={handleMember}>제출하기</button>
+    <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
   </div>
   )
 }
