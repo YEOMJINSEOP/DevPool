@@ -89,8 +89,8 @@ function TeamForm(){
         ...prev,
         [clickedValue]: !prev[clickedValue]
       }
-    })
-
+    });
+    handleRecruitField(selectedTechStack);
   }
   
   const handleCSSToggle = (stack: string):string => {
@@ -106,10 +106,6 @@ function TeamForm(){
       recruitField: trueTechStack
     }))
   }
-
-  useEffect(() => {
-    handleRecruitField(selectedTechStack);
-  }, [selectedTechStack]);
 
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {

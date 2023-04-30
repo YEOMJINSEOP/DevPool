@@ -89,8 +89,8 @@ function TeamForm(){
         ...prev,
         [clickedValue]: !prev[clickedValue]
       }
-    })
-
+    });
+    console.log(selectedTechStack);
   }
   
   const handleCSSToggle = (stack: string):string => {
@@ -98,18 +98,14 @@ function TeamForm(){
   }
 
   const handleRecruitField = (selectedTechStack: CurrentField) => {
-    const trueTechStack =  Object.entries(selectedTechStack).
-      filter(([key, value]) => value === true)
-      .map(([key]) => key);
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      recruitField: trueTechStack
-    }))
-  }
+    console.log(Object.entries(selectedTechStack)
+      .filter(([key, value]) => value === true)
+      .map((tuple) => tuple[0])      
+      )
 
-  useEffect(() => {
-    handleRecruitField(selectedTechStack);
-  }, [selectedTechStack]);
+    return Object.entries(selectedTechStack).
+      filter(([key, value]) => value === true)
+  }
 
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -142,13 +138,14 @@ function TeamForm(){
   /** selectedTechStack에서 true인 것만 team의 recruitField에 넣도록 하는 함수 필요 */
 
   const handleSubmit = (): void => {
+    handleRecruitField(selectedTechStack);
+    console.log(team);
     axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
       navigate('/teamList');
     })
     .catch(err => {
-      console.log(team);
       console.error(err, 'team post에 실패했습니다.' );
     })
     return;
