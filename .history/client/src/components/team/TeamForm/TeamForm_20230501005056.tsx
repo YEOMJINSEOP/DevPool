@@ -178,19 +178,19 @@ function TeamForm(){
               <p>Front-end</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={handleCSSToggle('Back-end')}src="/image/server.png" alt="Back-end" onClick={handleSelectedTechStack} />
+              <img className={styles.recruitFieldIcon}src="/image/server.png" alt="Back-end" onClick={handleSelectedTechStack} />
               <p>Back-end</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={handleCSSToggle('Android')}src="/image/android.png" alt="Android" onClick={handleSelectedTechStack}/>
+              <img className={styles.recruitFieldIcon}src="/image/android.png" alt="Android" onClick={handleSelectedTechStack}/>
               <p>Android</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={handleCSSToggle('iOS')}src="/image/apple-logo.png" alt="iOS" onClick={handleSelectedTechStack}/>
+              <img className={styles.recruitFieldIcon}src="/image/apple-logo.png" alt="iOS" onClick={handleSelectedTechStack}/>
               <p>iOS</p>
             </div>
             <div className={styles.recruitField}>
-            <img className={handleCSSToggle('AI')}src="/image/deep-learning.png" alt="AI" onClick={handleSelectedTechStack}/>
+            <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="AI" onClick={handleSelectedTechStack}/>
               <p>AI</p>
             </div>
           </div>
