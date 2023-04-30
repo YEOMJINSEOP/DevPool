@@ -18,10 +18,6 @@ type Team = {
   recruitStack: string[];
 };
 
-type CurrentField = {
-  [key: string]: boolean;
-}
-
 function TeamForm(){
   const navigate = useNavigate();
   const user = useRecoilValue(userState);
@@ -73,24 +69,40 @@ function TeamForm(){
     ))
   }, []);
 
-  const [selectedTechStack, setSelectedTechStack] = useState<CurrentField>({
-    'Front-end': false,
-    'Back-end': false,
-    'Android': false,
-    'iOS': false,
-    'AI': false
-  });
+  const [selectedTechStack, setSelectedTechStack] = useState<[string, boolean][]>(
+    [
+      ['Front-end', true],
+      ['Back-end', false],
+      ['Android', false],
+      ['iOS', false],
+      ['AI', false]
+    ]
+  );
   const handleSelectTechStack = (event: React.MouseEvent<HTMLImageElement>): void => {
     const target = event.target as HTMLImageElement;
-    const clickedValue = target.alt.toString();
-    setSelectedTechStack((prev) => {
-      return {
-        ...prev,
-        [clickedValue]: !prev[clickedValue]
-      }
-    });
-    console.log(selectedTechStack);
+    const clickedValue = target.alt;
+    const index = selectedTechStack.findIndex((tuple) => tuple[0] === clickedValue);
+    setSelectedTechStack((prev) => 
+      [
+        ...prev, 
+        [clickedValue, !prev[index][1]]
+      ]
+    )
+    // if(selectedTechStack.includes(clickedValue)){
+    //   setSelectedTechStack(
+    //     selectedTechStack.filter((stack) => 
+    //       stack != clickedValue
+    //     )
+    //   )
+    // }
+    // else{
+    //   setSelectedTechStack((prev) => 
+    //   [...prev, clickedValue]
+    //   );
+    // }
   }
+
+
   
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {

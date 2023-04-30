@@ -19,7 +19,11 @@ type Team = {
 };
 
 type CurrentField = {
-  [key: string]: boolean;
+  'Front-end': boolean,
+  'Back-end': boolean,
+  'Android': boolean,
+  'iOS': boolean,
+  'AI': boolean
 }
 
 function TeamForm(){
@@ -83,14 +87,16 @@ function TeamForm(){
   const handleSelectTechStack = (event: React.MouseEvent<HTMLImageElement>): void => {
     const target = event.target as HTMLImageElement;
     const clickedValue = target.alt.toString();
-    setSelectedTechStack((prev) => {
-      return {
+    setSelectedTechStack((prev) => 
+      ({
         ...prev,
-        [clickedValue]: !prev[clickedValue]
-      }
-    });
+        [clickedValue]: prev
+      })
+    );
     console.log(selectedTechStack);
   }
+
+
   
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {

@@ -84,13 +84,16 @@ function TeamForm(){
     const target = event.target as HTMLImageElement;
     const clickedValue = target.alt.toString();
     setSelectedTechStack((prev) => {
+      const currentState = prev[clickedValue];
       return {
         ...prev,
-        [clickedValue]: !prev[clickedValue]
+        [clickedValue]: !currentState
       }
     });
     console.log(selectedTechStack);
   }
+
+
   
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {

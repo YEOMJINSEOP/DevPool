@@ -91,6 +91,8 @@ function TeamForm(){
     });
     console.log(selectedTechStack);
   }
+
+
   
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
