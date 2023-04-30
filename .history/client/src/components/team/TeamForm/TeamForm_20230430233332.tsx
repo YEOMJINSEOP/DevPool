@@ -13,7 +13,7 @@ type Team = {
   category: string;
   currentCount: number;
   recruitCount: number;
-  recruitField: string[];
+  recruitDomain: string;
   recruitStack: string[];
 };
 
@@ -26,7 +26,7 @@ function TeamForm(){
     category: '',
     currentCount: 1,
     recruitCount: 1,
-    recruitField: [],
+    recruitDomain: '',
     recruitStack: [],
   });
 
@@ -71,24 +71,22 @@ function TeamForm(){
   const [selectedTechStack, setSelectedTechStack] = useState<string[]>([]);
   const handleSelectTechStack = (event: React.MouseEvent<HTMLImageElement>): void => {
     const target = event.target as HTMLImageElement;
-    const clickedValue = target.alt;
-    if(selectedTechStack.includes(clickedValue)){
-      setSelectedTechStack(
-        selectedTechStack.filter((stack) => 
-          stack != clickedValue
-        )
-      )
+    const imageVal = target.alt;
+    if(selectedTechStack.includes(imageVal)){
+      console.log('already exist');
     }
     else{
       setSelectedTechStack((prev) => 
-      [...prev, clickedValue]
+      [...prev, imageVal]
       );
     }
+    console.log(selectedTechStack);
+    // setTeam((prevTeam) => ({
+    //   ...prevTeam,
+    //   ['recruitStack']: [...prevTeam.recruitStack]
+    // }))
   }
 
-  const toggleClassName = (techStack: string):string => {
-    return selectedTechStack.includes(techStack) ? 'recruitFieldIcon_selected' : 'recruitFieldIcon_not_selected'
-  }
   
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -118,15 +116,7 @@ function TeamForm(){
     }
   };
 
-  const handleRecruitField = (selectedTechStack: string[]) => {
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      ['recruitField']: [...prevTeam.recruitStack, ...selectedTechStack]
-    }))
-  }
-
   const handleSubmit = (): void => {
-    handleRecruitField(selectedTechStack);
     console.log(team);
     axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {

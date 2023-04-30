@@ -86,7 +86,7 @@ function TeamForm(){
     }
   }
 
-  const toggleClassName = (techStack: string):string => {
+  const toggleClassName = (techStack: string): string => {
     return selectedTechStack.includes(techStack) ? 'recruitFieldIcon_selected' : 'recruitFieldIcon_not_selected'
   }
   
@@ -172,23 +172,23 @@ function TeamForm(){
           <label className={styles.label}htmlFor="recruitField">모집 분야</label>
           <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon} src="/image/javaScript.png" alt="Front-end" onClick={handleSelectTechStack} />
+              <img className={toggleClassName('Front-end')} src="/image/javaScript.png" alt="Front-end" onClick={handleSelectTechStack} />
               <p>Front-end</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/server.png" alt="Back-end" onClick={handleSelectTechStack} />
+              <img className={toggleClassName('Back-end')}src="/image/server.png" alt="Back-end" onClick={handleSelectTechStack} />
               <p>Back-end</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/android.png" alt="Android" onClick={handleSelectTechStack}/>
+              <img className={toggleClassName('Android')}src="/image/android.png" alt="Android" onClick={handleSelectTechStack}/>
               <p>Android</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/apple-logo.png" alt="iOS" onClick={handleSelectTechStack}/>
+              <img className={toggleClassName('iOS')}src="/image/apple-logo.png" alt="iOS" onClick={handleSelectTechStack}/>
               <p>iOS</p>
             </div>
             <div className={styles.recruitField}>
-            <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="AI" onClick={handleSelectTechStack}/>
+            <img className={toggleClassName('AI')}src="/image/deep-learning.png" alt="AI" onClick={handleSelectTechStack}/>
               <p>AI</p>
             </div>
           </div>

@@ -86,8 +86,8 @@ function TeamForm(){
     }
   }
 
-  const toggleClassName = (techStack: string):string => {
-    return selectedTechStack.includes(techStack) ? 'recruitFieldIcon_selected' : 'recruitFieldIcon_not_selected'
+  const toggleClassName = (techStack: string) => {
+    selectedTechStack.includes(techStack) ? 'recruitFieldIcon_selected' : 'recruitFieldIcon_not_selected'
   }
   
   const [stackInput, setStackInput] = useState<string>('');

@@ -86,8 +86,8 @@ function TeamForm(){
     }
   }
 
-  const toggleClassName = (techStack: string):string => {
-    return selectedTechStack.includes(techStack) ? 'recruitFieldIcon_selected' : 'recruitFieldIcon_not_selected'
+  const toggleClassName = (techStack: string) => {
+    selectedTechStack.includes(techStack) ? 'recruitF'
   }
   
   const [stackInput, setStackInput] = useState<string>('');
@@ -118,7 +118,7 @@ function TeamForm(){
     }
   };
 
-  const handleRecruitField = (selectedTechStack: string[]) => {
+  const handleRecruitDomain = (selectedTechStack: string[]) => {
     setTeam((prevTeam) => ({
       ...prevTeam,
       ['recruitField']: [...prevTeam.recruitStack, ...selectedTechStack]
@@ -126,7 +126,7 @@ function TeamForm(){
   }
 
   const handleSubmit = (): void => {
-    handleRecruitField(selectedTechStack);
+    handleRecruitDomain(selectedTechStack);
     console.log(team);
     axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {

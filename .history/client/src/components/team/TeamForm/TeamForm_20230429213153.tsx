@@ -13,7 +13,7 @@ type Team = {
   category: string;
   currentCount: number;
   recruitCount: number;
-  recruitField: string[];
+  recruitDomain: string;
   recruitStack: string[];
 };
 
@@ -26,7 +26,7 @@ function TeamForm(){
     category: '',
     currentCount: 1,
     recruitCount: 1,
-    recruitField: [],
+    recruitDomain: '',
     recruitStack: [],
   });
 
@@ -69,26 +69,14 @@ function TeamForm(){
   }, []);
 
   const [selectedTechStack, setSelectedTechStack] = useState<string[]>([]);
-  const handleSelectTechStack = (event: React.MouseEvent<HTMLImageElement>): void => {
-    const target = event.target as HTMLImageElement;
-    const clickedValue = target.alt;
-    if(selectedTechStack.includes(clickedValue)){
-      setSelectedTechStack(
-        selectedTechStack.filter((stack) => 
-          stack != clickedValue
-        )
-      )
-    }
-    else{
-      setSelectedTechStack((prev) => 
-      [...prev, clickedValue]
-      );
-    }
+  const handleSelectTechStack = (event: React.MouseEvent<HTMLDivElement>): void => {
+    console.log(event);
+    setTeam((prevTeam) => ({
+      ...prevTeam,
+      ['recruitStack']: [...prevTeam.recruitStack]
+    }))
   }
 
-  const toggleClassName = (techStack: string):string => {
-    return selectedTechStack.includes(techStack) ? 'recruitFieldIcon_selected' : 'recruitFieldIcon_not_selected'
-  }
   
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -118,15 +106,7 @@ function TeamForm(){
     }
   };
 
-  const handleRecruitField = (selectedTechStack: string[]) => {
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      ['recruitField']: [...prevTeam.recruitStack, ...selectedTechStack]
-    }))
-  }
-
   const handleSubmit = (): void => {
-    handleRecruitField(selectedTechStack);
     console.log(team);
     axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {
@@ -172,23 +152,23 @@ function TeamForm(){
           <label className={styles.label}htmlFor="recruitField">모집 분야</label>
           <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon} src="/image/javaScript.png" alt="Front-end" onClick={handleSelectTechStack} />
+              <img className={styles.recruitFieldIcon}src="/image/javaScript.png" alt="" />
               <p>Front-end</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/server.png" alt="Back-end" onClick={handleSelectTechStack} />
+              <img className={styles.recruitFieldIcon}src="/image/server.png" alt="" />
               <p>Back-end</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/android.png" alt="Android" onClick={handleSelectTechStack}/>
+              <img className={styles.recruitFieldIcon}src="/image/android.png" alt="" />
               <p>Android</p>
             </div>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/apple-logo.png" alt="iOS" onClick={handleSelectTechStack}/>
+              <img className={styles.recruitFieldIcon}src="/image/apple-logo.png" alt="" />
               <p>iOS</p>
             </div>
             <div className={styles.recruitField}>
-            <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="AI" onClick={handleSelectTechStack}/>
+            <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="" />
               <p>AI</p>
             </div>
           </div>
