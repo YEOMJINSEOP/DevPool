@@ -166,7 +166,7 @@ function TeamForm(){
         </div>
         <div className={`${styles.container}`}>
           <Label content={"모집 분야"}></Label>
-          <TechField onChange={handleRecruitField}/>
+          <RecruitField onChange={handleRecruitField}/>
         </div>
 
         <div className={`${styles.container}`}>
