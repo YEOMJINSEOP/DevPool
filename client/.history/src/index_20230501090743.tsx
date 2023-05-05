@@ -25,9 +25,9 @@ const router = createBrowserRouter([
       {path: '/myPage', element: <Mypage />},
       {path: '/signUp', element: <SignUp />},
       {path: '/logIn', element: <LogIn />},
-      {path: '/team/create', element: <TeamForm />},
-      {path: '/team/detail/:teamID', element: <TeamInfo />},
-      {path: '/team/list', element: <TeamList />}
+      {path: '/teamForm', element: <TeamForm />},
+      {path: '/teamInfo/:teamID', element: <TeamInfo />},
+      {path: '/teamList', element: <TeamList />}
     ]
   }
 ])

@@ -142,7 +142,7 @@ function TeamForm(){
   /** selectedTechStack에서 true인 것만 team의 recruitField에 넣도록 하는 함수 필요 */
 
   const handleSubmit = (): void => {
-    axios.post(`${process.env.REACT_APP_API_URL}/team/create`, team)
+    axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
       navigate('/teamList');
