@@ -72,7 +72,7 @@ function TeamInfo(){
           </div>
         </div>
         <div className={`${styles.container} ${styles.content}`}>
-           <Label content="팀 소개"></Label>        
+            <label className={styles.label}htmlFor="stack-search">팀 소개</label>          
             <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} readOnly></textarea>
         </div>
         <button className={styles.joinBtn}type="button">팀 참여하기</button>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './TeamBlock.module.css';
-import Label from '../../common/Label/Label';
+
 type TeamProps = {
   name: string;
   category: string;
@@ -30,7 +30,7 @@ function TeamBlock(props: TeamProps): JSX.Element{
 
       <div className={styles.divider}></div>
       <div className={styles.container}>
-        <Label content="카테고리"></Label>
+        <p className={styles.label}>카테고리</p>
         <p className={styles.inputReadOnly}>{props.category}</p>
       </div>
       <div className={styles.container}>

@@ -62,7 +62,7 @@ function TeamInfo(){
           <p className={styles.inputReadOnly}>{team.recruitField}</p>
         </div>
         <div className={`${styles.container} ${styles.recruitStack}`}>
-          <Label content={"모집 스택"}></Label>
+          <p className={styles.label}>모집 스택</p>
           <div className={styles.currentStack}>
               <ul>
                 {team.recruitStack.map((stack, idx) => (
@@ -72,7 +72,7 @@ function TeamInfo(){
           </div>
         </div>
         <div className={`${styles.container} ${styles.content}`}>
-           <Label content="팀 소개"></Label>        
+            <label className={styles.label}htmlFor="stack-search">팀 소개</label>          
             <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} readOnly></textarea>
         </div>
         <button className={styles.joinBtn}type="button">팀 참여하기</button>

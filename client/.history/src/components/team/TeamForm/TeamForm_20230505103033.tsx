@@ -210,7 +210,7 @@ function TeamForm(){
         </div>
 
         <div className={`${styles.container}`}>
-          <Label content={"모집 스택"}></Label>
+          <div className={styles.label}>모집 스택</div>
           <input className={styles.inputCommon} type="text" id='stack-search' value={stackInput} onChange={handleStackInput} onKeyDown={handleKeyDown}/>
           <button className={styles.addBtn} type="button" onClick={handleAddStack}>추가</button>
           <div className={styles.relatedContainer}>

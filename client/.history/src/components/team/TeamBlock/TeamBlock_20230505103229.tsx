@@ -30,7 +30,7 @@ function TeamBlock(props: TeamProps): JSX.Element{
 
       <div className={styles.divider}></div>
       <div className={styles.container}>
-        <Label content="카테고리"></Label>
+        <Label content="카테고리1"></Label>
         <p className={styles.inputReadOnly}>{props.category}</p>
       </div>
       <div className={styles.container}>

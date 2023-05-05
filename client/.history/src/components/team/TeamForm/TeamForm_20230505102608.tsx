@@ -4,7 +4,7 @@ import { userState } from '../../../recoil/user';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './TeamForm.module.css';
-import Label from '../../common/Label/Label';
+
 type TechStack = {
   name: string;
 }
@@ -158,20 +158,20 @@ function TeamForm(){
     <div className={styles.teamFormContainer}>
       <div className={styles.teamForm}>
         <div className={`${styles.container}`}>
-          <Label content={"팀 이름"}></Label>
+          <div className={styles.label} >팀 이름</div>
           <input className={styles.inputTeamName} type="text" name='name' id='name' value={team.name} onChange={handleTeamName} maxLength={20}/>
           {/* <span>{teamNameCount}/20</span> */}
         </div>
         <div className={styles.categoryAndCount_container}>
           <div className={`${styles.container} ${styles.category}`}>
-            <Label content={"카테고리"}></Label>
+            <div className={styles.label}>카테고리</div>
             <select className={styles.selectCommon} name='category' id='category' value={team.category} onChange={handleInputChange}>
               <option value="web">Web</option>
               <option value="mobile">Mobile App</option>
             </select>
           </div>
           <div className={`${styles.container} ${styles.recruitCount}`}>
-            <Label content={"모집 인원"}></Label>
+            <div className={styles.label}>모집 인원</div>
             <select className={styles.selectCommon} name="recruitCount" id="recruitCount" value={team.recruitCount} onChange={handleInputChange}>
               <option defaultValue="1">1</option>
               <option value="2">2</option>
@@ -184,7 +184,7 @@ function TeamForm(){
           </div>          
         </div>
         <div className={`${styles.container}`}>
-          <Label content={"모집 분야"}></Label>
+          <div className={styles.label} >모집 분야</div>
           <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
               <img className={handleCSSToggle('Front-end')} src="/image/javaScript.png" alt="Front-end" onClick={handleSelectedTechStack} />
@@ -210,7 +210,7 @@ function TeamForm(){
         </div>
 
         <div className={`${styles.container}`}>
-          <Label content={"모집 스택"}></Label>
+          <div className={styles.label}>모집 스택</div>
           <input className={styles.inputCommon} type="text" id='stack-search' value={stackInput} onChange={handleStackInput} onKeyDown={handleKeyDown}/>
           <button className={styles.addBtn} type="button" onClick={handleAddStack}>추가</button>
           <div className={styles.relatedContainer}>
