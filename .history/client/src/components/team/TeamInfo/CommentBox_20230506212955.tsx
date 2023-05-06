@@ -57,23 +57,12 @@ const handleCommentInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 }
 
 const handleAddComment = () => {
-  // ✅ 새로운 댓글을 추가하는 API가 필요.
-  // POST 요청.
-  // 매개변수로는 /:teamId
-  // 전달되는 JSON 데이터
-  // {
-  //  teamId: props.teamId,  
-  //  text: commentInput,
-  //  replies: []
-  //}
-  setCommentUpdate(true);
+
 }
 
-const [commentUpdate, setCommentUpdate] = useState<boolean>(false)
   useEffect(() => {
     // ✅ teamId를 매개변수로 넘겨주고, 해당되는 comment를 get 하는 API 필요 => setComment
-    setCommentUpdate(false);
-  }, [commentUpdate])
+  }, [])
   return (
     <div className={styles.commentBoxContainer}>
       <div className={styles.commentBox}>
