@@ -113,13 +113,13 @@ function UserList(){
             </div>
         </div>
         <ul className={styles.teamList}>
-          {/* {teamList.map((team) => {
+          {teamList.map((team) => {
             return(
               <li key={team.name}>
                 <UserBlock {...member}/>
               </li>
             )
-          })} */}
+          })}
         </ul>
     </div>
   )
