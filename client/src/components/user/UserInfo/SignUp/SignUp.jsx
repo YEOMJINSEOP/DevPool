@@ -35,7 +35,7 @@ export default function SignUp() {
   }
 
   const handleSignUpBtn = async() => {
-    await axios.post('/api/member', {
+    await axios.post('http://13.124.112.157/api/member', {
       name: name,
       nickName: nickName,
       email: email,
