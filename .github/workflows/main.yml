@@ -1,24 +1,38 @@
-name: S3 Deploy
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]    # main 브랜치에서 push, pull_request 이벤트가 일어났을 때 실행
+name: React build
+on: 
+  push:                               # master Branch에서 push 이벤트가 일어났을 때만 실행
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
+      - name: Checkout source code.   # 레포지토리 체크아웃
+        uses: actions/checkout@master
 
-      - name: Upload /build to S3
+      - name: Cache node modules      # node modules 캐싱
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install Dependencies    # 의존 파일 설치
+        run: npm install
+
+      - name: Build                   # React Build
+        run: npm run build
+
+      - name: Deploy                  # S3에 배포하기
         env:
-          BUCKET_NAME: ${{secrets.AWS_S3_BUCKET_NAME}}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 cp --recursive --region ap-northeast-2 build s3://$BUCKET_NAME
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            build s3://DevPool
+
