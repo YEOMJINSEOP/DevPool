@@ -26,6 +26,9 @@ export default function UserInfo(Member) {
   const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState([]);
   const [ProjectStackIcons, setProjectStackIcons] = useState([]);
+  // 관련 사이트
+  const [relatedSite, setRelatedSite] = useState([]);
+  const [relatedSiteId, setRelatedSiteId] = useState(1);
   // 전체 member의 state
   const [member, setMember] = useState({
     name: '',
@@ -34,6 +37,7 @@ export default function UserInfo(Member) {
     stack: [],
     project: [],
     certificate: [],
+    relatedSite: [],
   });
 
   const stackOptions = [
@@ -110,6 +114,28 @@ export default function UserInfo(Member) {
       setCertificate('');
       setCertificateId(count => count + 1);
     }
+    // 사이트 추가할 때
+    else if(id == 'relatedSite') {
+      if(relatedSite == '') return;
+      if(member.relatedSite.filter((item) => item == relatedSite).length != 0) {
+        alert('중복되는 사이트가 있습니다.');
+        setRelatedSite('');
+        return;
+      }
+      setMember((prev) => {
+        const newSite = [...prev.relatedSite];
+        newSite.push({
+          id: relatedSiteId,
+          content: relatedSite
+        });
+        return {
+          ...prev,
+          relatedSite: newSite,
+        };
+      });
+      setRelatedSite('');
+      setRelatedSiteId(count => count + 1);
+    }
     // 프로젝트 추가할 때
     else if(id == 'project') {
       if(project == '') return;
@@ -165,6 +191,16 @@ export default function UserInfo(Member) {
         };
       });
     }
+    else if(parentId[0] == 'relatedSite') {
+      setMember((prev) => {
+        let newSite = [...prev.relatedSite]; 
+        newSite = newSite.filter((item)=> item.id != parentId[1]);
+        return {
+          ...prev,
+          relatedSite: newSite,
+        };
+      });
+    }
     else if(parentId[0] == 'project') {
       setMember((prev) => {
         let newProject = [...prev.project];
@@ -204,6 +240,11 @@ export default function UserInfo(Member) {
     });
     setProjectStack(newValues);
   };
+  
+  function handleClick(url) {
+  if(url.includes('https://')) window.open(`${url}`);
+  else window.open(`https://${url}`);
+  }
 
   return (
   <div className={styles.user_wrapper}>
@@ -211,24 +252,25 @@ export default function UserInfo(Member) {
       {/* 유저 박스 왼쪽(이미지) */}
       <div className={styles.userBox_left}>
         <img 
-        className='user_img'
+        className={styles.user_img}
         alt='User Img' 
         style={{"width":"150px"}}
         src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
-        <button className={styles.profileBtn}>프로필 변경</button>
+        {/* <button className={styles.profileBtn}>프로필 변경</button> */}
       </div>
-      <div className='user_box_middel'>
+      <div className={styles.user_box_middle}>
         <p>
-          이름 :<input 
+          {/* 이름 :<input 
           className={styles.name_input}
           id='name'
           name='name'
           placeholder='이름' 
           type="text" value={member.name} 
-          onChange={handleUserInput}/>
+          onChange={handleUserInput}/> */}
+          <div className={styles.inputLabel}>이름: 이영진</div>
         </p>
         <div className={styles.interest_wrapper}>
-          <label htmlFor='interest'>관심분야</label>
+          <label htmlFor='interest' className={styles.inputLabel}>관심분야</label>
           <select id="interest" value={selectedInterest} onChange={handleAddBtn} className={styles.interest_input}>
             {interestList.map((item, idx) => {
               return (
@@ -253,8 +295,10 @@ export default function UserInfo(Member) {
         </div>
       </div>
       {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
-      <div className='user_box_right'>
-        <button className={styles.message_btn}>쪽지 보내기</button>
+      <div className={styles.user_box_right}>
+        <button className={styles.message_btn}>수정 완료</button>
+        <p></p>
+        <button className={styles.message_btn}>내 팀</button>
       </div>
     </div>
     <div className={styles.user_stack_wrapper}>
@@ -314,17 +358,41 @@ export default function UserInfo(Member) {
         onChange={(event)=>setCertificate(event.target.value)}/>
         <button id="certificate" onClick={handleAddBtn} className={styles.certificateBtn}>추가하기</button>
     </div>
-    {member.certificate.map((item, idx) => {
-      return (
-        <li 
-        className={styles.certificate_list}
-        id={"certificate " + item.id}
-        key={"certificate" + idx}>
-          {item.content}
-          <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
-        </li>
-      );
-    })}
+    <div className={styles.certificate_wrapper}>
+      {member.certificate.map((item, idx) => {
+        return (
+          <li 
+          className={styles.certificate_list}
+          id={"certificate " + item.id}
+          key={"certificate" + idx}>
+            {item.content}
+            <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
+          </li>
+        );
+      })}
+    </div>
+    <div className={styles.relatedSite_wrapper}>
+      <label htmlFor='relatedSited'>관련 사이트</label>
+      <input 
+          className={styles.certificate_input}
+          placeholder='' 
+          type="text" 
+          value={relatedSite}
+          onChange={(event)=>setRelatedSite(event.target.value)}/>
+          <button id="relatedSite" onClick={handleAddBtn} className={styles.relatedSiteBtn}>추가하기</button>
+      {member.relatedSite.map((item, idx) => {
+        return (
+          <li 
+          className={styles.certificate_list}
+          id={"relatedSite " + item.id}
+          key={"relatedSite" + idx}
+          onClick={()=>handleClick(item.content)}>
+            {item.content}
+            <button onClick={handleDeleteBtn2} className={styles.relatedSite_deleteBtn}>삭제</button>
+          </li>
+        );
+      })}
+    </div>
     <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
   </div>
   )

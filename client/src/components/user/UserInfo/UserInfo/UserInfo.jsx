@@ -252,25 +252,26 @@ export default function UserInfo(Member) {
       {/* 유저 박스 왼쪽(이미지) */}
       <div className={styles.userBox_left}>
         <img 
-        className='user_img'
+        className={styles.user_img}
         alt='User Img' 
         style={{"width":"150px"}}
         src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
-        <button className={styles.profileBtn}>프로필 변경</button>
+        {/* <button className={styles.profileBtn}>프로필 변경</button> */}
       </div>
-      <div className='user_box_middel'>
+      <div className={styles.user_box_middle}>
         <p>
-          이름 :<input 
+          {/* 이름 :<input 
           className={styles.name_input}
           id='name'
           name='name'
           placeholder='이름' 
           type="text" value={member.name} 
-          onChange={handleUserInput}/>
+          onChange={handleUserInput}/> */}
+          <div className={styles.inputLabel}>이름: 이영진</div>
         </p>
         <div className={styles.interest_wrapper}>
-          <label htmlFor='interest'>관심분야</label>
-          <select id="interest" value={selectedInterest} onChange={handleAddBtn} className={styles.interest_input}>
+          <label htmlFor='interest' className={styles.inputLabel}>관심분야</label>
+          {/* <select id="interest" value={selectedInterest} onChange={handleAddBtn} className={styles.interest_input}>
             {interestList.map((item, idx) => {
               return (
                 <option 
@@ -279,7 +280,7 @@ export default function UserInfo(Member) {
                 key={idx}>{item}</option>
               );
             })}
-          </select>
+          </select> */}
           {member.interest.map((item, idx) => {
             return (
               <li 
@@ -287,7 +288,7 @@ export default function UserInfo(Member) {
               id={"interest " + item}
               key={idx}>
                 {item}
-                <button onClick={handleDeleteBtn} className={styles.interest_deleteBtn}>삭제</button>
+                {/* <button onClick={handleDeleteBtn} className={styles.interest_deleteBtn}>삭제</button> */}
               </li>
             );
           })}
@@ -300,10 +301,10 @@ export default function UserInfo(Member) {
     </div>
     <div className={styles.user_stack_wrapper}>
       <label htmlFor='stack'>기술 스택</label>
-      <Tags 
+      {/* <Tags 
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
-      />
+      /> */}
       <div className={styles.user_stack}>
         {selectedStackIcons && selectedStackIcons.map((items) => {
           return (
@@ -339,7 +340,7 @@ export default function UserInfo(Member) {
           <span className={styles.project_span}>
           {item.start} ~ {item.end}
           </span>
-          <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button>
+          {/* <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button> */}
         </li>
         )
       })}
@@ -353,7 +354,7 @@ export default function UserInfo(Member) {
         type="text" 
         value={certificate}
         onChange={(event)=>setCertificate(event.target.value)}/>
-        <button id="certificate" onClick={handleAddBtn} className={styles.certificateBtn}>추가하기</button>
+        {/* <button id="certificate" onClick={handleAddBtn} className={styles.certificateBtn}>추가하기</button> */}
     </div>
     <div className={styles.certificate_wrapper}>
       {member.certificate.map((item, idx) => {
@@ -363,7 +364,7 @@ export default function UserInfo(Member) {
           id={"certificate " + item.id}
           key={"certificate" + idx}>
             {item.content}
-            <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
+            {/* <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button> */}
           </li>
         );
       })}
@@ -376,7 +377,7 @@ export default function UserInfo(Member) {
           type="text" 
           value={relatedSite}
           onChange={(event)=>setRelatedSite(event.target.value)}/>
-          <button id="relatedSite" onClick={handleAddBtn} className={styles.relatedSiteBtn}>추가하기</button>
+          {/* <button id="relatedSite" onClick={handleAddBtn} className={styles.relatedSiteBtn}>추가하기</button> */}
       {member.relatedSite.map((item, idx) => {
         return (
           <li 
@@ -385,12 +386,12 @@ export default function UserInfo(Member) {
           key={"relatedSite" + idx}
           onClick={()=>handleClick(item.content)}>
             {item.content}
-            <button onClick={handleDeleteBtn2} className={styles.relatedSite_deleteBtn}>삭제</button>
+            {/* <button onClick={handleDeleteBtn2} className={styles.relatedSite_deleteBtn}>삭제</button> */}
           </li>
         );
       })}
     </div>
-    <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
+    {/* <button onClick={handleMember} className={styles.submitBtn}>제출하기</button> */}
   </div>
   )
 }

@@ -1,8 +1,8 @@
 @import '../../../../App.css';
 
 .user_wrapper {
-    max-width: 1250px;
-    border: solid 2px black;
+    max-width: 1100px;
+    /* border: solid 2px black; */
     font-family: var(--font-family-DoHyeon);
     margin: auto;
     padding: 60px;
@@ -11,6 +11,18 @@
 .user_box {
     display: flex;
     justify-content: space-around;
+}
+
+.user_box_middle {
+    padding-right: 290px;
+}
+
+.user_img {
+    border-radius: 5px;
+}
+
+.inputLabel {
+    font-size: 20px;
 }
 
 .userBox_left {
@@ -100,7 +112,7 @@
 }
 
 .user_stack {
-    width: 1100px;
+    width: 950px;
     height:150px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -144,7 +156,7 @@
   font-size: 16px;
 }
 
-.interest_deleteBtn, .certificate_deleteBtn, .project_deleteBtn {
+.interest_deleteBtn, .certificate_deleteBtn, .project_deleteBtn, .relatedSite_deleteBtn {
     margin-left: 8px;
     padding: 3px 6px;
     font-size: 12px;
@@ -174,7 +186,7 @@
     height: 40px;
 }
 
-.certificateBtn {
+.certificateBtn, .relatedSiteBtn {
     padding: 4px 8px;
     font-size: 15px;
     font-family: var(--font-family-DoHyeon);
@@ -186,7 +198,7 @@
     cursor: pointer;
 }
 
-.certificateBtn:hover {
+.certificateBtn:hover, .relatedSiteBtn:hover {
     background-color: #a9abaa;
 }
 
@@ -200,6 +212,10 @@
     background-color: #E9E9E9;
     color: black;
     cursor: pointer;
+}
+
+.certificate_wrapper, .relatedSite_wrapper {
+    margin: 20px 0 0 0;
 }
 
 .submitBtn:hover {
@@ -224,4 +240,8 @@
   cursor: pointer;
   margin: 0 0 0 10px;
   font-family: var(--font-family-DoHyeon);
+}
+
+.message_btn {
+    margin: 10px;
 }

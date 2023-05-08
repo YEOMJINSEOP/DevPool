@@ -15,7 +15,7 @@ export default function SignUp() {
   const [validEmail, setValidEmail] = useState(true);
   const [ableBtn, setAbleBtn] = useState(true);
   const [IsSamePwd, setIsSamePwd] = useState(false);
-  const [image, setImage] = useState()
+  const [image, setImage] = useState();
 
   useEffect(() => {
     const pattern = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
@@ -34,14 +34,14 @@ export default function SignUp() {
     setImage(()=>event.target.files[0]);
   }
 
-  const handleSignUpBtn = () => {
-    axios.post('http://localhost:8080/api/member', {
-      email: email,
-      imageUrl: "1234",
+  const handleSignUpBtn = async() => {
+    await axios.post('/api/member', {
       name: name,
       nickName: nickName,
-      password: pwd
-    });
+      email: email,
+      password: pwd,
+      imageUrl: "asdf"
+    }).then(req=>console.log(req));
   }
 
 return (
