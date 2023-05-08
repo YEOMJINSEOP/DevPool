@@ -4,8 +4,7 @@ import { userState } from '../../../recoil/user';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './TeamForm.module.css';
-import Label from '../../common/Label/Label';
-import TechField from '../../common/TechField/TechField';
+
 type TechStack = {
   name: string;
 }
@@ -82,6 +81,22 @@ function TeamForm(){
     'AI': false
   });
 
+  const handleSelectedTechStack = (event: React.MouseEvent<HTMLImageElement>): void => {
+    const target = event.target as HTMLImageElement;
+    const clickedValue = target.alt.toString();
+    setSelectedTechStack((prev) => {
+      return {
+        ...prev,
+        [clickedValue]: !prev[clickedValue]
+      }
+    })
+
+  }
+  
+  const handleCSSToggle = (stack: string):string => {
+    return selectedTechStack[stack] ? styles.recruitFieldIcon_selected : styles.recruitFieldIcon;
+  }
+
   const handleRecruitField = (selectedTechStack: CurrentField) => {
     const trueTechStack =  Object.entries(selectedTechStack).
       filter(([key, value]) => value === true)
@@ -91,6 +106,10 @@ function TeamForm(){
       recruitField: trueTechStack
     }))
   }
+
+  useEffect(() => {
+    handleRecruitField(selectedTechStack);
+  }, [selectedTechStack]);
 
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -123,7 +142,7 @@ function TeamForm(){
   /** selectedTechStack에서 true인 것만 team의 recruitField에 넣도록 하는 함수 필요 */
 
   const handleSubmit = (): void => {
-    axios.post(`${process.env.REACT_APP_API_URL}/team/create`, team)
+    axios.post(`${process.env.REACT_APP_API_URL}/teamForm`, team)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
       navigate('/teamList');
@@ -139,20 +158,20 @@ function TeamForm(){
     <div className={styles.teamFormContainer}>
       <div className={styles.teamForm}>
         <div className={`${styles.container}`}>
-          <Label content={"팀 이름"}></Label>
+          <label className={styles.label}htmlFor='name'>팀 이름</label>
           <input className={styles.inputTeamName} type="text" name='name' id='name' value={team.name} onChange={handleTeamName} maxLength={20}/>
           {/* <span>{teamNameCount}/20</span> */}
         </div>
         <div className={styles.categoryAndCount_container}>
           <div className={`${styles.container} ${styles.category}`}>
-            <Label content={"카테고리"}></Label>
+            <label className={styles.label}htmlFor='category'>카테고리</label>
             <select className={styles.selectCommon} name='category' id='category' value={team.category} onChange={handleInputChange}>
               <option value="web">Web</option>
               <option value="mobile">Mobile App</option>
             </select>
           </div>
           <div className={`${styles.container} ${styles.recruitCount}`}>
-            <Label content={"모집 인원"}></Label>
+            <label className={styles.label}htmlFor="recruitCount">모집 인원</label>
             <select className={styles.selectCommon} name="recruitCount" id="recruitCount" value={team.recruitCount} onChange={handleInputChange}>
               <option defaultValue="1">1</option>
               <option value="2">2</option>
@@ -165,12 +184,33 @@ function TeamForm(){
           </div>          
         </div>
         <div className={`${styles.container}`}>
-          <Label content={"모집 분야"}></Label>
-          <TechField onChange={handleRecruitField}/>
+          <label className={styles.label}htmlFor="recruitField">모집 분야</label>
+          <div className={styles.recruitFieldList}>
+            <div className={styles.recruitField}>
+              <img className={handleCSSToggle('Front-end')} src="/image/javaScript.png" alt="Front-end" onClick={handleSelectedTechStack} />
+              <p>Front-end</p>
+            </div>
+            <div className={styles.recruitField}>
+              <img className={handleCSSToggle('Back-end')}src="/image/server.png" alt="Back-end" onClick={handleSelectedTechStack} />
+              <p>Back-end</p>
+            </div>
+            <div className={styles.recruitField}>
+              <img className={handleCSSToggle('Android')}src="/image/android.png" alt="Android" onClick={handleSelectedTechStack}/>
+              <p>Android</p>
+            </div>
+            <div className={styles.recruitField}>
+              <img className={handleCSSToggle('iOS')}src="/image/apple-logo.png" alt="iOS" onClick={handleSelectedTechStack}/>
+              <p>iOS</p>
+            </div>
+            <div className={styles.recruitField}>
+            <img className={handleCSSToggle('AI')}src="/image/deep-learning.png" alt="AI" onClick={handleSelectedTechStack}/>
+              <p>AI</p>
+            </div>
+          </div>
         </div>
 
         <div className={`${styles.container}`}>
-          <Label content={"모집 스택"}></Label>
+          <label className={styles.label}htmlFor="stack-search">모집 스택</label>
           <input className={styles.inputCommon} type="text" id='stack-search' value={stackInput} onChange={handleStackInput} onKeyDown={handleKeyDown}/>
           <button className={styles.addBtn} type="button" onClick={handleAddStack}>추가</button>
           <div className={styles.relatedContainer}>
@@ -195,7 +235,7 @@ function TeamForm(){
             </ul>
         </div>
         <div className={`${styles.container} ${styles.content}`}>
-          <Label content="팀 소개"></Label>        
+          <label className={styles.label}htmlFor="stack-search">팀 소개</label>          
           <textarea className={styles.textareaCommon} name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentInput}></textarea>
           {/* <p>{contentCount} / 300</p> */}
         </div>

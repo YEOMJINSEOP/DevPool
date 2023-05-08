@@ -10,7 +10,7 @@ type Team = {
   category: string;
   currentCount: number;
   recruitCount: number;
-  recruitField: string;
+  recruitDomain: string;
   recruitStack: string[];
   content: string;
 };
@@ -23,7 +23,7 @@ function TeamList(){
     "category": "Web",
     "currentCount": 3,
     "recruitCount": 5,
-    "recruitField": "Front-end",
+    "recruitDomain": "Front-end",
     "recruitStack": ["React", "TypeScript"],
     "content": "content"
 }, 
@@ -33,7 +33,7 @@ function TeamList(){
     "category": "Web",
     "currentCount": 1,
     "recruitCount": 2,
-    "recruitField": "Back-end",
+    "recruitDomain": "Back-end",
     "recruitStack": ["Node.js", "Spring"],
     "content": "content"
 }]);

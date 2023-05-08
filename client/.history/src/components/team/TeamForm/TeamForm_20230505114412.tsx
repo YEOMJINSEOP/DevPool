@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './TeamForm.module.css';
 import Label from '../../common/Label/Label';
-import TechField from '../../common/TechField/TechField';
+import RecruitField from '../../common/RecruitField/RecruitField';
 type TechStack = {
   name: string;
 }
@@ -82,6 +82,22 @@ function TeamForm(){
     'AI': false
   });
 
+  const handleSelectedTechStack = (event: React.MouseEvent<HTMLImageElement>): void => {
+    const target = event.target as HTMLImageElement;
+    const clickedValue = target.alt.toString();
+    setSelectedTechStack((prev) => {
+      return {
+        ...prev,
+        [clickedValue]: !prev[clickedValue]
+      }
+    })
+
+  }
+  
+  const handleCSSToggle = (stack: string):string => {
+    return selectedTechStack[stack] ? styles.recruitFieldIcon_selected : styles.recruitFieldIcon;
+  }
+
   const handleRecruitField = (selectedTechStack: CurrentField) => {
     const trueTechStack =  Object.entries(selectedTechStack).
       filter(([key, value]) => value === true)
@@ -91,6 +107,10 @@ function TeamForm(){
       recruitField: trueTechStack
     }))
   }
+
+  useEffect(() => {
+    handleRecruitField(selectedTechStack);
+  }, [selectedTechStack]);
 
   const [stackInput, setStackInput] = useState<string>('');
   const handleStackInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -166,7 +186,7 @@ function TeamForm(){
         </div>
         <div className={`${styles.container}`}>
           <Label content={"모집 분야"}></Label>
-          <TechField onChange={handleRecruitField}/>
+          <RecruitField/>
         </div>
 
         <div className={`${styles.container}`}>

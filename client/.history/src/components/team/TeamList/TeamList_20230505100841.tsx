@@ -10,9 +10,8 @@ type Team = {
   category: string;
   currentCount: number;
   recruitCount: number;
-  recruitField: string;
+  recruitDomain: string;
   recruitStack: string[];
-  content: string;
 };
 
 function TeamList(){
@@ -23,9 +22,8 @@ function TeamList(){
     "category": "Web",
     "currentCount": 3,
     "recruitCount": 5,
-    "recruitField": "Front-end",
-    "recruitStack": ["React", "TypeScript"],
-    "content": "content"
+    "recruitDomain": "Front-end",
+    "recruitStack": ["React", "TypeScript"]
 }, 
 {
     "teamId": 2,
@@ -33,9 +31,8 @@ function TeamList(){
     "category": "Web",
     "currentCount": 1,
     "recruitCount": 2,
-    "recruitField": "Back-end",
-    "recruitStack": ["Node.js", "Spring"],
-    "content": "content"
+    "recruitDomain": "Back-end",
+    "recruitStack": ["Node.js", "Spring"]
 }]);
 
   useEffect(() => {

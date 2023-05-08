@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './TeamForm.module.css';
 import Label from '../../common/Label/Label';
-import TechField from '../../common/TechField/TechField';
+import RecruitField from '../../common/RecruitField/RecruitField';
 type TechStack = {
   name: string;
 }
@@ -166,7 +166,7 @@ function TeamForm(){
         </div>
         <div className={`${styles.container}`}>
           <Label content={"모집 분야"}></Label>
-          <TechField onChange={handleRecruitField}/>
+          <RecruitField onChange={handleRecruitField}/>
         </div>
 
         <div className={`${styles.container}`}>

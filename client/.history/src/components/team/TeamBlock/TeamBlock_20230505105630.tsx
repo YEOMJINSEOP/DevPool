@@ -7,7 +7,7 @@ type TeamProps = {
   category: string;
   currentCount: number;
   recruitCount: number;
-  recruitField: string;
+  recruitDomain: string;
   recruitStack: string[];
 };
 

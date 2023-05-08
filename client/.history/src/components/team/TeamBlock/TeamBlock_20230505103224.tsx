@@ -7,7 +7,7 @@ type TeamProps = {
   category: string;
   currentCount: number;
   recruitCount: number;
-  recruitField: string;
+  recruitDomain: string;
   recruitStack: string[];
 };
 
@@ -34,7 +34,7 @@ function TeamBlock(props: TeamProps): JSX.Element{
         <p className={styles.inputReadOnly}>{props.category}</p>
       </div>
       <div className={styles.container}>
-        <Label content="팀 인원"></Label>
+        <p className={styles.label}>팀 인원</p>    
         <p className={styles.inputReadOnly}>{props.currentCount}명/{props.recruitCount}명</p>
       </div>
     </div>
