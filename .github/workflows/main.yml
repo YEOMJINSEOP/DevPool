@@ -28,7 +28,7 @@ jobs:
       - name: Build # React Build
         run: |
           cd client
-          npm run build
+          CI='' npm run build
 
       - name: Deploy # S3에 배포하기
         env:
@@ -38,4 +38,4 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            client/build s3://DevPool
+            client/build s3://devpool
