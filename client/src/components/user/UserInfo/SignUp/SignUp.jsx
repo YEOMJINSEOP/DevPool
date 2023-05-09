@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import styles from './SignUp.module.css';
 
+export const BASE_URL = process.env.REACT_APP_API_URL;
+
 export default function SignUp() {
 
   const [name, setName] = useState('');
@@ -35,13 +37,22 @@ export default function SignUp() {
   }
 
   const handleSignUpBtn = async() => {
-    await axios.post('http://13.124.112.157/api/member', {
+    await axios.post(`${BASE_URL}/api/member`, {
       name: name,
       nickName: nickName,
       email: email,
       password: pwd,
       imageUrl: "asdf"
-    }).then(req=>console.log(req));
+    })
+    .then(req=>console.log(req))
+    .then(() => {
+      alert('회원가입이 완료되었습니다!')
+      setName('');
+      setEmail('');
+      setNickName('');
+      setPwd('');
+      setpwdCheck('');
+    });
   }
 
 return (

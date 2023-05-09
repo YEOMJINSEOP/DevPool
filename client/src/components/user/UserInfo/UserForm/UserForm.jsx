@@ -5,8 +5,25 @@ import styles from './UserForm.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
 import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
+import StackTags from '../StackTags';
+import StackField from '../StackField';
 
 const interestList = ["선택하기", "Front-end", "Back-end", "IOS",  "Android", "AI"];
+
+export const stackOptions = [
+  { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
+  { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
+  { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
+  { id: '4', label: 'Vue.js', icon: <FontAwesomeIcon className={styles.icon} icon={faVuejs} size="xl" style={{color: "#4d8217",}} /> },
+  { id: '5', label: 'React.js', icon: <FontAwesomeIcon className={styles.icon} icon={faReact} size="xl" style={{color: "#3a8fcf",}} /> },
+  { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
+  { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
+  { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
+  { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
+  { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
+  { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
+  { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
+];
 
 //나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
@@ -18,7 +35,6 @@ export default function UserInfo(Member) {
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
   // 선택된 스택 state
   const [selectedStack, setSelectedStack] = useState([]);
-  const [selectedStackIcons, setSelectedStackIcons] = useState([]);
   // Project state
   const [project, setProject] = useState('');
   const [projectId, setProjectId] = useState(1);
@@ -40,21 +56,6 @@ export default function UserInfo(Member) {
     relatedSite: [],
   });
 
-  const stackOptions = [
-    { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
-    { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
-    { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
-    { id: '4', label: 'Vue.js', icon: <FontAwesomeIcon className={styles.icon} icon={faVuejs} size="xl" style={{color: "#4d8217",}} /> },
-    { id: '5', label: 'React.js', icon: <FontAwesomeIcon className={styles.icon} icon={faReact} size="xl" style={{color: "#3a8fcf",}} /> },
-    { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
-    { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
-    { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
-    { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
-    { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
-    { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
-    { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
-  ];
-
   // member interest 설정
     useEffect(() => {
       if (selectedInterest == '선택하기') {
@@ -70,19 +71,12 @@ export default function UserInfo(Member) {
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
 
-    useEffect(() => {
-      let projectIcons = member.project.map(now => stackOptions.filter(option => now.stack.includes(option.label)));
-      setProjectStackIcons(projectIcons);
-    }, [member.project]);
-
     // 멤버 stack 설정
     useEffect(() => {
       setMember((prev) => ({
         ...prev,
         stack: selectedStack,
       }));
-      // 스택의 Icon을 filter해서 보여줌
-      setSelectedStackIcons(stackOptions.filter(option => selectedStack.includes(option.label)));
     }, [selectedStack]);
 
   // 리스트에 추가하기
@@ -229,10 +223,11 @@ export default function UserInfo(Member) {
   const handleProject = (e) => {setProject(e.target.value)};
   const handleProjectStart = (e) => setProjectStart(e.target.value);
   const handleProjectEnd = (e) => setProjectEnd(e.target.value);
+
   const handleSelectedStack = (event, values) => {
     setSelectedStack(values);
-    console.log(values);
   };
+
   const handleProjectStack = (event, values) => {
     let newValues= [];
     values.map((value) => {
@@ -260,13 +255,6 @@ export default function UserInfo(Member) {
       </div>
       <div className={styles.user_box_middle}>
         <p>
-          {/* 이름 :<input 
-          className={styles.name_input}
-          id='name'
-          name='name'
-          placeholder='이름' 
-          type="text" value={member.name} 
-          onChange={handleUserInput}/> */}
           <div className={styles.inputLabel}>이름: 이영진</div>
         </p>
         <div className={styles.interest_wrapper}>
@@ -305,13 +293,9 @@ export default function UserInfo(Member) {
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
       />
-      <div className={styles.user_stack}>
-        {selectedStackIcons && selectedStackIcons.map((items) => {
-          return (
-            <div>{items.icon}</div>
-          )
-        })}
-      </div>
+      <StackField
+      selectedStack={selectedStack}
+      />
     </div>
     {/* 프로젝트 */}
     <div className={styles.user_project}>
