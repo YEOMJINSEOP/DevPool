@@ -17,9 +17,11 @@ type Team = {
 
 function TeamInfo(){
   const params = useParams();
+  
+  console.log(location);
   useEffect(() => {
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
-    axios.get(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`).then(
+    axios.get(`${process.env.REACT_APP_API_URL}/api/team/`).then(
       (res) => {
         const teamInfo = res.data[0];
         setTeam(teamInfo as Team);

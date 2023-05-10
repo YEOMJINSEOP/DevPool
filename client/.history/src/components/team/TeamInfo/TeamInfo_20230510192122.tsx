@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './TeamInfo.module.css';
 import CommentBox from './CommentBox';
 import Label from '../../common/Label/Label';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 type Team = {
   teamId: number;
   name: string;
@@ -16,10 +16,11 @@ type Team = {
 };
 
 function TeamInfo(){
-  const params = useParams();
+  const location = useLocation();
+  console.log(location);
   useEffect(() => {
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
-    axios.get(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`).then(
+    axios.get(`${process.env.REACT_APP_API_URL}/api/team/`).then(
       (res) => {
         const teamInfo = res.data[0];
         setTeam(teamInfo as Team);
