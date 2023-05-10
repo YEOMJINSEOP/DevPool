@@ -139,7 +139,7 @@ function TeamForm(){
       navigate('/teamList');
     })
     .catch(err => {
-      console.log(teamForSubmit);
+      console.log(team);
       console.error(err, 'team post에 실패했습니다.' );
     })
     return;

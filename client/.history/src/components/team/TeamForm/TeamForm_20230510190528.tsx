@@ -126,6 +126,7 @@ function TeamForm(){
 
   const handleSubmit = (): void => {
     const teamForSubmit = {
+      memberId: 0,
       name: team.name,
       categoryName: team.category,
       recruitNum: team.recruitCount,
@@ -139,7 +140,7 @@ function TeamForm(){
       navigate('/teamList');
     })
     .catch(err => {
-      console.log(teamForSubmit);
+      console.log(team);
       console.error(err, 'team post에 실패했습니다.' );
     })
     return;

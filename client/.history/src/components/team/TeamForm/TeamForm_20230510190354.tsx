@@ -17,7 +17,6 @@ type Team = {
   recruitCount: number;
   recruitField: string[];
   recruitStack: string[];
-  content: string
 };
 
 type CurrentField = {
@@ -35,7 +34,6 @@ function TeamForm(){
     recruitCount: 1,
     recruitField: [],
     recruitStack: [],
-    content: ''
   });
 
 
@@ -126,12 +124,12 @@ function TeamForm(){
 
   const handleSubmit = (): void => {
     const teamForSubmit = {
+      memberId: 0,
       name: team.name,
       categoryName: team.category,
       recruitNum: team.recruitCount,
       recruitTechFieldNameList: team.recruitField,
       recruitStackNameList: team.recruitStack,
-      content: team.content
     }
     axios.post(`http://13.124.112.157/api/team`, teamForSubmit)
     .then(res => {
@@ -139,7 +137,7 @@ function TeamForm(){
       navigate('/teamList');
     })
     .catch(err => {
-      console.log(teamForSubmit);
+      console.log(team);
       console.error(err, 'team post에 실패했습니다.' );
     })
     return;
