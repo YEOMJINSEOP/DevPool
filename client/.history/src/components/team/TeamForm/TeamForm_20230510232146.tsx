@@ -126,7 +126,7 @@ function TeamForm(){
 
   const handleSubmit = (): void => {
     const teamForSubmit = {
-      // memberId: 1,
+      memberId: 'NewJeans',
       name: team.name,
       categoryName: team.category,
       recruitNum: team.recruitCount,
