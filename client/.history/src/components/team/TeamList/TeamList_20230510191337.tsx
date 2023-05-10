@@ -17,8 +17,29 @@ type Team = {
 
 function TeamList(){
   const navigate = useNavigate();
-  const [teamList, setTeamList] = useState<Team[]>([]);
+  const [teamList, setTeamList] = useState<Team[]>([ {
+    "teamId": 1,
+    "name": "team name",
+    "category": "Web",
+    "currentCount": 3,
+    "recruitCount": 5,
+    "recruitField": "Front-end",
+    "recruitStack": ["React", "TypeScript"],
+    "content": "content"
+}, 
+{
+    "teamId": 2,
+    "name": "team name2",
+    "category": "Web",
+    "currentCount": 1,
+    "recruitCount": 2,
+    "recruitField": "Back-end",
+    "recruitStack": ["Node.js", "Spring"],
+    "content": "content"
+}]);
+
   useEffect(() => {
+    // ✅ team 데이터를 모두 get 하는 API 필요
     axios.get(`${process.env.REACT_APP_API_URL}/api/teams`)
     .then((res) => {
       setTeamList(res.data.dataList);
@@ -26,6 +47,7 @@ function TeamList(){
     })
     .catch((err) => console.log('get teamList failed', err))
   }, []);
+
 
   return (
     <div className={styles.teamListContainer}>
