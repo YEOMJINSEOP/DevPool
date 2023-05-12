@@ -7,8 +7,6 @@ import styles from './TeamForm.module.css';
 import Label from '../../common/Label/Label';
 import TechField from '../../common/TechField/TechField';
 import StackTags from '../../user/UserInfo/StackTags';
-import StackField from '../../user/UserInfo/StackField';
-
 type TechStack = {
   name: string;
 }
@@ -143,7 +141,7 @@ function TeamForm(){
 
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
 
-  const handleSelectedStack = (event: any, values: string[]) => {
+  const handleSelectedStack = (values: string[]) => {
     setSelectedStack(values);
   };
 
@@ -209,7 +207,6 @@ function TeamForm(){
         </div> */}
 
         <StackTags selectedStack={selectedStack} handleSelectedStack={handleSelectedStack} />
-        <StackField selectedStack={selectedStack}/>
 
         <div className={`${styles.container} ${styles.content}`}>
           <Label content="팀 소개"></Label>        

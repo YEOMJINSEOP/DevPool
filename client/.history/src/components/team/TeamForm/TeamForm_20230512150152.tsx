@@ -6,9 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from './TeamForm.module.css';
 import Label from '../../common/Label/Label';
 import TechField from '../../common/TechField/TechField';
-import StackTags from '../../user/UserInfo/StackTags';
-import StackField from '../../user/UserInfo/StackField';
-
 type TechStack = {
   name: string;
 }
@@ -69,15 +66,23 @@ function TeamForm(){
     }));
   };
 
-  // const [techStack, setTechStack] = useState<string[]>([]);
-  // useEffect(() => {
-  //   axios.get('data/techStack.json')
-  //   .then((res) => res.data.map((stack:TechStack) => {
-  //       console.log(stack.name);
-  //       setTechStack((prev) => [...prev, stack.name]);
-  //     }
-  //   ))
-  // }, []);
+  const [techStack, setTechStack] = useState<string[]>([]);
+  useEffect(() => {
+    axios.get('data/techStack.json')
+    .then((res) => res.data.map((stack:TechStack) => {
+        console.log(stack.name);
+        setTechStack((prev) => [...prev, stack.name]);
+      }
+    ))
+  }, []);
+
+  const [selectedTechStack, setSelectedTechStack] = useState<CurrentField>({
+    'Front-end': false,
+    'Back-end': false,
+    'Android': false,
+    'iOS': false,
+    'AI': false
+  });
 
   const handleRecruitField = (selectedTechStack: CurrentField) => {
     const trueTechStack =  Object.entries(selectedTechStack).
@@ -141,13 +146,6 @@ function TeamForm(){
     return;
   }
 
-  const [selectedStack, setSelectedStack] = useState<string[]>([]);
-
-  const handleSelectedStack = (event: any, values: string[]) => {
-    setSelectedStack(values);
-  };
-
-
   return (
     <div className={styles.teamFormContainer}>
       <div className={styles.teamForm}>
@@ -159,7 +157,7 @@ function TeamForm(){
         <div className={styles.categoryAndCount_container}>
           <div className={`${styles.container} ${styles.category}`}>
             <Label content={"카테고리"}></Label>
-            <select className={styles.selectCommseon} name='category' id='category' value={team.category} onChange={handleInputChange}>
+            <select className={styles.selectCommon} name='category' id='category' value={team.category} onChange={handleInputChange}>
               <option value="web">Web</option>
               <option value="mobile">Mobile App</option>
             </select>
@@ -207,10 +205,7 @@ function TeamForm(){
               ))}
             </ul>
         </div> */}
-
-        <StackTags selectedStack={selectedStack} handleSelectedStack={handleSelectedStack} />
-        <StackField selectedStack={selectedStack}/>
-
+        
         <div className={`${styles.container} ${styles.content}`}>
           <Label content="팀 소개"></Label>        
           <textarea className={styles.textareaCommon} name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentInput}></textarea>

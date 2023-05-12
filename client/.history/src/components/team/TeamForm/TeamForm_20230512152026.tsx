@@ -143,7 +143,7 @@ function TeamForm(){
 
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
 
-  const handleSelectedStack = (event: any, values: string[]) => {
+  const handleSelectedStack = (values: string[]) => {
     setSelectedStack(values);
   };
 
@@ -209,7 +209,7 @@ function TeamForm(){
         </div> */}
 
         <StackTags selectedStack={selectedStack} handleSelectedStack={handleSelectedStack} />
-        <StackField selectedStack={selectedStack}/>
+        {/* <StackField selectedStack={selectedStack}/> */}
 
         <div className={`${styles.container} ${styles.content}`}>
           <Label content="팀 소개"></Label>        
