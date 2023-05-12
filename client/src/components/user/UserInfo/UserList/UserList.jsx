@@ -2,11 +2,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './UserList.module.css';
+import UserBlock from './UserBlock';
 
 function UserList(){
     const navigate = useNavigate();
 
-    const [member, setMember] = useState(
+    const [member, setMember] = useState([
         {
         name: '이영진',
         email: 'qwer@naver.com',
@@ -79,10 +80,7 @@ function UserList(){
         certificate: ["정보처리기사", "SQLD"],
         relatedSite: ['www.kakao.com', 'www.naver.com'],
         }
-        );
-
-
-
+       ]);
 
   return (
     <div className={styles.teamListContainer}>
@@ -112,6 +110,11 @@ function UserList(){
               <p>AI</p>
             </div>
         </div>
+        {member.map((user) => {
+          return (
+            <UserBlock user={user} />
+          )
+        })}
     </div>
   )
 }

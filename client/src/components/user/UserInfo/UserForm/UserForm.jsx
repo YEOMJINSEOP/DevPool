@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import BasicModal from '../BasicModal';
-import Tags from '../StackTags';
 import styles from './UserForm.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
@@ -289,7 +288,7 @@ export default function UserInfo(Member) {
     </div>
     <div className={styles.user_stack_wrapper}>
       <label htmlFor='stack'>기술 스택</label>
-      <Tags 
+      <StackTags
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
       />
