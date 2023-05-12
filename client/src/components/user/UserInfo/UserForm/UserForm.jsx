@@ -6,6 +6,7 @@ import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, fa
 import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 import StackTags from '../StackTags';
 import StackField from '../StackField';
+import TechField from '../../../common/TechField/TechField';
 
 const interestList = ["선택하기", "Front-end", "Back-end", "IOS",  "Android", "AI"];
 
@@ -54,6 +55,17 @@ export default function UserInfo(Member) {
     certificate: [],
     relatedSite: [],
   });
+
+  // 
+  const handleUserInterest = (selectedTechStack) => {
+    const trueTechStack =  Object.entries(selectedTechStack).
+      filter(([key, value]) => value === true)
+      .map(([key]) => key); // trueTechStack은 선택되어 true값을 가지는 techField의 배열을 반환합니다. 이 배열을 사용하셔서 setState에 사용하시면 됩니다.
+    setMember((prevUser) => ({
+      ...prevUser,
+      interest: trueTechStack
+    }))
+  }
 
   // member interest 설정
     useEffect(() => {
@@ -256,30 +268,7 @@ export default function UserInfo(Member) {
         <p>
           <div className={styles.inputLabel}>이름: 이영진</div>
         </p>
-        <div className={styles.interest_wrapper}>
-          <label htmlFor='interest' className={styles.inputLabel}>관심분야</label>
-          <select id="interest" value={selectedInterest} onChange={handleAddBtn} className={styles.interest_input}>
-            {interestList.map((item, idx) => {
-              return (
-                <option 
-                className={styles.interest_option}
-                value={item}
-                key={idx}>{item}</option>
-              );
-            })}
-          </select>
-          {member.interest.map((item, idx) => {
-            return (
-              <li 
-              className={styles.interest_list}
-              id={"interest " + item}
-              key={idx}>
-                {item}
-                <button onClick={handleDeleteBtn} className={styles.interest_deleteBtn}>삭제</button>
-              </li>
-            );
-          })}
-        </div>
+        <TechField onChange={handleUserInterest} className={styles.TechField}/>
       </div>
       {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
       <div className='user_box_right'>

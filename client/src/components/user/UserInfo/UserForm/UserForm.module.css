@@ -14,7 +14,7 @@
 }
 
 .user_box_middle {
-    padding-right: 290px;
+    padding-right: 20px;
 }
 
 .user_img {
@@ -52,6 +52,10 @@
 
 .profileBtn:hover {
     background-color: #a9abaa;
+}
+
+.TechField {
+    margin-top: 50px;
 }
 
 .name_input {

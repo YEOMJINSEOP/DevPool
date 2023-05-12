@@ -4,7 +4,11 @@ import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './UserForm/UserForm.module.css'
 
-export const stackOptions = [
+
+
+export default function StackField({ selectedStack }) {
+    
+  const stackOptions = [
     { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
     { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
     { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
@@ -19,9 +23,7 @@ export const stackOptions = [
     { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
   ];
 
-export default function StackField({ selectedStack }) {
-  
-    const [selectedStackIcons, setSelectedStackIcons] = useState([]);
+  const [selectedStackIcons, setSelectedStackIcons] = useState([]);
 
     useEffect(() => {
         if(selectedStack != null) {
