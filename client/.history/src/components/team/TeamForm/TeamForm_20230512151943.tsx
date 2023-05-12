@@ -143,7 +143,7 @@ function TeamForm(){
 
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
 
-  const handleSelectedStack = (event: any, values: string[]) => {
+  const handleSelectedStack = (values: string[]) => {
     setSelectedStack(values);
   };
 

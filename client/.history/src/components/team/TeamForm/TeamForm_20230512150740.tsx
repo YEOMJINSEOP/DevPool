@@ -8,7 +8,6 @@ import Label from '../../common/Label/Label';
 import TechField from '../../common/TechField/TechField';
 import StackTags from '../../user/UserInfo/StackTags';
 import StackField from '../../user/UserInfo/StackField';
-
 type TechStack = {
   name: string;
 }
@@ -143,7 +142,7 @@ function TeamForm(){
 
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
 
-  const handleSelectedStack = (event: any, values: string[]) => {
+  const handleSelectedStack = (values: string[]) => {
     setSelectedStack(values);
   };
 
