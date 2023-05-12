@@ -21,10 +21,9 @@ function TeamInfo(){
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
     axios.get(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`).then(
       (res) => {
-        const teamInfo = res.data;
+        const teamInfo = res.data[0];
         // setTeam(teamInfo as Team);
         console.log(teamInfo);
-        console.log(params.teamId);
       })
       .catch(
         console.error
