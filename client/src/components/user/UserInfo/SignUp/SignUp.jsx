@@ -18,6 +18,7 @@ export default function SignUp() {
   const [ableBtn, setAbleBtn] = useState(true);
   const [IsSamePwd, setIsSamePwd] = useState(false);
   const [image, setImage] = useState();
+  const [imageURL, setImageURL] = useState('');
 
   useEffect(() => {
     const pattern = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
@@ -34,6 +35,15 @@ export default function SignUp() {
 
   const handleImgInput = (event) => {
     setImage(()=>event.target.files[0]);
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64 = event.target.result;
+      // base64로 인코딩된 파일 데이터를 사용할 수 있습니다.
+      console.log(base64);
+      setImageURL(base64)
+    };
+    reader.readAsDataURL(file);
   }
 
   const handleSignUpBtn = async() => {
@@ -42,7 +52,7 @@ export default function SignUp() {
       nickName: nickName,
       email: email,
       password: pwd,
-      imageUrl: "asdf"
+      imageUrl: imageURL
     })
     .then(req=>console.log(req))
     .then(() => {

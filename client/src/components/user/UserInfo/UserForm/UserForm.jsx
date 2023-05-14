@@ -7,8 +7,8 @@ import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 import StackTags from '../StackTags';
 import StackField from '../StackField';
 import TechField from '../../../common/TechField/TechField';
+import styled from '@emotion/styled';
 
-const interestList = ["선택하기", "Front-end", "Back-end", "IOS",  "Android", "AI"];
 
 export const stackOptions = [
   { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
@@ -24,6 +24,10 @@ export const stackOptions = [
   { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
   { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
 ];
+
+const TechFieldContainer = styled.div`
+margin-top: 50px;
+`;
 
 //나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
@@ -56,7 +60,8 @@ export default function UserInfo(Member) {
     relatedSite: [],
   });
 
-  // 
+
+
   const handleUserInterest = (selectedTechStack) => {
     const trueTechStack =  Object.entries(selectedTechStack).
       filter(([key, value]) => value === true)
@@ -268,7 +273,9 @@ export default function UserInfo(Member) {
         <p>
           <div className={styles.inputLabel}>이름: 이영진</div>
         </p>
-        <TechField onChange={handleUserInterest} className={styles.TechField}/>
+        <TechFieldContainer>
+        <TechField onChange={handleUserInterest}/>
+        </TechFieldContainer>
       </div>
       {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
       <div className='user_box_right'>
