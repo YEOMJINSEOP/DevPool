@@ -1,0 +1,97 @@
+:root {
+
+  /* font */
+  --font-family-DoHyeon: 'BMDOHYEON';
+
+  /* color */
+  --color-devPool: #F25022;
+  --color-white: #FFFFFF; 
+
+
+
+  /* height */
+  --container-width: 100%;
+  --container-height: 92.5vh;
+  
+  --subContainer-width: 935px;
+  --subContainer-height: 600px;
+  --subContainer-border: 1px solid #C5C5C5;
+  --subContainer-border-radius: 20px;
+  --subContainer-padding: 60px;
+  
+  
+
+
+  --height-header: 7.5vh;
+
+  /* width */
+  --width-full: 100%;
+  --width-window-large: 935px;
+  
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+
+}
+
+ul {
+  list-style: none;
+}
+
+textarea {
+  resize: none;
+  outline: none;
+}
+
+@font-face {
+  font-family: 'BMDOHYEON';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.label{
+  width: 125px;
+  height: 30px;
+  background: #E9E9E9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+
+  font-family: var(--font-family-DoHyeon);
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+
+  font-size: 14px;
+}
+
+.inputCommon, .selectCommon {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 10px;
+
+  width: 210px;
+  height: 30px;
+
+  margin-left: 20px;
+  padding-left: 20px;
+
+  text-align: center;
+
+  font-size: 16px;
+}
