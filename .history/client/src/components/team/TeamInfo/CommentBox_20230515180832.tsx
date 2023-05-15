@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styles from './CommentBox.module.css';
-import { time } from 'console';
 
 type CommentBoxProps = {
   teamId: number;
@@ -68,8 +67,8 @@ const handleAddComment = () => {
   //  replies: []
   //}
   setComment((prev) => [...prev, {
-    teamId: Date.now(),
-    commentId: Date.now(),
+    teamId: 1,
+    commentId: 2,
     text: commentInput,
     replies: []
   }]);
