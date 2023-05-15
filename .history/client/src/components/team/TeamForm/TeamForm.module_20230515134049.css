@@ -61,7 +61,7 @@
   height: var(--subContainer-height);
 
   border: var(--subContainer-border);
-  border-radius: var(--subContainer-border-radius);
+  border-radius: var(--subContainer-padding);
 
   padding-left: var(--subContainer-padding);
   padding-right: var(--subContainer-padding);
@@ -88,7 +88,7 @@
 }
 
 .container > .inputTeamName {
-  width: 100%;
+  width: 670px;
   border: none;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -100,6 +100,7 @@
 .categoryAndCount_container {
   display: flex;
   justify-content: space-between;
+  background-color: red;
 }
 
 
@@ -109,7 +110,7 @@
 }
 
 .recruitFieldList {
-  width: 100%;
+  width: 670px;
   margin-left: 20px;
   display: flex;
   justify-content: space-around;

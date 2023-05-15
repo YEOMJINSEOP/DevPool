@@ -61,7 +61,7 @@
   height: var(--subContainer-height);
 
   border: var(--subContainer-border);
-  border-radius: var(--subContainer-border-radius);
+  border-radius: var(--subContainer-padding);
 
   padding-left: var(--subContainer-padding);
   padding-right: var(--subContainer-padding);
@@ -100,6 +100,7 @@
 .categoryAndCount_container {
   display: flex;
   justify-content: space-between;
+  background-color: red;
 }
 
 
