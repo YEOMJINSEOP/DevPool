@@ -1,6 +1,6 @@
 import React, {useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import styles from './TeamForm.module.css';
 import Label from '../../common/Label/Label';
 import TechField from '../../common/TechField/TechField';
@@ -19,16 +19,12 @@ type recruitStack = {
   name: string;
 }
 
-type category = {
-  name: string;
-}
-
 type Team = {
   name: string;
-  category: category;
+  category: string;
   recruitCount: number;
   recruitField: recruitField[];
-  recruitStack: recruitStack[];
+  recruitStack: string[];
   content: string
 };
 
@@ -38,10 +34,11 @@ type CurrentField = {
 
 function TeamForm(){
   const navigate = useNavigate();
+  // const user = useRecoilValue(userState);
   
   const [team, setTeam] = useState<Team>({
     name: '',
-    category: {name: ''},
+    category: '',
     recruitCount: 1,
     recruitField: [],
     recruitStack: [],
@@ -58,26 +55,6 @@ function TeamForm(){
     }));
   };
 
-  const handleCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      ['category']: {name: event.target.value},
-    }));
-  }
-
-  const handleTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      ['name']: event.target.value,
-    }));
-  };
-
-  const handleContentInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      ['content']: event.target.value,
-    }));
-  };
 
   const handleRecruitField = (selectedTechStack: CurrentField) => {
     const trueTechStack =  Object.entries(selectedTechStack).
@@ -86,27 +63,27 @@ function TeamForm(){
         name: key
       }));
       console.log(trueTechStack);
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      recruitField: trueTechStack
-    }))
+    // setTeam((prevTeam) => ({
+    //   ...prevTeam,
+    //   recruitField: trueTechStack
+    // }))
   }
 
 
   const handleSubmit = (): void => {
     const teamForSubmit = {
-      hostId: 1,
+      hostMemberId: 1,
       name: team.name,
-      category: team.category,
-      recruitCount: team.recruitCount,
-      recruitTechField: team.recruitField,
-      recruitStack: team.recruitStack,
+      categoryName: team.category,
+      recruitNum: team.recruitCount,
+      recruitTechFieldNameList: team.recruitField,
+      recruitStackNameList: team.recruitStack,
       content: team.content
     }
     axios.post(`http://13.124.112.157/api/team`, teamForSubmit)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
-      navigate('/team/list');
+      navigate('/teamList');
     })
     .catch(err => {
       console.log(teamForSubmit);
@@ -116,28 +93,27 @@ function TeamForm(){
   }
 
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
-  
+
   const handleSelectedStack = (event: any, values: string[]) => {
     setSelectedStack(values);
     setTeam((prevTeam) => ({
       ...prevTeam,
-      ['recruitStack']: [...prevTeam.recruitField, ...selectedStack.map((stack) => ({
-        name: stack
-      }))]
-    }));
+      recruitStack: selectedStack
+    }))
   };
+
 
   return (
     <div className={styles.teamFormContainer}>
       <div className={styles.teamForm}>
         <div className={`${styles.container}`}>
           <Label content={"팀 이름"}></Label>
-          <input className={styles.inputTeamName} type="text" name='name' id='name' onChange={handleTeamName} value={team.name} maxLength={20}/>
+          <input className={styles.inputTeamName} type="text" name='name' id='name' value={team.name} maxLength={20}/>
         </div>
         <div className={styles.categoryAndCount_container}>
           <div className={`${styles.container} ${styles.category}`}>
             <Label content={"카테고리"}></Label>
-            <select className={styles.selectCommon} name='category' id='category' value={team.category.name} onChange={handleCategory}>
+            <select className={styles.selectCommon} name='category' id='category' value={team.category} onChange={handleInputChange}>
               <option value="web">Web</option>
               <option value="mobile">Mobile App</option>
             </select>
@@ -165,7 +141,7 @@ function TeamForm(){
 
         <div className={`${styles.container} ${styles.content}`}>
           <Label content="팀 소개"></Label>        
-          <textarea className={styles.textareaCommon} name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentInput}></textarea>
+          <textarea className={styles.textareaCommon} name="content" id="content" cols={30} rows={10} maxLength={300}></textarea>
         </div>
         <button className={styles.submitBtn} type="button" onClick={handleSubmit}>팀 등록하기</button>
       </div>

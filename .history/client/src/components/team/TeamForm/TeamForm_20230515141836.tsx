@@ -115,17 +115,21 @@ function TeamForm(){
     return;
   }
 
-  const [selectedStack, setSelectedStack] = useState<string[]>([]);
-  
-  const handleSelectedStack = (event: any, values: string[]) => {
-    setSelectedStack(values);
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      ['recruitStack']: [...prevTeam.recruitField, ...selectedStack.map((stack) => ({
-        name: stack
-      }))]
-    }));
+  const [selectedStack, setSelectedStack] = useState<recruitStack[]>([]);
+
+  const handleSelectedStack = (event: any, values: recruitStack[]) => {
+    values.map((stack) => {
+      console.log({name: stack});
+    })
+    // setSelectedStack(values.map((stack) => ({
+    //   name: stack
+    // })));
+    // setTeam((prevTeam) => ({
+    //   ...prevTeam,
+    //   recruitStack: selectedStack
+    // }))
   };
+
 
   return (
     <div className={styles.teamFormContainer}>

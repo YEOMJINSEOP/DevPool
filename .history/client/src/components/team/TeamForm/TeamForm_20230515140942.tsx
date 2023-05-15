@@ -28,7 +28,7 @@ type Team = {
   category: category;
   recruitCount: number;
   recruitField: recruitField[];
-  recruitStack: recruitStack[];
+  recruitStack: string[];
   content: string
 };
 
@@ -106,7 +106,7 @@ function TeamForm(){
     axios.post(`http://13.124.112.157/api/team`, teamForSubmit)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
-      navigate('/team/list');
+      navigate('/teamList');
     })
     .catch(err => {
       console.log(teamForSubmit);
@@ -116,16 +116,15 @@ function TeamForm(){
   }
 
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
-  
+
   const handleSelectedStack = (event: any, values: string[]) => {
     setSelectedStack(values);
     setTeam((prevTeam) => ({
       ...prevTeam,
-      ['recruitStack']: [...prevTeam.recruitField, ...selectedStack.map((stack) => ({
-        name: stack
-      }))]
-    }));
+      recruitStack: selectedStack
+    }))
   };
+
 
   return (
     <div className={styles.teamFormContainer}>
