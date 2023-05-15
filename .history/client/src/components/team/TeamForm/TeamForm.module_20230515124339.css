@@ -1,5 +1,10 @@
 @import '../../../App.css';
 
+.teamFormContainer {
+  background-color: beige;
+  
+}
+
 .label{
   width: 125px;
   height: 30px;
@@ -48,23 +53,23 @@
 
 
 .teamFormContainer {
-  width: var(--container-width);
-  height: var(--container-height);
+  width: var(--width-full);
+  height: 90vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .teamForm {
-  width: var(--subContainer-width);
-  height: var(--subContainer-height);
+  width: var(--width-window-large);
+  height: 720px;
+  background-color: red;
 
-  border: var(--subContainer-border);
-  border-radius: var(--subContainer-padding);
+  border: 1px solid #C5C5C5;
+  border-radius: 20px;
 
-  padding-left: var(--subContainer-padding);
-  padding-right: var(--subContainer-padding);
+  padding-left: 60px;
+  padding-right: 60px;
 
   display: flex;
   flex-direction: column;

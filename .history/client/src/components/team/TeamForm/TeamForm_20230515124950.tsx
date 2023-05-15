@@ -147,7 +147,7 @@ function TeamForm(){
     setSelectedStack(values);
     setTeam((prevTeam) => ({
       ...prevTeam,
-      recruitStack: selectedStack
+      recruitField: selectedStack
     }))
   };
 

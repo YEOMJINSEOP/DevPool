@@ -144,10 +144,9 @@ function TeamForm(){
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
 
   const handleSelectedStack = (event: any, values: string[]) => {
-    setSelectedStack(values);
     setTeam((prevTeam) => ({
       ...prevTeam,
-      recruitStack: selectedStack
+      recruitField: selectedStack
     }))
   };
 

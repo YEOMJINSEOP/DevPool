@@ -126,7 +126,7 @@ function TeamForm(){
       categoryName: team.category,
       recruitNum: team.recruitCount,
       recruitTechFieldNameList: team.recruitField,
-      recruitStackNameList: team.recruitStack,
+      recruitStackNameList: selectedStack,
       content: team.content
     }
     axios.post(`http://13.124.112.157/api/team`, teamForSubmit)
@@ -145,10 +145,6 @@ function TeamForm(){
 
   const handleSelectedStack = (event: any, values: string[]) => {
     setSelectedStack(values);
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      recruitStack: selectedStack
-    }))
   };
 
 
