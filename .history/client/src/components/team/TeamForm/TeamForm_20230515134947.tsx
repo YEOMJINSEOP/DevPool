@@ -86,9 +86,7 @@ function TeamForm(){
   const handleRecruitField = (selectedTechStack: CurrentField) => {
     const trueTechStack =  Object.entries(selectedTechStack).
       filter(([key, value]) => value === true)
-      .map(([key]) => ({
-        name: key
-      }));
+      .map(([key]) => key);
       console.log(trueTechStack);
     // setTeam((prevTeam) => ({
     //   ...prevTeam,
