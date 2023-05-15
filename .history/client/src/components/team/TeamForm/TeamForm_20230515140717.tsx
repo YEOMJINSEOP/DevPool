@@ -28,7 +28,7 @@ type Team = {
   category: category;
   recruitCount: number;
   recruitField: recruitField[];
-  recruitStack: recruitStack[];
+  recruitStack: string[];
   content: string
 };
 
@@ -38,6 +38,7 @@ type CurrentField = {
 
 function TeamForm(){
   const navigate = useNavigate();
+  // const user = useRecoilValue(userState);
   
   const [team, setTeam] = useState<Team>({
     name: '',
@@ -57,13 +58,6 @@ function TeamForm(){
       [name]: name.includes('Count') ? parseInt(value) : value,
     }));
   };
-
-  const handleCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTeam((prevTeam) => ({
-      ...prevTeam,
-      ['category']: {name: event.target.value},
-    }));
-  }
 
   const handleTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeam((prevTeam) => ({
@@ -95,18 +89,18 @@ function TeamForm(){
 
   const handleSubmit = (): void => {
     const teamForSubmit = {
-      hostId: 1,
+      hostMemberId: 1,
       name: team.name,
-      category: team.category,
-      recruitCount: team.recruitCount,
-      recruitTechField: team.recruitField,
-      recruitStack: team.recruitStack,
+      categoryName: team.category,
+      recruitNum: team.recruitCount,
+      recruitTechFieldNameList: team.recruitField,
+      recruitStackNameList: team.recruitStack,
       content: team.content
     }
     axios.post(`http://13.124.112.157/api/team`, teamForSubmit)
     .then(res => {
       console.log(res, 'team post가 완료되었습니다.');
-      navigate('/team/list');
+      navigate('/teamList');
     })
     .catch(err => {
       console.log(teamForSubmit);
@@ -116,16 +110,15 @@ function TeamForm(){
   }
 
   const [selectedStack, setSelectedStack] = useState<string[]>([]);
-  
+
   const handleSelectedStack = (event: any, values: string[]) => {
     setSelectedStack(values);
     setTeam((prevTeam) => ({
       ...prevTeam,
-      ['recruitStack']: [...prevTeam.recruitField, ...selectedStack.map((stack) => ({
-        name: stack
-      }))]
-    }));
+      recruitStack: selectedStack
+    }))
   };
+
 
   return (
     <div className={styles.teamFormContainer}>
@@ -137,7 +130,7 @@ function TeamForm(){
         <div className={styles.categoryAndCount_container}>
           <div className={`${styles.container} ${styles.category}`}>
             <Label content={"카테고리"}></Label>
-            <select className={styles.selectCommon} name='category' id='category' value={team.category.name} onChange={handleCategory}>
+            <select className={styles.selectCommon} name='category' id='category' value={team.category.name} onChange={handleInputChange}>
               <option value="web">Web</option>
               <option value="mobile">Mobile App</option>
             </select>

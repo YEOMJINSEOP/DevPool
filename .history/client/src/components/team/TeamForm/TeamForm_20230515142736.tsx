@@ -115,15 +115,13 @@ function TeamForm(){
     return;
   }
 
-  const [selectedStack, setSelectedStack] = useState<string[]>([]);
-  
-  const handleSelectedStack = (event: any, values: string[]) => {
+  const [selectedStack, setSelectedStack] = useState<recruitStack[]>([]);
+
+  const handleSelectedStack = (event: any, values: recruitStack[]) => {
     setSelectedStack(values);
-    setTeam((prevTeam) => ({
+    setTeam(prevTeam => ({
       ...prevTeam,
-      ['recruitStack']: [...prevTeam.recruitField, ...selectedStack.map((stack) => ({
-        name: stack
-      }))]
+      recruitStack: selectedStack
     }));
   };
 
