@@ -11,8 +11,8 @@
 
 .teamInfo {
   width: var(--subContainer-width);
-  height: var(--subContainer-height);
-  border: 1px solid #C5C5C5;
+  height: var(--subContinaer-height);
+  border: var(--subContinaer-border);
   border-radius: var(--subContainer-border-radius);
 
   padding-left: var(--subContainer-padding);
