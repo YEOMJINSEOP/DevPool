@@ -110,11 +110,13 @@ function UserList(){
               <p>AI</p>
             </div>
         </div>
+        <div className={styles.userBlockWrapper}>
         {member.map((user) => {
           return (
             <UserBlock user={user} />
           )
         })}
+        </div>
     </div>
   )
 }

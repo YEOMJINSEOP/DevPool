@@ -15,7 +15,7 @@ export const getMemberId = () => {
   const base64Url = devAccessToken.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const decodedData = JSON.parse(atob(base64));
-  return decodedData.memberId;
+  return decodedData;
 }
 
 export default function LogIn() {
@@ -46,8 +46,8 @@ export default function LogIn() {
       alert('DevPool에 오신 걸 환영합니다.');
       naviagte('/');
       setLoggedIn(true);
-      const memberId = getMemberId();
-      console.log(memberId);
+      const memberInfo = getMemberId();
+      console.log(memberInfo.memberId);
       setId(memberId);
       } catch (error) { 
           console.log(error);

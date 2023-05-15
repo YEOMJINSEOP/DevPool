@@ -1,4 +1,7 @@
 import {atom} from 'recoil';
+import { recoilPersist } from 'recoil-persist'; // ✔
+
+const { persistAtom } = recoilPersist(); // ✔
 
 interface User {
   id: string;
@@ -17,10 +20,12 @@ export const userState = atom<User>({
 
 export const isLoggedIn = atom<boolean>({
   key: 'isLoggedIn',
-  default: false
+  default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const memberId = atom<number>({
   key: 'memberId',
-  default: undefined
+  default: undefined,
+  effects_UNSTABLE: [persistAtom],
 });

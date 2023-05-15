@@ -31,6 +31,7 @@ margin-top: 50px;
 `;
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
+const memberId = getMemberId().memberId;
 
 //나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
@@ -64,9 +65,14 @@ export default function UserInfo(Member) {
   });
 
   useEffect(() => {
-    const memberId = getMemberId();
-    axios.get(`${BASE_URL}/api/member/${memberId}`)
+
+    axios.get(`${BASE_URL}/api/member_pool/${memberId}`)
     .then((res) => console.log(res));
+
+    // axios.post(`${BASE_URL}/api/member_pool`, {
+    //   memberId: memberId,
+
+    // });
   }, [])
 
   const handleUserInterest = (selectedTechStack) => {

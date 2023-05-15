@@ -11,7 +11,7 @@ function Header(){
     <div className={styles.header}>
       <button className={styles.logo} onClick={() => navigate('/')}>DevPool</button>
       <div className={styles.category_container}>
-        <button onClick={() => navigate('/')}>팀원 구하기</button>
+        <button onClick={() => navigate('/user/list')}>팀원 구하기</button>
         <div className={styles.divider}></div>
         <button onClick={() => navigate('/team/list')}>팀 구하기</button>        
         <div className={styles.divider}></div>

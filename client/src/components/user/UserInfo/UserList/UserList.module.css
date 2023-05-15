@@ -1,43 +1,51 @@
 .teamListContainer {
-    width: 100%;
-    height: 92.5vh;
-  }
-  
-  .recruitFieldList {
-    margin: auto;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  
-  .recruitField {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  
-  .recruitField > p {
-    font-size: 14px;
-    padding-top: 6px;
-  }
-  
-  .recruitFieldIcon {
-    width: 45px;
-    height: 45px;
-    padding: 6px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 100%;
-  }
-  
-  .recruitFieldIcon:hover {
-    background-color: var(--color-devPool);
-    transition: 100ms linear;
-  }
-  
-  .teamList{
-    display: flex;
-    justify-content: space-around;
-  }
+  margin-top: 30px;
+  width: 100%;
+  height: 92.5vh;
+}
+
+.recruitFieldList {
+  margin: auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.recruitField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+.recruitField > p {
+  font-size: 14px;
+  padding-top: 6px;
+}
+
+.recruitFieldIcon {
+  width: 45px;
+  height: 45px;
+  padding: 6px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 100%;
+}
+
+.recruitFieldIcon:hover {
+  background-color: var(--color-devPool);
+  transition: 100ms linear;
+}
+
+.teamList{
+  display: flex;
+  justify-content: space-around;
+}
+
+.userBlockWrapper {
+  margin-top: 60px;
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-around;
+}

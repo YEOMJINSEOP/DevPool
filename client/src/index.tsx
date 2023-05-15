@@ -23,12 +23,12 @@ const router = createBrowserRouter([
     // errorElement: 
     children: [
       {index: true, element: <MainBanner />},
-      {path: '/userInfo', element: <UserInfo />},
-      {path: '/userForm', element: <UserForm />},
+      {path: '/user/info', element: <UserInfo />},
+      {path: '/user/form', element: <UserForm />},
       {path: '/myPage', element: <Mypage />},
       {path: '/signUp', element: <SignUp />},
       {path: '/logIn', element: <LogIn />},
-      {path: '/userList', element: <UserList />},
+      {path: '/user/list', element: <UserList />},
       {path: '/team/create', element: <TeamForm />},
       {path: '/team/detail/:teamId', element: <TeamInfo />},
       {path: '/team/list', element: <TeamList />}
