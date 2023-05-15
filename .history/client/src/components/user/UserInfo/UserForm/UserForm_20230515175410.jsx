@@ -64,16 +64,16 @@ export default function UserInfo(Member) {
     relatedSite: [],
   });
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   axios.get(`${BASE_URL}/api/member_pool/${memberId}`)
-  //   .then((res) => console.log(res));
+    axios.get(`${BASE_URL}/api/member_pool/${memberId}`)
+    .then((res) => console.log(res));
 
-  //   // axios.post(`${BASE_URL}/api/member_pool`, {
-  //   //   memberId: memberId,
+    // axios.post(`${BASE_URL}/api/member_pool`, {
+    //   memberId: memberId,
 
-  //   // });
-  // }, [])
+    // });
+  }, [])
 
   const handleUserInterest = (selectedTechStack) => {
     const trueTechStack =  Object.entries(selectedTechStack).
