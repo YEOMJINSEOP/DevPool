@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import styles from './SignUp.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -19,6 +20,7 @@ export default function SignUp() {
   const [IsSamePwd, setIsSamePwd] = useState(false);
   const [image, setImage] = useState();
   const [imageURL, setImageURL] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const pattern = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
@@ -62,6 +64,7 @@ export default function SignUp() {
       setNickName('');
       setPwd('');
       setpwdCheck('');
+      navigate('/login');
     });
   }
 

@@ -64,17 +64,6 @@ export default function UserInfo(Member) {
     relatedSite: [],
   });
 
-  useEffect(() => {
-
-    axios.get(`${BASE_URL}/api/member_pool/${memberId}`)
-    .then((res) => console.log(res));
-
-    // axios.post(`${BASE_URL}/api/member_pool`, {
-    //   memberId: memberId,
-
-    // });
-  }, [])
-
   const handleUserInterest = (selectedTechStack) => {
     const trueTechStack =  Object.entries(selectedTechStack).
       filter(([key, value]) => value === true)
@@ -236,13 +225,69 @@ export default function UserInfo(Member) {
     }
   }
 
-  const handleUserInput =  (e) => {
-    const { id, value } = e.target;
-    setMember((prev) => {
-      const cur = {...prev};
-      cur[id] = value;
-      return cur
+  const handleSubmit = () => {
+    console.log(member);
+    const interestForSubmit = [];
+    const stackForSubmit = [];
+    let projcectStackForSubmit = [];
+    const certificateForSubmit = [];
+    const relatedSiteForSubmit = [];
+    const projectForSubmit = [];
+    member.interest.map((item) => {
+      interestForSubmit.push({
+        name: item
+      })
+    });
+    member.stack.map((item) => {
+      stackForSubmit.push({
+        name: item
+      })
     })
+    member.certificate.map((item) => {
+      certificateForSubmit.push({  
+        name: item.content
+      })
+    })
+    member.project.map((item) => {
+      item.stack.map((current) => {
+        projcectStackForSubmit.push({
+          name: current
+        })
+      })
+      projectForSubmit.push({
+        name: item.content,
+        startDate: item.start,
+        stack: projcectStackForSubmit,
+        endDate: item.end,
+        url: "qwer"
+      })
+      projcectStackForSubmit = [];
+    })
+    member.relatedSite.map((item) => {
+      relatedSiteForSubmit.push({
+        name: item.content,
+        url: item.content
+      })
+    })
+
+    console.log({
+      memberId: memberId,
+      techField: interestForSubmit,
+      stack: stackForSubmit,
+      project: projectForSubmit,
+      certificate: certificateForSubmit,
+      site: relatedSiteForSubmit
+    });
+
+    // axios.post(`${BASE_URL}/api/member_pool`, {
+    //   memberId: memberId,
+    //   techField: interestForSubmit,
+    //   stack: stackForSubmit,
+    //   project: projectForSubmit,
+    //   certificate: certificateForSubmit,
+    //   site: relatedSiteForSubmit
+    // }).then((res) => console.log(res));
+
   }
 
   const handleMember = () => {
@@ -384,7 +429,7 @@ export default function UserInfo(Member) {
         );
       })}
     </div>
-    <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
+    <button onClick={handleSubmit} className={styles.submitBtn}>제출하기</button>
     </div>
   </div>
   )
