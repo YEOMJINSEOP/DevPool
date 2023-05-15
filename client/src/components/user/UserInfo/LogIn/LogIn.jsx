@@ -7,9 +7,16 @@ import styles from './LogIn.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
-import { isLoggedIn } from '../../../../recoil/user';
+import { isLoggedIn, memberId } from '../../../../recoil/user';
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
+export const getMemberId = () => {
+  const devAccessToken = localStorage.getItem('dev_access_token');
+  const base64Url = devAccessToken.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const decodedData = JSON.parse(atob(base64));
+  return decodedData.memberId;
+}
 
 export default function LogIn() {
   
@@ -17,6 +24,7 @@ export default function LogIn() {
   const [pwd, setPwd] = useState('');
   const naviagte = useNavigate();
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+  const [id, setId] = useRecoilState(memberId);
 
   const navigateToSignUp = () => {
     naviagte('/signUp');
@@ -38,7 +46,10 @@ export default function LogIn() {
       alert('DevPool에 오신 걸 환영합니다.');
       naviagte('/');
       setLoggedIn(true);
-      } catch (error) {
+      const memberId = getMemberId();
+      console.log(memberId);
+      setId(memberId);
+      } catch (error) { 
           console.log(error);
       }
   }

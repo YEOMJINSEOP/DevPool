@@ -19,3 +19,8 @@ export const isLoggedIn = atom<boolean>({
   key: 'isLoggedIn',
   default: false
 });
+
+export const memberId = atom<number>({
+  key: 'memberId',
+  default: undefined
+});

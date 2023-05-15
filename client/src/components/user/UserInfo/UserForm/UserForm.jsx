@@ -8,7 +8,8 @@ import StackTags from '../StackTags';
 import StackField from '../StackField';
 import TechField from '../../../common/TechField/TechField';
 import styled from '@emotion/styled';
-
+import axios from 'axios';
+import { getMemberId } from '../LogIn/LogIn';
 
 export const stackOptions = [
   { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
@@ -28,6 +29,8 @@ export const stackOptions = [
 const TechFieldContainer = styled.div`
 margin-top: 50px;
 `;
+
+export const BASE_URL = process.env.REACT_APP_API_URL;
 
 //나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
@@ -60,7 +63,11 @@ export default function UserInfo(Member) {
     relatedSite: [],
   });
 
-
+  useEffect(() => {
+    const memberId = getMemberId();
+    axios.get(`${BASE_URL}/api/member/${memberId}`)
+    .then((res) => console.log(res));
+  }, [])
 
   const handleUserInterest = (selectedTechStack) => {
     const trueTechStack =  Object.entries(selectedTechStack).
