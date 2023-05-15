@@ -16,23 +16,19 @@ type recruitStack = {
   name: string;
 }
 
+type category = {
+  name: string;
+}
 
 type Team = {
   teamId: number;
   name: string;
-  category: string;
+  category: category;
   currentCount: number;
   recruitCount: number;
-  createTime: number;
   recruitField: recruitField[];
   recruitStack: recruitStack[];
-  content: string;
-  hostMember: {
-    memberId: number,
-    email: string,
-    imageUrl: string,
-    name: string
-  }
+  content: string
 };
 
 function TeamList(){
@@ -49,7 +45,7 @@ function TeamList(){
 
   return (
     <div className={styles.teamListContainer}>
-      {/* <div className={styles.recruitFieldList}>
+      <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/javaScript.png" alt="" />
               <p>Front-end</p>
@@ -70,7 +66,7 @@ function TeamList(){
             <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="" />
               <p>AI</p>
             </div>
-      </div> */}
+          </div>
       <div>
         <ul className={styles.teamList}>
           {teamList.map((team) => {

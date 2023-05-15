@@ -15,11 +15,15 @@ type recruitStack = {
   name: string;
 }
 
+type category = {
+  name: string;
+}
+
 
 type TeamProps = {
   teamId: number;
   name: string;
-  category: string;
+  category: category;
   currentCount: number;
   recruitCount: number;
   createTime: number;

@@ -15,7 +15,7 @@ type Team = {
   currentCount: number;
   recruitCount: number;
   createTime: string;
-  recruitTechField: string[];
+  recruitField: string[];
   recruitStack: string[];
   content: string;
   hostMember: {
@@ -32,8 +32,8 @@ function TeamInfo(){
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
     axios.get(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`).then(
       (res) => {
-        const teamInfo = res.data.data;
-        setTeam(teamInfo);
+        const teamInfo = res;
+        // setTeam(teamInfo);
         console.log(teamInfo);        
       })
       .catch(
@@ -48,7 +48,7 @@ function TeamInfo(){
     currentCount: 0,
     recruitCount: 0,
     createTime: '',
-    recruitTechField: [],
+    recruitField: [],
     recruitStack: [],
     content: '',
     hostMember: {
@@ -78,15 +78,9 @@ function TeamInfo(){
             <p className={styles.inputReadOnly}>{team.currentCount} / {team.recruitCount}</p>
           </div>
         </div>
-        <div className={`${styles.container} ${styles.recruitStack}`}>
+        <div className={`${styles.container} ${styles.recruitField}`}>
           <Label content={"모집 분야"}></Label>
-          <div className={styles.currentStack}>
-              <ul>
-                {team.recruitTechField && team.recruitTechField.map((field, idx) => (
-                  <li className={styles.stack} key={idx}><span>{field}</span></li>
-                ))}
-              </ul>
-          </div>          
+          <p className={styles.inputReadOnly}>{team.recruitField}</p>
         </div>
         <div className={`${styles.container} ${styles.recruitStack}`}>
           <Label content={"모집 스택"}></Label>
@@ -100,7 +94,7 @@ function TeamInfo(){
         </div>
         <div className={`${styles.container} ${styles.content}`}>
            <Label content="팀 소개"></Label>        
-            <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} value={team.content} readOnly></textarea>
+            <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} readOnly></textarea>
         </div>
         <button className={styles.joinBtn}type="button">팀 참여하기</button>
       </div>
