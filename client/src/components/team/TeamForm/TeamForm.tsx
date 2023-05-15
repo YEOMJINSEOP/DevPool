@@ -159,7 +159,7 @@ function TeamForm(){
         <div className={styles.categoryAndCount_container}>
           <div className={`${styles.container} ${styles.category}`}>
             <Label content={"카테고리"}></Label>
-            <select className={styles.selectCommseon} name='category' id='category' value={team.category} onChange={handleInputChange}>
+            <select className={styles.selectCommon} name='category' id='category' value={team.category} onChange={handleInputChange}>
               <option value="web">Web</option>
               <option value="mobile">Mobile App</option>
             </select>
