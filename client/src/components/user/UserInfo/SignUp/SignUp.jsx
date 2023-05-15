@@ -47,7 +47,7 @@ export default function SignUp() {
   }
 
   const handleSignUpBtn = async() => {
-    await axios.post(`${BASE_URL}/api/member`, {
+    await axios.post(`${BASE_URL}/join`, {
       name: name,
       nickName: nickName,
       email: email,

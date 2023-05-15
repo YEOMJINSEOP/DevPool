@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import ProjectTags from './ProjectTags';
 import styles from './BasicModal.module.css';
+import StackTags from './StackTags';
 
 const style = {
   position: 'absolute',
@@ -62,7 +63,7 @@ export default function BasicModal({project, handleProject, projectStack, handle
           value={projectEnd}
           onChange={handleProjectEnd}
           type='month'/>
-          <p></p><button id='project' onClick={handleAddBtn} className={styles.project_submitBtn}>제출하기</button>
+          <p></p><button id='project' onClick={(e)=>{handleAddBtn(e); handleClose();}} className={styles.project_submitBtn}>제출하기</button>
           <p></p><button onClick={handleClose} className={styles.project_closeBtn}>창닫기</button>
         </Box>
       </Modal>

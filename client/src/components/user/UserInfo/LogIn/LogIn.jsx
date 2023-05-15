@@ -7,6 +7,8 @@ import styles from './LogIn.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+export const BASE_URL = process.env.REACT_APP_API_URL;
+
 export default function LogIn() {
   
   const [email, setEmail] = useState('');
@@ -15,6 +17,13 @@ export default function LogIn() {
 
   const navigateToSignUp = () => {
     naviagte('/signUp');
+  }
+
+  const handleLogin = async() => {
+    await axios.post(`${BASE_URL}/login`, {
+      email: email,
+      password: pwd
+    }).then((res)=>console.log(res))
   }
     
   return (
@@ -49,7 +58,7 @@ export default function LogIn() {
             </div>
         </div>
         <Stack direction="row" spacing={2}>
-          <Button variant="contained" sx={{ m: "16px"}}>로그인</Button>
+          <Button variant="contained" sx={{ m: "16px"}} onClick={handleLogin}>로그인</Button>
         </Stack>
     </div>
   )

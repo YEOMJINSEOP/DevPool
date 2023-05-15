@@ -169,11 +169,11 @@ export default function UserInfo(Member) {
           project: newProject,
         };
       });
+      setProjectStack([]);
       setProject('');
       setProjectStart('');
       setProjectEnd('');
       setProjectId(count => count + 1);
-      setProjectStack([]);
     }
   }
 
