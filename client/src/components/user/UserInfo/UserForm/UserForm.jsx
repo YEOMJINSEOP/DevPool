@@ -258,7 +258,8 @@ export default function UserInfo(Member) {
   }
 
   return (
-  <div className={styles.user_wrapper}>
+  <div className={styles.user}>
+    <div className={styles.user_wrapper}>
     <div className={styles.user_box}>
       {/* 유저 박스 왼쪽(이미지) */}
       <div className={styles.userBox_left}>
@@ -371,6 +372,7 @@ export default function UserInfo(Member) {
       })}
     </div>
     <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
+    </div>
   </div>
   )
 }

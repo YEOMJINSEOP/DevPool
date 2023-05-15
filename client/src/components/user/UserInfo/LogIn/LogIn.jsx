@@ -6,6 +6,8 @@ import Stack from '@mui/material/Stack';
 import styles from './LogIn.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { isLoggedIn } from '../../../../recoil/user';
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -14,16 +16,31 @@ export default function LogIn() {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const naviagte = useNavigate();
+  const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
 
   const navigateToSignUp = () => {
     naviagte('/signUp');
   }
 
   const handleLogin = async() => {
-    await axios.post(`${BASE_URL}/login`, {
-      email: email,
-      password: pwd
-    }).then((res)=>console.log(res))
+    try {
+      const res = await axios.post(`${BASE_URL}/login`, {
+          email: email,
+          password: pwd,
+      });
+      if(res.status !== 200){
+          alert('로그인 실패. 아이디 비밀번호를 확인해주세요.');
+          return;
+      }
+      console.log(res);
+      localStorage.setItem("dev_access_token", res.data.accessToken);
+      localStorage.setItem("dev_refresh_token", res.data.refreshToken);
+      alert('DevPool에 오신 걸 환영합니다.');
+      naviagte('/');
+      setLoggedIn(true);
+      } catch (error) {
+          console.log(error);
+      }
   }
     
   return (

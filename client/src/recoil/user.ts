@@ -13,4 +13,9 @@ export const userState = atom<User>({
     name: 'default',
     email: 'default',
   }
-})
+});
+
+export const isLoggedIn = atom<boolean>({
+  key: 'isLoggedIn',
+  default: false
+});
