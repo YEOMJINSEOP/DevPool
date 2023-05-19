@@ -225,6 +225,7 @@ export default function UserInfo(Member) {
   }
 
   const handleSubmit = () => {
+    const memberId = getMemberId().memberId;
     console.log(member);
     const interestForSubmit = [];
     const stackForSubmit = [];
@@ -255,9 +256,9 @@ export default function UserInfo(Member) {
       })
       projectForSubmit.push({
         name: item.content,
-        startDate: item.start,
+        startDate: '2023-05-15',
         stack: projcectStackForSubmit,
-        endDate: item.end,
+        endDate: '2023-05-15',
         url: "qwer"
       })
       projcectStackForSubmit = [];
@@ -269,23 +270,23 @@ export default function UserInfo(Member) {
       })
     })
 
-    // console.log({
-    //   memberId: memberId,
-    //   techField: interestForSubmit,
-    //   stack: stackForSubmit,
-    //   project: projectForSubmit,
-    //   certificate: certificateForSubmit,
-    //   site: relatedSiteForSubmit
-    // });
+    console.log({
+      memberId: memberId,
+      techField: interestForSubmit,
+      stack: stackForSubmit,
+      project: projectForSubmit,
+      certificate: certificateForSubmit,
+      site: relatedSiteForSubmit
+    });
 
-    // axios.post(`${BASE_URL}/api/member_pool`, {
-    //   memberId: memberId,
-    //   techField: interestForSubmit,
-    //   stack: stackForSubmit,
-    //   project: projectForSubmit,
-    //   certificate: certificateForSubmit,
-    //   site: relatedSiteForSubmit
-    // }).then((res) => console.log(res));
+    axios.post(`${BASE_URL}/api/member_pool`, {
+      memberId: memberId,
+      techField: interestForSubmit,
+      stack: stackForSubmit,
+      project: projectForSubmit,
+      certificate: certificateForSubmit,
+      site: relatedSiteForSubmit
+    }).then((res) => console.log(res));
 
   }
 

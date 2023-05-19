@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './UserList.module.css';
 import UserBlock from './UserBlock';
+import { BASE_URL } from '../LogIn/LogIn';
 
 function UserList(){
     const navigate = useNavigate();
@@ -80,7 +81,15 @@ function UserList(){
         certificate: ["정보처리기사", "SQLD"],
         relatedSite: ['www.kakao.com', 'www.naver.com'],
         }
-       ]);
+      ]);
+
+      useEffect(()=> {
+        axios.get(`${BASE_URL}/api/member_pools`).then((res)=>{
+          setMember(res.data.dataList);
+          console.log(res.data.dataList);
+        });
+      }, []);
+      
 
   return (
     <div className={styles.teamListContainer}>

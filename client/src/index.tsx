@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     // errorElement: 
     children: [
       {index: true, element: <MainBanner />},
-      {path: '/user/info', element: <UserInfo />},
+      {path: '/user/info/:userId', element: <UserInfo />},
       {path: '/user/form', element: <UserForm />},
       {path: '/myPage', element: <Mypage />},
       {path: '/signUp', element: <SignUp />},

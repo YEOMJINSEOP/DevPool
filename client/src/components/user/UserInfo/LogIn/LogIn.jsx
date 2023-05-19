@@ -12,10 +12,16 @@ import { isLoggedIn, memberId } from '../../../../recoil/user';
 export const BASE_URL = process.env.REACT_APP_API_URL;
 export const getMemberId = () => {
   const devAccessToken = localStorage.getItem('dev_access_token');
-  const base64Url = devAccessToken.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const decodedData = JSON.parse(atob(base64));
-  return decodedData;
+  if (devAccessToken != null) {
+    const base64Url = devAccessToken.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const decodedData = JSON.parse(atob(base64));
+    return decodedData;
+  }
+  else {
+    return null;
+  }
+  
 }
 
 export default function LogIn() {
