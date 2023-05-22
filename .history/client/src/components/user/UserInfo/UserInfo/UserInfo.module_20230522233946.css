@@ -1,0 +1,271 @@
+@import '../../../../App.css';
+
+.user {
+    /* width: var(--container-width);
+    border: solid 2px black;
+    font-family: var(--font-family-DoHyeon);
+    margin: auto;
+    padding: 60px; */
+    width: var(--container-width);
+    height: var(--container-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.user_wrapper {
+    width: var(--subContainer-width);
+  
+    border: var(--subContainer-border);
+    border-radius: var(--subContainer-border-radius);
+  
+    padding: var(--subContainer-padding);
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.user_box {
+    display: flex;
+    justify-content: space-around;
+}
+
+.user_box_middle {
+
+}
+
+.user_img {
+    border-radius: 50%;
+}
+
+.inputLabel {
+    font-family: var(--font-family-DoHyeon);
+    font-size: 20px;
+    padding-left: 70px;
+}
+
+.message_img {
+    width: 30px;
+    height: 30px;
+    background-color: #F25022;
+}
+
+.userBox_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBtn {
+  /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  /* 스타일링 */
+  padding: 6px 4px;
+  font-size: 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  /* 배경색과 글자색 설정 */
+  background-color: #f5f5f5;
+  color: #333;
+  /* 마우스 커서 설정 */
+  cursor: pointer;
+  margin: 16px 0 0 0;
+  font-family: var(--font-family-DoHyeon);
+}
+
+.profileBtn:hover {
+    background-color: #a9abaa;
+}
+
+.name_input {
+          /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  /* 스타일링 */
+  padding: 8px 12px;
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  /* 배경색과 글자색 설정 */
+  background-color: #f5f5f5;
+  color: #333;
+  /* 마우스 커서 설정 */
+  cursor: pointer;
+  margin: 0 0 0 10px;
+  font-family: var(--font-family-DoHyeon);
+}
+
+.interest_wrapper {
+    margin: 32px 0 0 0;
+}
+
+.message_btn {
+    padding: 12px 20px;
+    font-family: var(--font-family-DoHyeon);
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: #FFA500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.message_btn:hover {
+    background-color: #F25022;
+}
+
+.message_btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #F25022(0, 123, 255, 0.5);
+}
+
+.user_stack_wrapper {
+    margin: 36px 0 0 0;
+}
+
+.user_project {
+    margin: 36px 0 0 0;
+}
+
+.user_certificate {
+    margin: 24px 0 0 0;
+}
+
+.user_stack {
+    width: 100%;
+    height:67px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 20px 0 0 0;
+    display: flex;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.interest_input {
+      /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  /* 스타일링 */
+  padding: 4px 5px;
+  font-size: 16px;
+  font-family: var(--font-family-DoHyeon);
+  border-radius: 4px;
+  border: 1px solid #E9E9E9;
+  margin: 0 10px;
+  background-color: #E9E9E9;
+  color: black;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* .interest_input:hover {
+    background-color: #a9abaa;
+} */
+
+.interest_option {
+  /* 스타일링 */
+  padding: 8px 12px;
+  font-size: 15px;
+  font-family: var(--font-family-DoHyeon);
+}
+
+.interest_list, .certificate_list {
+      /* 스타일링 */
+  padding: 5px 8px;
+  font-size: 16px;
+}
+
+.interest_deleteBtn, .certificate_deleteBtn, .project_deleteBtn, .relatedSite_deleteBtn {
+    margin-left: 8px;
+    padding: 3px 6px;
+    font-size: 12px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    cursor: pointer;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 8px;
+}
+
+.project_span {
+    margin-left: 18px;
+}
+
+.project_span_small {
+    margin-left: 7px;
+}
+
+.project_stack_icon {
+    width: 40px;
+    height: 40px;
+}
+
+.certificateBtn, .relatedSiteBtn {
+    padding: 4px 8px;
+    font-size: 15px;
+    font-family: var(--font-family-DoHyeon);
+    border-radius: 4px;
+    border: 1px solid #E9E9E9;
+    margin: 0 10px;
+    background-color: #E9E9E9;
+    color: black;
+    cursor: pointer;
+}
+
+.certificateBtn:hover, .relatedSiteBtn:hover {
+    background-color: #a9abaa;
+}
+
+.submitBtn {
+    margin: 30px 0 0 0;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-family: var(--font-family-DoHyeon);
+    border-radius: 4px;
+    border: 1px solid #E9E9E9;
+    background-color: #E9E9E9;
+    color: black;
+    cursor: pointer;
+}
+
+.certificate_wrapper, .relatedSite_wrapper {
+    margin: 20px 0 0 0;
+}
+
+.submitBtn:hover {
+    background-color: #a9abaa;
+}
+
+.certificate_input {
+      /* 기본 스타일링 제거 */
+  appearance: none;
+  border: none;
+  /* 스타일링 */
+  padding: 8px 12px;
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  /* 배경색과 글자색 설정 */
+  background-color: #f5f5f5;
+  color: #333;
+  /* 마우스 커서 설정 */
+  cursor: pointer;
+  margin: 0 0 0 10px;
+  font-family: var(--font-family-DoHyeon);
+}
