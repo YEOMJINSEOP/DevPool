@@ -111,10 +111,6 @@
   align-items: flex-start;
 }
 
-.container.button {
-  justify-content: center;
-}
-
 .currentStack{
   background: #FFFFFF;
   border: 1px solid #C5C5C5;

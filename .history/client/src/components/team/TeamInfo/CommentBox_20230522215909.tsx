@@ -27,7 +27,7 @@ type Comment = {
 
 function CommentBox(props: CommentBoxProps): JSX.Element {
 
-  const teamId = props.teamId;
+  const teamId = 1;
   const currentMemberId = 1;
   
   const [comment, setComment] = useState<Comment[]>([]);
