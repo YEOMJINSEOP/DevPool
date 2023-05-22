@@ -21,10 +21,6 @@ export const stackOptions = [
   { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
   { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
   { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
-  { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
-  { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
-  { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
-  { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
 ];
 
 const TechFieldContainer = styled.div`
