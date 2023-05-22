@@ -78,8 +78,6 @@ function TeamInfo(){
     }
   });
 
-  console.log(`loggedInUser: ${loggedInUser.id}, hostUser: ${team.hostMember.memberId}`);
-
   return (
     <>
       <div className={styles.teamInfoContainer}>
@@ -124,7 +122,6 @@ function TeamInfo(){
             <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} value={team.content} readOnly></textarea>
         </div>
         <button className={styles.joinBtn}type="button">팀 참여하기</button>
-        {LoggedIn && loggedInUser.id === team.hostMember.memberId.toString() && <button>팀 삭제하기</button>}
       </div>
     </div>
     <CommentBox teamId={team.teamId}/>

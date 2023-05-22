@@ -46,6 +46,7 @@ function TeamInfo(){
   const [loggedInUser, setLoggedInUser] = useRecoilState(userState);
   const LoggedIn = useRecoilValue(isLoggedIn);
 
+  console.log(LoggedIn);
   const params = useParams();
   useEffect(() => {
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
@@ -77,8 +78,6 @@ function TeamInfo(){
       name: ''
     }
   });
-
-  console.log(`loggedInUser: ${loggedInUser.id}, hostUser: ${team.hostMember.memberId}`);
 
   return (
     <>
@@ -124,7 +123,6 @@ function TeamInfo(){
             <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} value={team.content} readOnly></textarea>
         </div>
         <button className={styles.joinBtn}type="button">팀 참여하기</button>
-        {LoggedIn && loggedInUser.id === team.hostMember.memberId.toString() && <button>팀 삭제하기</button>}
       </div>
     </div>
     <CommentBox teamId={team.teamId}/>

@@ -80,6 +80,7 @@ function TeamInfo(){
 
   console.log(`loggedInUser: ${loggedInUser.id}, hostUser: ${team.hostMember.memberId}`);
 
+
   return (
     <>
       <div className={styles.teamInfoContainer}>

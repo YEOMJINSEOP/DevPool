@@ -78,7 +78,8 @@ function TeamInfo(){
     }
   });
 
-  console.log(`loggedInUser: ${loggedInUser.id}, hostUser: ${team.hostMember.memberId}`);
+  console.log(`loggedInUser: ${loggedInUser}, hostUser: ${team.hostMember.memberId}`);
+
 
   return (
     <>

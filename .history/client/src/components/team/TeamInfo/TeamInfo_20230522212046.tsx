@@ -46,6 +46,7 @@ function TeamInfo(){
   const [loggedInUser, setLoggedInUser] = useRecoilState(userState);
   const LoggedIn = useRecoilValue(isLoggedIn);
 
+  console.log(LoggedIn);
   const params = useParams();
   useEffect(() => {
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
@@ -77,8 +78,6 @@ function TeamInfo(){
       name: ''
     }
   });
-
-  console.log(`loggedInUser: ${loggedInUser.id}, hostUser: ${team.hostMember.memberId}`);
 
   return (
     <>
