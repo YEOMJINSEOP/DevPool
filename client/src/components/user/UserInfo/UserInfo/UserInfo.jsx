@@ -142,9 +142,10 @@ export default function UserInfo(Member) {
           <span>
           {item.name} 
           </span>
-          {stackOptions.filter(option => 
-            userProjectStack.includes(option.label)
-          ).map((option, index) => (
+          {stackOptions.filter(option => {
+            console.log(userProjectStack);
+            userProjectStack.includes(option.label);
+          }).map((option, index) => (
             <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
           )}
           <span className={styles.project_span}>

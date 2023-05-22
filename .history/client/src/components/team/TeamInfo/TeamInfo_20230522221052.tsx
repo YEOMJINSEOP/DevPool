@@ -30,7 +30,7 @@ type Team = {
   currentCount: number;
   recruitCount: number;
   createTime: string;
-  recruitTechField: recruitField[];
+  recruitField: recruitField[];
   recruitStack: recruitStack[];
   content: string;
   hostMember: {
@@ -73,7 +73,7 @@ function TeamInfo(){
     currentCount: 0,
     recruitCount: 0,
     createTime: '',
-    recruitTechField: [],
+    recruitField: [],
     recruitStack: [],
     content: '',
     hostMember: {
@@ -107,7 +107,7 @@ function TeamInfo(){
           <Label content={"모집 분야"}></Label>
           <div className={styles.currentStack}>
               <ul>
-                {team.recruitTechField && team.recruitTechField.map((field, idx) => (
+                {team.recruitField && team.recruitField.map((field, idx) => (
                   <li className={styles.stack} key={idx}><span>{field.name}</span></li>
                 ))}
               </ul>

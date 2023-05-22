@@ -3,9 +3,7 @@ import axios from 'axios';
 import styles from './TeamInfo.module.css';
 import CommentBox from './CommentBox';
 import Label from '../../common/Label/Label';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { isLoggedIn, userState } from '../../../recoil/user';
+import { useLocation, useParams } from 'react-router-dom';
 
 type TechStack = {
   name: string;
@@ -23,6 +21,7 @@ type Category = {
   name: string;
 }
 
+
 type Team = {
   teamId: number;
   name: string;
@@ -30,8 +29,8 @@ type Team = {
   currentCount: number;
   recruitCount: number;
   createTime: string;
-  recruitTechField: recruitField[];
-  recruitStack: recruitStack[];
+  recruitTechField: string[];
+  recruitStack: string[];
   content: string;
   hostMember: {
     memberId: number,
@@ -42,16 +41,6 @@ type Team = {
 };
 
 function TeamInfo(){
-  // 영진이와 상의 필요
-  // const [loggedInUser, setLoggedInUser] = useRecoilState(userState);
-  // const LoggedIn = useRecoilValue(isLoggedIn);
-
-  const navigate = useNavigate();
-  const handleDeleteTeam = () => {
-    axios.delete(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`);
-    navigate('/team/list');
-  }
-
   const params = useParams();
   useEffect(() => {
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
@@ -108,7 +97,7 @@ function TeamInfo(){
           <div className={styles.currentStack}>
               <ul>
                 {team.recruitTechField && team.recruitTechField.map((field, idx) => (
-                  <li className={styles.stack} key={idx}><span>{field.name}</span></li>
+                  <li className={styles.stack} key={idx}><span>{field}</span></li>
                 ))}
               </ul>
           </div>          
@@ -118,7 +107,7 @@ function TeamInfo(){
           <div className={styles.currentStack}>
               <ul>
                 {team.recruitStack && team.recruitStack.map((stack, idx) => (
-                  <li className={styles.stack} key={idx}><span>{stack.name}</span></li>
+                  <li className={styles.stack} key={idx}><span>{stack}</span></li>
                 ))}
               </ul>
           </div>
@@ -127,13 +116,7 @@ function TeamInfo(){
            <Label content="팀 소개"></Label>        
             <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} value={team.content} readOnly></textarea>
         </div>
-        <div className={`${styles.container} ${styles.button}`}>
-          <button className={styles.joinBtn} type="button">팀 참여하기</button>
-          {
-            // LoggedIn && loggedInUser.id === team.hostMember.memberId.toString() && 
-            <button className={styles.removeBtn} onClick={handleDeleteTeam}>팀 삭제하기</button>
-          }
-        </div>
+        <button className={styles.joinBtn}type="button">팀 참여하기</button>
       </div>
     </div>
     <CommentBox teamId={team.teamId}/>

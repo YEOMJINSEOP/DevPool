@@ -16,17 +16,13 @@ type recruitStack = {
 }
 
 
-type Category = {
-  name: string;
-}
-
 type TeamProps = {
   teamId: number;
   name: string;
-  category: Category;
+  category: string;
   currentCount: number;
   recruitCount: number;
-  createTime: string;
+  createTime: number;
   recruitField: recruitField[];
   recruitStack: recruitStack[];
   content: string;
@@ -50,15 +46,15 @@ function TeamBlock(props: TeamProps): JSX.Element{
 
   return (
     <div className={styles.teamBlock} onClick={teamClickHandler}>
-      <div className={styles.header}>
-        <div className={styles.hostImg}></  div>
-        {/* <img className={styles.hostImg} src="" alt="host" /> */}
-        <h2 className={styles.teamName}>{props.name}</h2>
-      </div>
+
+      <span className={styles.hostImg}></span>
+      {/* <img className={styles.hostImg} src="" alt="host" /> */}
+      <h2 className={styles.teamName}>{props.name}</h2>
+
       <div className={styles.divider}></div>
       <div className={styles.container}>
         <Label content="카테고리"></Label>
-        <p className={styles.inputReadOnly}>{props.category.name}</p>
+        <p className={styles.inputReadOnly}>{props.category}</p>
       </div>
       <div className={styles.container}>
         <Label content="팀 인원"></Label>

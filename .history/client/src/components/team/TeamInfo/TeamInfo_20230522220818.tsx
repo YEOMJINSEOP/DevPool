@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './TeamInfo.module.css';
 import CommentBox from './CommentBox';
 import Label from '../../common/Label/Label';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isLoggedIn, userState } from '../../../recoil/user';
 
@@ -30,7 +30,7 @@ type Team = {
   currentCount: number;
   recruitCount: number;
   createTime: string;
-  recruitTechField: recruitField[];
+  recruitField: recruitField[];
   recruitStack: recruitStack[];
   content: string;
   hostMember: {
@@ -42,14 +42,12 @@ type Team = {
 };
 
 function TeamInfo(){
-  // 영진이와 상의 필요
-  // const [loggedInUser, setLoggedInUser] = useRecoilState(userState);
-  // const LoggedIn = useRecoilValue(isLoggedIn);
 
-  const navigate = useNavigate();
+  const [loggedInUser, setLoggedInUser] = useRecoilState(userState);
+  const LoggedIn = useRecoilValue(isLoggedIn);
+
   const handleDeleteTeam = () => {
-    axios.delete(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`);
-    navigate('/team/list');
+    axios.delete(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`)
   }
 
   const params = useParams();
@@ -73,7 +71,7 @@ function TeamInfo(){
     currentCount: 0,
     recruitCount: 0,
     createTime: '',
-    recruitTechField: [],
+    recruitField: [],
     recruitStack: [],
     content: '',
     hostMember: {
@@ -83,6 +81,8 @@ function TeamInfo(){
       name: ''
     }
   });
+
+  console.log(`loggedInUser: ${loggedInUser.id}, hostUser: ${team.hostMember.memberId}`);
 
   return (
     <>
@@ -107,7 +107,7 @@ function TeamInfo(){
           <Label content={"모집 분야"}></Label>
           <div className={styles.currentStack}>
               <ul>
-                {team.recruitTechField && team.recruitTechField.map((field, idx) => (
+                {team.recruitField && team.recruitField.map((field, idx) => (
                   <li className={styles.stack} key={idx}><span>{field.name}</span></li>
                 ))}
               </ul>
