@@ -139,7 +139,8 @@ function TeamForm(){
             <Label content={"카테고리"}></Label>
             <select className={styles.selectCommon} name='category' id='category' value={team.category.name} onChange={handleCategory}>
               <option value="web">Web</option>
-              <option value="mobile">Mobile App</option>
+              <option value="mobile">App</option>
+              <option value="mobile">AI</option>
             </select>
           </div>
           <div className={`${styles.container} ${styles.recruitCount}`}>
