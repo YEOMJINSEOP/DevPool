@@ -55,24 +55,16 @@ function TeamList(){
     <div className={styles.teamListContainer}>
       <div className={styles.recruitFieldList}>
             <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/javaScript.png" alt="" />
-              <p>Front-end</p>
+                <span className={styles.recruitFieldIcon} style={{fontSize: "25px", fontWeight: "600"}}>All</span>
+                <p>All</p>
             </div>
             <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/server.png" alt="" />
-              <p>Back-end</p>
+              <p>Web</p>
             </div>
             <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/android.png" alt="" />
-              <p>Android</p>
-            </div>
-            <div className={styles.recruitField}>
-              <img className={styles.recruitFieldIcon}src="/image/apple-logo.png" alt="" />
-              <p>iOS</p>
-            </div>
-            <div className={styles.recruitField}>
-            <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="" />
-              <p>AI</p>
+              <p>App</p>
             </div>
       </div>
       <div>
