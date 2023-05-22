@@ -5,18 +5,6 @@ import CommentBox from './CommentBox';
 import Label from '../../common/Label/Label';
 import { useLocation, useParams } from 'react-router-dom';
 
-type TechStack = {
-  name: string;
-}
-
-type recruitField = {
-  name: string;
-}
-
-type recruitStack = {
-  name: string;
-}
-
 type Category = {
   name: string;
 }
@@ -28,8 +16,8 @@ type Team = {
   currentCount: number;
   recruitCount: number;
   createTime: string;
-  recruitField: recruitField[];
-  recruitStack: recruitStack[];
+  recruitTechField: string[];
+  recruitStack: string[];
   content: string;
   hostMember: {
     memberId: number,
@@ -61,7 +49,7 @@ function TeamInfo(){
     currentCount: 0,
     recruitCount: 0,
     createTime: '',
-    recruitField: [],
+    recruitTechField: [],
     recruitStack: [],
     content: '',
     hostMember: {
@@ -95,8 +83,8 @@ function TeamInfo(){
           <Label content={"모집 분야"}></Label>
           <div className={styles.currentStack}>
               <ul>
-                {team.recruitField && team.recruitField.map((field, idx) => (
-                  <li className={styles.stack} key={idx}><span>{field.name}</span></li>
+                {team.recruitTechField && team.recruitTechField.map((field, idx) => (
+                  <li className={styles.stack} key={idx}><span>{field}</span></li>
                 ))}
               </ul>
           </div>          
@@ -106,7 +94,7 @@ function TeamInfo(){
           <div className={styles.currentStack}>
               <ul>
                 {team.recruitStack && team.recruitStack.map((stack, idx) => (
-                  <li className={styles.stack} key={idx}><span>{stack.name}</span></li>
+                  <li className={styles.stack} key={idx}><span>{stack}</span></li>
                 ))}
               </ul>
           </div>

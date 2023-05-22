@@ -26,7 +26,7 @@ type TeamProps = {
   category: Category;
   currentCount: number;
   recruitCount: number;
-  createTime: string;
+  createTime: number;
   recruitField: recruitField[];
   recruitStack: recruitStack[];
   content: string;

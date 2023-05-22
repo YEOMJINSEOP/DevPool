@@ -16,18 +16,14 @@ type recruitStack = {
   name: string;
 }
 
-type Category = {
-  name: string;
-}
-
 
 type Team = {
   teamId: number;
   name: string;
-  category: Category;
+  category: string;
   currentCount: number;
   recruitCount: number;
-  createTime: string;
+  createTime: number;
   recruitField: recruitField[];
   recruitStack: recruitStack[];
   content: string;
@@ -46,7 +42,7 @@ function TeamList(){
     axios.get(`${process.env.REACT_APP_API_URL}/api/teams`)
     .then((res) => {
       setTeamList(res.data.dataList);
-      console.log(res.data.dataList);
+      console.log(res);
     })
     .catch((err) => console.log('get teamList failed', err))
   }, []);

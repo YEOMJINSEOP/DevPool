@@ -16,27 +16,23 @@ type recruitStack = {
   name: string;
 }
 
-type Category = {
-  name: string;
-}
-
 
 type Team = {
   teamId: number;
   name: string;
-  category: Category;
+  category: string;
   currentCount: number;
   recruitCount: number;
-  createTime: string;
+  createTime: number;
   recruitField: recruitField[];
   recruitStack: recruitStack[];
   content: string;
-  hostMember: {
-    memberId: number,
-    email: string,
-    imageUrl: string,
-    name: string
-  }
+  // hostMember: {
+  //   memberId: number,
+  //   email: string,
+  //   imageUrl: string,
+  //   name: string
+  // }
 };
 
 function TeamList(){

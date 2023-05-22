@@ -16,26 +16,22 @@ type recruitStack = {
 }
 
 
-type Category = {
-  name: string;
-}
-
 type TeamProps = {
   teamId: number;
   name: string;
-  category: Category;
+  category: string;
   currentCount: number;
   recruitCount: number;
-  createTime: string;
+  createTime: number;
   recruitField: recruitField[];
   recruitStack: recruitStack[];
   content: string;
-  hostMember: {
-    memberId: number,
-    email: string,
-    imageUrl: string,
-    name: string
-  }
+  // hostMember: {
+  //   memberId: number,
+  //   email: string,
+  //   imageUrl: string,
+  //   name: string
+  // }
 };
 
 
@@ -58,7 +54,7 @@ function TeamBlock(props: TeamProps): JSX.Element{
       <div className={styles.divider}></div>
       <div className={styles.container}>
         <Label content="카테고리"></Label>
-        <p className={styles.inputReadOnly}>{props.category.name}</p>
+        <p className={styles.inputReadOnly}>{props.category}</p>
       </div>
       <div className={styles.container}>
         <Label content="팀 인원"></Label>

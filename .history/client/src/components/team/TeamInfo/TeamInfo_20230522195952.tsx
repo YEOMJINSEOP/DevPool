@@ -95,8 +95,8 @@ function TeamInfo(){
           <Label content={"모집 분야"}></Label>
           <div className={styles.currentStack}>
               <ul>
-                {team.recruitField && team.recruitField.map((field, idx) => (
-                  <li className={styles.stack} key={idx}><span>{field.name}</span></li>
+                {team.recruitTechField && team.recruitField.map((field, idx) => (
+                  <li className={styles.stack} key={idx}><span>{field}</span></li>
                 ))}
               </ul>
           </div>          
