@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './MainBanner.module.css';
+import { BASE_URL, getMemberId } from '../../user/UserInfo/LogIn/LogIn';
+import axios from 'axios';
 
 function MainBanner() {
   

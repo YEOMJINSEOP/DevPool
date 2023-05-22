@@ -26,6 +26,8 @@ export const getMemberId = () => {
 
 export default function LogIn() {
   
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const naviagte = useNavigate();
@@ -49,12 +51,23 @@ export default function LogIn() {
       console.log(res);
       localStorage.setItem("dev_access_token", res.data.accessToken);
       localStorage.setItem("dev_refresh_token", res.data.refreshToken);
-      alert('DevPool에 오신 걸 환영합니다.');
-      naviagte('/');
-      setLoggedIn(true);
       const memberInfo = getMemberId();
       console.log(memberInfo.memberId);
       setId(memberId);
+      
+      // memberId로 DevPool에 등록되어 있나 확인해보고, 없다면 'user/form'으로 이동
+      axios.get(`${BASE_URL}/api/member_pool/2`)
+      .then((res) => {
+        setLoggedIn(true);
+        alert('DevPool에 오신 걸 환영합니다.');
+        naviagte('/');
+        console.log(res);
+      })
+      .catch(()=>{
+        setLoggedIn(true);
+        alert('아직 DevPool에 등록되지 않았습니다!');
+        navigate('/user/form');
+      });
       } catch (error) { 
           console.log(error);
       }

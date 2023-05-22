@@ -33,9 +33,9 @@ export default function StackField({ selectedStack }) {
   
     return (
     <div className={styles.user_stack}>
-        {selectedStackIcons && selectedStackIcons.map((items) => {
+        {selectedStackIcons && selectedStackIcons.map((items, idx) => {
           return (
-            <div>{items.icon}</div>
+            <div key={idx}>{items.icon}</div>
           )
         })}
     </div>

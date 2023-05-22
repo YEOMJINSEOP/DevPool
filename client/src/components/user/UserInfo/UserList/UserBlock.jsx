@@ -22,7 +22,7 @@ export default function UserBlock({ user }) {
         <div style={{display: 'flex'}}>
             <span className={styles.user_img}></span>
             <h3>
-                {user.email}
+                {user.nickName}
             </h3>
             <button className={styles.mailBtn}><MailOutlineIcon />쪽지 보내기</button>
         </div>

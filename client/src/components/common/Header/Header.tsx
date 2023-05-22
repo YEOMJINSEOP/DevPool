@@ -18,13 +18,31 @@ function Header(){
         <button onClick={() => navigate('/team/create')}>팀 모집하기</button>
       </div>
       <div className={styles.loginAndUser_container}>
-        {loggedIn ? 
-        <button onClick={()=>{navigate('/'); setLoggedIn(false); alert('로그아웃 되었습니다')}}>
-          로그아웃
-        </button> : 
-        <button onClick={()=>navigate('/logIn')}>
+        {loggedIn ? (
+        <>
+          <button 
+          className={styles.sharedButtonStyle} 
+          onClick={() => {
+            navigate('/chat');
+          }}>
+            쪽지함
+          </button>
+          <button
+            className={`${styles.sharedButtonStyle} ${styles.logoutButton}`}
+            onClick={() => {
+              navigate('/');
+              setLoggedIn(false);
+              alert('로그아웃 되었습니다');
+            }}
+          >
+            로그아웃
+          </button>
+        </>
+        ) : (
+        <button className={styles.sharedButtonStyle} onClick={() => navigate('/logIn')}>
           로그인
-        </button>}
+        </button>
+        )}
       </div>
     </div>
   )

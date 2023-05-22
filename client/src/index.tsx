@@ -14,6 +14,7 @@ import Mypage from './components/user/UserInfo/MyPage/Mypage';
 import SignUp from './components/user/UserInfo/SignUp/SignUp';
 import LogIn from './components/user/UserInfo/LogIn/LogIn';
 import UserList from './components/user/UserInfo/UserList/UserList';
+import Chat from './components/user/UserInfo/Chat';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       {path: '/myPage', element: <Mypage />},
       {path: '/signUp', element: <SignUp />},
       {path: '/logIn', element: <LogIn />},
+      {path: '/chat', element: <Chat />},
       {path: '/user/list', element: <UserList />},
       {path: '/team/create', element: <TeamForm />},
       {path: '/team/detail/:teamId', element: <TeamInfo />},

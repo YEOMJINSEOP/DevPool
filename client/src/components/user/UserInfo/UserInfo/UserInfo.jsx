@@ -112,7 +112,7 @@ export default function UserInfo(Member) {
       </div>
       <div className={styles.user_box_middle}>
         <p>
-          <div className={styles.inputLabel}>이름: {state.email}</div>
+          <div className={styles.inputLabel}>이름: {state.nickName}</div>
         </p>
         <TechFieldContainer>
           <TechField onChange={handleUserInterest}/>
@@ -132,13 +132,19 @@ export default function UserInfo(Member) {
     <div className={styles.user_project}>
       <label htmlFor='project'>프로젝트 경험</label>
       {state.project.map((item, idx) => {
+          let userProjectStack = [];
+          item.stack.map((current) => {
+            userProjectStack.push(current.name);
+          });
         return (
         <li id={"project " + item.id}
          key={idx}>
           <span>
-          {item.content} 
+          {item.name} 
           </span>
-          {stackOptions.filter(option => item.stack.includes(option.label)).map((option, index) => (
+          {stackOptions.filter(option => 
+            userProjectStack.includes(option.label)
+          ).map((option, index) => (
             <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
           )}
           <span className={styles.project_span}>
