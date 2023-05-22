@@ -77,7 +77,7 @@ function TeamList(){
               <img className={styles.recruitFieldIcon} src="/image/android.png" alt="" />
               <p>App</p>
             </div>
-            <div className={styles.recruitField} onClick={(e) => handleFilter(e, "AI")}>
+            <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon} src="/image/deep-learning.png" alt="" />
               <p>AI</p>
             </div>

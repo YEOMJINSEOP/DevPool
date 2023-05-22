@@ -70,15 +70,15 @@ function TeamList(){
                 <p>All</p>
             </div>
             <div className={styles.recruitField} onClick={(e) => handleFilter(e, "Web")}>
-              <img className={styles.recruitFieldIcon} src="/image/server.png" alt="" />
+              <img className={styles.recruitFieldIcon}src="/image/server.png" alt="" />
               <p>Web</p>
             </div>
             <div className={styles.recruitField} onClick={(e) => handleFilter(e, "App")}>
-              <img className={styles.recruitFieldIcon} src="/image/android.png" alt="" />
+              <img className={styles.recruitFieldIcon}src="/image/android.png" alt="" />
               <p>App</p>
             </div>
-            <div className={styles.recruitField} onClick={(e) => handleFilter(e, "AI")}>
-              <img className={styles.recruitFieldIcon} src="/image/deep-learning.png" alt="" />
+            <div className={styles.recruitField}>
+            <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="" />
               <p>AI</p>
             </div>
       </div>
