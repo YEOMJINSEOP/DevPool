@@ -52,14 +52,9 @@ function TeamList(){
   }, []);
 
   const [filteredTeamList, setFilteredTeamList] = useState<Team[]>([]);
-  
+  // 카테고리에 해당하는 팀을 보여주는 Filter를 구현해야 합니다.
   const handleFilter = (event: React.MouseEvent<HTMLDivElement>, selectedCategory: string) => {
-    if(selectedCategory === "All"){
-      setFilteredTeamList(teamList);
-    }
-    else {
-      setFilteredTeamList(teamList.filter((team) => team.category.name === selectedCategory));
-    }
+    setFilteredTeamList(teamList.filter((team) => team.category.name === selectedCategory));
   }
 
   return (

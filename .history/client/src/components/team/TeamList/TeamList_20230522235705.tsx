@@ -45,21 +45,14 @@ function TeamList(){
     axios.get(`${process.env.REACT_APP_API_URL}/api/teams`)
     .then((res) => {
       setTeamList(res.data.dataList);
-      setFilteredTeamList(res.data.dataList);
       console.log(res.data.dataList);
     })
     .catch((err) => console.log('get teamList failed', err))
   }, []);
 
-  const [filteredTeamList, setFilteredTeamList] = useState<Team[]>([]);
-  
+  // 카테고리에 해당하는 팀을 보여주는 Filter를 구현해야 합니다.
   const handleFilter = (event: React.MouseEvent<HTMLDivElement>, selectedCategory: string) => {
-    if(selectedCategory === "All"){
-      setFilteredTeamList(teamList);
-    }
-    else {
-      setFilteredTeamList(teamList.filter((team) => team.category.name === selectedCategory));
-    }
+
   }
 
   return (
@@ -80,7 +73,7 @@ function TeamList(){
       </div>
       <div>
         <ul className={styles.teamList}>
-          {filteredTeamList.map((team) => {
+          {teamList.map((team) => {
             return(
               <li key={team.name}>
                 <TeamBlock {...team}/>

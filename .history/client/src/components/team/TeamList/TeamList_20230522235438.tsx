@@ -45,21 +45,14 @@ function TeamList(){
     axios.get(`${process.env.REACT_APP_API_URL}/api/teams`)
     .then((res) => {
       setTeamList(res.data.dataList);
-      setFilteredTeamList(res.data.dataList);
       console.log(res.data.dataList);
     })
     .catch((err) => console.log('get teamList failed', err))
   }, []);
 
-  const [filteredTeamList, setFilteredTeamList] = useState<Team[]>([]);
-  
-  const handleFilter = (event: React.MouseEvent<HTMLDivElement>, selectedCategory: string) => {
-    if(selectedCategory === "All"){
-      setFilteredTeamList(teamList);
-    }
-    else {
-      setFilteredTeamList(teamList.filter((team) => team.category.name === selectedCategory));
-    }
+  // 카테고리에 해당하는 팀을 보여주는 Filter를 구현해야 합니다.
+  const handleFilter = (event: React.MouseEvent<HTMLDivElement>, category: string) => {
+
   }
 
   return (
@@ -73,14 +66,14 @@ function TeamList(){
               <img className={styles.recruitFieldIcon}src="/image/server.png" alt="" />
               <p>Web</p>
             </div>
-            <div className={styles.recruitField} onClick={(e) => handleFilter(e, "App")}>
+            <div className={styles.recruitField} onClick={(e) => handleFilter(e, "APP")}>
               <img className={styles.recruitFieldIcon}src="/image/android.png" alt="" />
               <p>App</p>
             </div>
       </div>
       <div>
         <ul className={styles.teamList}>
-          {filteredTeamList.map((team) => {
+          {teamList.map((team) => {
             return(
               <li key={team.name}>
                 <TeamBlock {...team}/>

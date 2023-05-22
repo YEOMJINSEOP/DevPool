@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import TeamBlock from '../TeamBlock/TeamBlock';
-import { useNavigate } from 'react-router-dom';
 import styles from './TeamList.module.css';
 
 type TechStack = {
@@ -39,48 +38,35 @@ type Team = {
 };
 
 function TeamList(){
-  const navigate = useNavigate();
   const [teamList, setTeamList] = useState<Team[]>([]);
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/teams`)
     .then((res) => {
       setTeamList(res.data.dataList);
-      setFilteredTeamList(res.data.dataList);
       console.log(res.data.dataList);
     })
     .catch((err) => console.log('get teamList failed', err))
   }, []);
 
-  const [filteredTeamList, setFilteredTeamList] = useState<Team[]>([]);
-  
-  const handleFilter = (event: React.MouseEvent<HTMLDivElement>, selectedCategory: string) => {
-    if(selectedCategory === "All"){
-      setFilteredTeamList(teamList);
-    }
-    else {
-      setFilteredTeamList(teamList.filter((team) => team.category.name === selectedCategory));
-    }
-  }
-
   return (
     <div className={styles.teamListContainer}>
       <div className={styles.recruitFieldList}>
-            <div className={styles.recruitField} onClick={(e) => handleFilter(e, "All")}>
+            <div className={styles.recruitField}>
                 <span className={styles.recruitFieldIcon} style={{fontSize: "25px", fontWeight: "600"}}>All</span>
                 <p>All</p>
             </div>
-            <div className={styles.recruitField} onClick={(e) => handleFilter(e, "Web")}>
+            <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/server.png" alt="" />
               <p>Web</p>
             </div>
-            <div className={styles.recruitField} onClick={(e) => handleFilter(e, "App")}>
+            <div className={styles.recruitField}>
               <img className={styles.recruitFieldIcon}src="/image/android.png" alt="" />
               <p>App</p>
             </div>
       </div>
       <div>
         <ul className={styles.teamList}>
-          {filteredTeamList.map((team) => {
+          {teamList.map((team) => {
             return(
               <li key={team.name}>
                 <TeamBlock {...team}/>
