@@ -94,7 +94,7 @@ function TeamForm(){
   }
   const [loggedInUserId, setLoggedInUserId] = useState<string>('');
   useEffect(() => {
-    setLoggedInUserId(getMemberId().memberId);
+    setLoggedInUserId(getMemberId().memberId)
   },[])
 
 
