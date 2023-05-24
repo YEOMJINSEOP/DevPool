@@ -104,16 +104,23 @@ export default function UserInfo(Member) {
         className={styles.user_img}
         alt='User Img' 
         style={{"width":"150px"}}
-        src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
+        src={state.imageUrl}/>
         {/* <button className={styles.profileBtn}>프로필 변경</button> */}
       </div>
       <div className={styles.user_box_middle}>
         <p>
           <div className={styles.inputLabel}>이름: {state.nickName}</div>
         </p>
-        <TechFieldContainer>
-          <TechField onChange={handleUserInterest}/>
-        </TechFieldContainer>
+        <div className={styles.user_project}>
+          <label>관심 분야</label>
+        </div>
+        <div className={styles.stack_list}>
+          {state.techField.map((item) => {
+            return (
+              <li className={styles.stack_item}>{item.name}</li>
+            );
+          })}
+        </div>
       </div>
       <div className='user_box_right'>
         <button className={styles.message_btn}>쪽지 보내기</button>
@@ -126,8 +133,10 @@ export default function UserInfo(Member) {
       />
     </div>
     {/* 프로젝트 */}
-    <div className={styles.user_project}>
-      <label htmlFor='project'>프로젝트 경험</label>
+      <div className={styles.user_project}>
+        <label htmlFor='project'>프로젝트 경험</label>
+      </div>
+      <div className={styles.project_wrapper}>
       {state.project.map((item, idx) => {
           let userProjectStack = [];
           item.stack.map((current) => {
@@ -137,12 +146,12 @@ export default function UserInfo(Member) {
         <li id={"project " + item.id}
          key={idx}>
           <span>
-          {item.name} 
+          {item.name}
+          {idx+1}.
           </span>
-          {stackOptions.filter(option => {
-            console.log(userProjectStack);
-            userProjectStack.includes(option.label);
-          }).map((option, index) => (
+          {stackOptions.filter(option => 
+            userProjectStack.includes(option.label)
+          ).map((option, index) => (
             <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
           )}
           <span className={styles.project_span}>
@@ -159,17 +168,19 @@ export default function UserInfo(Member) {
     <div className={styles.certificate_wrapper}>
       {state.certificate.map((item, idx) => {
         return (
-          <li 
+          <li
           className={styles.certificate_list}
           id={"certificate " + item.id}
           key={"certificate" + idx}>
-            {item.name}
+            {idx+1}. {item.name}
           </li>
         );
       })}
     </div>
-      <div className={styles.relatedSite_wrapper}>
+      <div className={styles.user_relatedSite}>
         <label htmlFor='relatedSited'>관련 사이트</label>
+      </div>
+        <div className={styles.relatedSite_wrapper}>
         {state.site.map((item, idx) => {
           return (
             <li 
@@ -177,7 +188,7 @@ export default function UserInfo(Member) {
             id={"relatedSite " + item.id}
             key={"relatedSite" + idx}
             onClick={()=>handleClick(item.name)}>
-              {item.name}
+              {idx+1}. {item.name}
             </li>
           );
         })}

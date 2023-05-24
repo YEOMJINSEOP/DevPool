@@ -46,6 +46,6 @@
 .userBlockWrapper {
   margin-top: 60px;
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   justify-content: space-around;
 }

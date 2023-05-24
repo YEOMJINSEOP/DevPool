@@ -15,19 +15,24 @@
 } */
 
 .userBlockStackFiled {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .user_img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background-color: var(--color-devPool);
     border-radius: 100%;
 }
 
 .mailBtn {
-    margin-left: 10px;
+    margin-left: 60px;
     font-size: 18px;
     font-weight: 700;
     text-align: center;
+}
+
+.user_nickName {
+    margin-top: 25px;
+    margin-left: 32px;
 }

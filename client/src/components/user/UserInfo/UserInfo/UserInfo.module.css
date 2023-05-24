@@ -33,10 +33,6 @@
     justify-content: space-around;
 }
 
-.user_box_middle {
-
-}
-
 .user_img {
     border-radius: 50%;
 }
@@ -130,12 +126,8 @@
     margin: 36px 0 0 0;
 }
 
-.user_project {
-    margin: 36px 0 0 0;
-}
-
-.user_certificate {
-    margin: 24px 0 0 0;
+.user_project, .user_certificate, .user_relatedSite {
+    margin:24px 0 0 0;
 }
 
 .user_stack {
@@ -243,7 +235,7 @@
 
 .certificate_wrapper, .relatedSite_wrapper {
     margin: 20px 0 0 0;
-}
+}project_wrapper
 
 .submitBtn:hover {
     background-color: #a9abaa;
@@ -268,3 +260,32 @@
   margin: 0 0 0 10px;
   font-family: var(--font-family-DoHyeon);
 }
+
+label {
+    font-family: var(--font-family-DoHyeon);
+    font-size: 17px;
+    background-color: #ccc;
+    padding: 8px 16px;
+    border-radius: 17px;
+}
+
+.project_wrapper {
+    margin: 24px 0 0 0;
+}
+
+.certificate_wrapper, .relatedSite_wrapper, .project_wrapper {
+    list-style: none;
+    font-family: var(--font-family-DoHyeon);    
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.stack_item {
+    list-style: none;
+    padding: 6px 0;
+    margin: 12px 0;
+    font-family: var(--font-family-DoHyeon);
+    border: 1px solid #a9abaa;
+    border-radius: 15px;
+    text-align: center;
+}
+

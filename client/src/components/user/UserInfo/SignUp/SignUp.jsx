@@ -49,20 +49,17 @@ export default function SignUp() {
   }
 
   const handleSignUpBtn = async() => {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('nickName', nickName);
+    formData.append('email', email);
+    formData.append('password', pwd);
+    formData.append('image', image); // 이미지 추가
 
-    console.log({
-      name: name,
-      nickName: nickName,
-      email: email,
-      password: pwd,
-      imageUrl: imageURL
-    });
-    await axios.post(`${BASE_URL}/join`, {
-      name: name,
-      nickName: nickName,
-      email: email,
-      password: pwd,
-      imageUrl: imageURL
+    await axios.post(`${BASE_URL}/join`, formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
     })
     .then(req=>console.log(req))
     .then(() => {

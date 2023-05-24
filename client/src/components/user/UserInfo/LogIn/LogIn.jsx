@@ -56,7 +56,7 @@ export default function LogIn() {
       setId(memberId);
       
       // memberId로 DevPool에 등록되어 있나 확인해보고, 없다면 'user/form'으로 이동
-      axios.get(`${BASE_URL}/api/member_pool/2`)
+      axios.get(`${BASE_URL}/api/member_pool/${memberInfo.memberId}`)
       .then((res) => {
         setLoggedIn(true);
         alert('DevPool에 오신 걸 환영합니다.');

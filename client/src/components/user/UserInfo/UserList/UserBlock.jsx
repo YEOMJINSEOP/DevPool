@@ -13,15 +13,15 @@ export default function UserBlock({ user }) {
   }
   
   const userStack = [];
-  user.stack.map((item) => {
+  user.stack.slice(0, 5).map((item) => {
     userStack.push(item.name);
   })
   
   return (
     <div className={styles.userBlockWrapper} onClick={navToUserInfo}>
         <div style={{display: 'flex'}}>
-            <span className={styles.user_img}></span>
-            <h3>
+            <img className={styles.user_img} src={user.imageUrl}/>
+            <h3 className={styles.user_nickName}>
                 {user.nickName}
             </h3>
             <button className={styles.mailBtn}><MailOutlineIcon />쪽지 보내기</button>

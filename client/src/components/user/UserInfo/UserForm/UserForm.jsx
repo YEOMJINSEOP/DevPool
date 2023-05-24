@@ -10,6 +10,7 @@ import TechField from '../../../common/TechField/TechField';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import { getMemberId } from '../LogIn/LogIn';
+import { getMemberInfo } from '../../../../api/api';
 
 export const stackOptions = [
   { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
@@ -35,6 +36,8 @@ export const BASE_URL = process.env.REACT_APP_API_URL;
 //나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
 export default function UserInfo(Member) {
+  // 이름을 받아옴
+  const [userName, setUserName] = useState('');
   // certificate 입력값
   const [certificate, setCertificate] = useState('');
   const [certificateId, setCertificateId] = useState(1);
@@ -72,6 +75,15 @@ export default function UserInfo(Member) {
       interest: trueTechStack
     }))
   }
+
+  // 멤버의 이름 불러옴 
+  useEffect(() => {
+    const memberInfo = getMemberId();
+    console.log(memberInfo.memberId)
+    axios.get(`${BASE_URL}/api/members`).then((res) => {
+      console.log(res);
+    })
+  }, []);
 
   // member interest 설정
     useEffect(() => {
@@ -290,10 +302,6 @@ export default function UserInfo(Member) {
 
   }
 
-  const handleMember = () => {
-    console.log(member);
-  }
-
   const handleProject = (e) => {setProject(e.target.value)};
   const handleProjectStart = (e) => setProjectStart(e.target.value);
   const handleProjectEnd = (e) => setProjectEnd(e.target.value);
@@ -330,7 +338,7 @@ export default function UserInfo(Member) {
       </div>
       <div className={styles.user_box_middle}>
         <p>
-          <div className={styles.inputLabel}>이름: 이영진</div>
+          <div className={styles.inputLabel}>Name : API 호출 안 되는 거 물어보기</div>
         </p>
         <TechFieldContainer>
         <TechField onChange={handleUserInterest}/>
