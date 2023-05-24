@@ -43,8 +43,11 @@ type Team = {
 };
 
 function TeamInfo(){
+  // 영진이와 상의 필요
+  // const [loggedInUser, setLoggedInUser] = useRecoilState(userState);
+  // const LoggedIn = useRecoilValue(isLoggedIn);
 
-  const [loggedInUserId, setLoggedInUserId] = useState<string>('');
+  const [logginedUserId, setLoggedInUserId] = useState<string>('');
   const navigate = useNavigate();
   const handleDeleteTeam = () => {
     axios.delete(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`);
@@ -53,7 +56,8 @@ function TeamInfo(){
 
   const params = useParams();
   useEffect(() => {
-    setLoggedInUserId(getMemberId().memberId);
+
+    console.log(getMemberId().memberId);
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
     axios.get(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`).then(
       (res) => {
@@ -64,11 +68,7 @@ function TeamInfo(){
       .catch(
         console.error
       )
-  }, []);
-
-  useEffect(() => {
-    console.log(loggedInUserId);
-  }, [loggedInUserId])
+  }, [])
 
   const [team, setTeam] = useState<Team>({
     teamId: 0,
@@ -134,7 +134,7 @@ function TeamInfo(){
         <div className={`${styles.container} ${styles.button}`}>
           <button className={styles.joinBtn} type="button">팀 참여하기</button>
           {
-            loggedInUserId && loggedInUserId.toString() === team.hostMember.memberId.toString() && 
+            // LoggedIn && loggedInUser.id === team.hostMember.memberId.toString() && 
             <button className={styles.removeBtn} onClick={handleDeleteTeam}>팀 삭제하기</button>
           }
         </div>

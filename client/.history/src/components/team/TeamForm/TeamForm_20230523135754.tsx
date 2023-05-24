@@ -94,13 +94,13 @@ function TeamForm(){
   }
   const [loggedInUserId, setLoggedInUserId] = useState<string>('');
   useEffect(() => {
-    setLoggedInUserId(getMemberId().memberId);
+    setLoggedInUserId(getMemberId().memberId)
   },[])
 
 
   const handleSubmit = (): void => {
     const teamForSubmit = {
-      hostMemberId: loggedInUserId,
+      hostMemberId: 1,
       name: team.name,
       category: team.category,
       recruitCount: team.recruitCount,

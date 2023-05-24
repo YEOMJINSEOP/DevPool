@@ -64,11 +64,7 @@ function TeamInfo(){
       .catch(
         console.error
       )
-  }, []);
-
-  useEffect(() => {
-    console.log(loggedInUserId);
-  }, [loggedInUserId])
+  }, [])
 
   const [team, setTeam] = useState<Team>({
     teamId: 0,
@@ -134,7 +130,7 @@ function TeamInfo(){
         <div className={`${styles.container} ${styles.button}`}>
           <button className={styles.joinBtn} type="button">팀 참여하기</button>
           {
-            loggedInUserId && loggedInUserId.toString() === team.hostMember.memberId.toString() && 
+            loggedInUserId && loggedInUserId === team.hostMember.memberId.toString() && 
             <button className={styles.removeBtn} onClick={handleDeleteTeam}>팀 삭제하기</button>
           }
         </div>
