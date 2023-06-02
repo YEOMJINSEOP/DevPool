@@ -29,7 +29,8 @@ li {
   border: 2px solid var(--color-devPool);
   border-radius: 10px;
   width: 70%;
-  height: 42vh;
+  height: 40vh;
+  padding: 10px;
   overflow: auto;
 }
 

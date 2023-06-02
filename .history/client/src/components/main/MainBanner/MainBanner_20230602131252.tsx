@@ -38,18 +38,17 @@ function MainBanner() {
         </div>
       </div> */}
       <div className={styles.recruitContainer}>
-        <div className={styles.title}>👨🏻‍💻 최신 채용 공고 👨🏻‍💻</div>
         <ul className={styles.recruitInfoList}>
           {recruitInfoList.map((recruitInfo) => (
-            <li className={styles.recruitInfoBlock}>
-              <p className={styles.recruitTitle}>{recruitInfo.company}</p>
-              <p className={styles.recruitContent}>{recruitInfo.data}</p>
+            <li>
+              <p>{recruitInfo.company}</p>
+              <p>{recruitInfo.data}</p>
             </li>
           ))}
         </ul>
       </div>
       <div className={styles.rankingContainer}>
-
+            
       </div>
     </div>
   );

@@ -25,12 +25,8 @@ function MainBanner() {
       .catch(console.error)
   },[])
 
-  useEffect(() => {
-    console.log(recruitInfoList)
-  }, [recruitInfoList]);
-
   return (
-    <div className={styles.mainContainer}>
+    <>
       {/* <div className={styles.main}>
         <div className={styles.bannerContainer}>
           <div className={styles.bannerSlogan}>Find Your Teammate in Univ.</div>
@@ -38,20 +34,9 @@ function MainBanner() {
         </div>
       </div> */}
       <div className={styles.recruitContainer}>
-        <div className={styles.title}>👨🏻‍💻 최신 채용 공고 👨🏻‍💻</div>
-        <ul className={styles.recruitInfoList}>
-          {recruitInfoList.map((recruitInfo) => (
-            <li className={styles.recruitInfoBlock}>
-              <p className={styles.recruitTitle}>{recruitInfo.company}</p>
-              <p className={styles.recruitContent}>{recruitInfo.data}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={styles.rankingContainer}>
 
       </div>
-    </div>
+    </>
   );
 }
 

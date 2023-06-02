@@ -38,7 +38,6 @@ function MainBanner() {
         </div>
       </div> */}
       <div className={styles.recruitContainer}>
-        <div className={styles.title}>👨🏻‍💻 최신 채용 공고 👨🏻‍💻</div>
         <ul className={styles.recruitInfoList}>
           {recruitInfoList.map((recruitInfo) => (
             <li className={styles.recruitInfoBlock}>
