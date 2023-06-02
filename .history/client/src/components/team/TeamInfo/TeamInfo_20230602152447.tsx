@@ -138,16 +138,7 @@ function TeamInfo(){
               teamId: team.teamId
             }
             console.log('🤴🏻', participateDate);
-            axios.post(`http://13.124.112.157/api/member-team/`, {},
-             {
-              params: {
-                memberId: loggedInUserId,
-                teamId: team.teamId
-              }
-             }
-            )
-             .then(console.log)
-             .catch(console.error)
+            axios.post(`${process.env.REACT_APP_API_URL}/api/team/`, participateDate);
 
           }}>팀 참여하기</button>
           {

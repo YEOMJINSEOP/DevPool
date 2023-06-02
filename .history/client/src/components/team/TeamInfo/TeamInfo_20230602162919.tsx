@@ -138,7 +138,7 @@ function TeamInfo(){
               teamId: team.teamId
             }
             console.log('🤴🏻', participateDate);
-            axios.post(`http://13.124.112.157/api/member-team/`, {},
+            axios.post(`http://13.124.112.157/api/member-team/`, 
              {
               params: {
                 memberId: loggedInUserId,

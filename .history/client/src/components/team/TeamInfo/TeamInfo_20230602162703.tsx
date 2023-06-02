@@ -134,16 +134,15 @@ function TeamInfo(){
         <div className={`${styles.container} ${styles.button}`}>
           <button className={styles.joinBtn} type="button" onClick={() => {
             const participateDate = {
-              memberId: loggedInUserId,
-              teamId: team.teamId
+              // memberId: loggedInUserId,
+              // teamId: team.teamId
+              memberId: 2,
+              teamId: 1
             }
             console.log('🤴🏻', participateDate);
-            axios.post(`http://13.124.112.157/api/member-team/`, {},
+            axios.post(`${process.env.REACT_APP_API_URL}/api/member-team/`, 
              {
-              params: {
-                memberId: loggedInUserId,
-                teamId: team.teamId
-              }
+              params: participateDate
              }
             )
              .then(console.log)

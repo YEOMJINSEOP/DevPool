@@ -133,22 +133,10 @@ function TeamInfo(){
         </div>
         <div className={`${styles.container} ${styles.button}`}>
           <button className={styles.joinBtn} type="button" onClick={() => {
-            const participateDate = {
+            axios.post(`${process.env.REACT_APP_API_URL}/api/team/`, {
               memberId: loggedInUserId,
               teamId: team.teamId
-            }
-            console.log('🤴🏻', participateDate);
-            axios.post(`http://13.124.112.157/api/member-team/`, {},
-             {
-              params: {
-                memberId: loggedInUserId,
-                teamId: team.teamId
-              }
-             }
-            )
-             .then(console.log)
-             .catch(console.error)
-
+            })
           }}>팀 참여하기</button>
           {
             loggedInUserId && loggedInUserId.toString() === team.hostMember.memberId.toString() && 
