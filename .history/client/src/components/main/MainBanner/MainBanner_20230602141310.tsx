@@ -44,12 +44,12 @@ function MainBanner() {
 
   return (
     <div className={styles.mainContainer}>
-      {/* <div className={styles.main}>
+      <div className={styles.main}>
         <div className={styles.bannerContainer}>
           <div className={styles.bannerSlogan}>Find Your Teammate in Univ.</div>
           <button className={styles.bannerSignUp} onClick={navigateToSignUp}>Sign Up</button>    
         </div>
-      </div> */}
+      </div>
       <div className={styles.recruitContainer}>
         <div className={styles.title}>👨🏻‍💻 최신 채용 공고 👨🏻‍💻</div>
         <ul className={styles.recruitInfoList}>

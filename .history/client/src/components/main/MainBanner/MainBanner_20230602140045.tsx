@@ -26,9 +26,9 @@ function MainBanner() {
   const [recruitInfoList, setRecruitInfoList] = useState<RecruitInfo[]>([]);
   const [baekJoonRank, setBaekJoonRank] = useState<BaekJoonInfo[]>([]);
   useEffect(() => {
-    axios.get('http://15.164.82.94/recruit/info')
-      .then((res) => setRecruitInfoList(res.data))
-      .catch(console.error)
+    // axios.get('http://15.164.82.94/recruit/info')
+    //   .then((res) => setRecruitInfoList(res.data))
+    //   .catch(console.error)
 
     axios.get('http://localhost:80/rank')
       .then((res) => setBaekJoonRank(res.data))
@@ -63,14 +63,11 @@ function MainBanner() {
       </div>
       <div className={styles.rankingContainer}>
         <div className={styles.title}>🔥 백준 알고리즘 랭킹 🔥</div>
-          <ul className={styles.rankingList}>
-            {baekJoonRank.map((info, idx) => (
-              <li className={styles.rankingBlock}>
-                <p className={styles.crown}>{idx === 0 ? '👑' : ' '}</p>
-                <p className={styles.rankingId}>{info.userId}</p>
-                <div className={styles.rankingSolvedCount}>
-                  <span>{info.solvedCount}</span>
-                </div>
+          <ul className={styles.recruitInfoList}>
+            {recruitInfoList.map((recruitInfo) => (
+              <li className={styles.recruitInfoBlock}>
+                <p className={styles.recruitTitle}>{recruitInfo.company}</p>
+                <p className={styles.recruitContent}>{recruitInfo.data}</p>
               </li>
             ))}
           </ul>

@@ -9,7 +9,6 @@ li {
   font-size: 20px;
   margin-bottom: 20px;
 }
-
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -88,9 +87,10 @@ li {
 }
 .crown {
   position: absolute;
-  left: 40px;
+  left: 20px;
   font-size: 40px;
   line-height: 36px;
+  background-color: red;
 }
 
 

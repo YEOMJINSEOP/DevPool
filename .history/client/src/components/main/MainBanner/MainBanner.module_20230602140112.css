@@ -9,7 +9,6 @@ li {
   font-size: 20px;
   margin-bottom: 20px;
 }
-
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -37,7 +36,7 @@ li {
   align-items: center;
 }
 
-.recruitInfoList, .rankingList {
+.recruitInfoList {
   border: 2px solid var(--color-devPool);
   border-radius: 10px;
   width: 70%;
@@ -52,7 +51,6 @@ li {
   border: 1px solid lightgray;
   border-radius: 10px;
 }
-
 .recruitTitle {
   font-size: 14px;
   font-family:Arial, Helvetica, sans-serif;
@@ -62,37 +60,6 @@ li {
   font-size: 15px;
   padding-top: 4px;
 }
-
-
-.rankingBlock {
-  position: relative;
-  height: 8vh;
-  margin: 1.8vh;
-  padding: 10px;
-  border: 1px solid lightgray;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-around;
-}
-
-.rankingSolvedCount {
-  display: flex;
-  justify-content: space-around;
-  width: 200px;
-  font-family: var(--font-family-DoHyeon);
-}
-
-.rankingId {
-  font-size: 17px;
-  font-family: var(--font-family-DoHyeon);
-}
-.crown {
-  position: absolute;
-  left: 40px;
-  font-size: 40px;
-  line-height: 36px;
-}
-
 
 .main {
   width: 100%;

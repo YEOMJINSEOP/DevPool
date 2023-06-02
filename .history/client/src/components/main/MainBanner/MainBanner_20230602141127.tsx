@@ -26,9 +26,9 @@ function MainBanner() {
   const [recruitInfoList, setRecruitInfoList] = useState<RecruitInfo[]>([]);
   const [baekJoonRank, setBaekJoonRank] = useState<BaekJoonInfo[]>([]);
   useEffect(() => {
-    axios.get('http://15.164.82.94/recruit/info')
-      .then((res) => setRecruitInfoList(res.data))
-      .catch(console.error)
+    // axios.get('http://15.164.82.94/recruit/info')
+    //   .then((res) => setRecruitInfoList(res.data))
+    //   .catch(console.error)
 
     axios.get('http://localhost:80/rank')
       .then((res) => setBaekJoonRank(res.data))

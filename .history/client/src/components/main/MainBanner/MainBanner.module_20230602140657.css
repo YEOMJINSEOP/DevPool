@@ -9,7 +9,6 @@ li {
   font-size: 20px;
   margin-bottom: 20px;
 }
-
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -65,7 +64,6 @@ li {
 
 
 .rankingBlock {
-  position: relative;
   height: 8vh;
   margin: 1.8vh;
   padding: 10px;
@@ -76,21 +74,13 @@ li {
 }
 
 .rankingSolvedCount {
-  display: flex;
-  justify-content: space-around;
-  width: 200px;
-  font-family: var(--font-family-DoHyeon);
+  background-color: red;
+  display: flex
 }
 
 .rankingId {
   font-size: 17px;
   font-family: var(--font-family-DoHyeon);
-}
-.crown {
-  position: absolute;
-  left: 40px;
-  font-size: 40px;
-  line-height: 36px;
 }
 
 
