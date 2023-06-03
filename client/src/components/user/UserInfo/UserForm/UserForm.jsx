@@ -37,7 +37,7 @@ export const BASE_URL = process.env.REACT_APP_API_URL;
 
 export default function UserInfo(Member) {
   // 이름을 받아옴
-  const [userName, setUserName] = useState('');
+  const [userData, setUserData] = useState();
   // certificate 입력값
   const [certificate, setCertificate] = useState('');
   const [certificateId, setCertificateId] = useState(1);
@@ -80,8 +80,9 @@ export default function UserInfo(Member) {
   useEffect(() => {
     const memberInfo = getMemberId();
     console.log(memberInfo.memberId)
-    axios.get(`${BASE_URL}/api/members`).then((res) => {
-      console.log(res);
+    axios.get(`${BASE_URL}/api/member/${memberInfo.memberId}`).then((res) => {
+      setUserData(res.data.data);
+      console.log(res.data.data);
     })
   }, []);
 
@@ -268,9 +269,9 @@ export default function UserInfo(Member) {
       })
       projectForSubmit.push({
         name: item.content,
-        startDate: '2023-05-15',
+        startDate: projectStart,
         stack: projcectStackForSubmit,
-        endDate: '2023-05-15',
+        endDate: projectEnd,
         url: "qwer"
       })
       projcectStackForSubmit = [];
@@ -298,7 +299,7 @@ export default function UserInfo(Member) {
       project: projectForSubmit,
       certificate: certificateForSubmit,
       site: relatedSiteForSubmit
-    }).then((res) => console.log(res));
+    }).then((res) => console.log(res)).catch((err) => console.log(err));
 
   }
 
@@ -329,16 +330,16 @@ export default function UserInfo(Member) {
     <div className={styles.user_box}>
       {/* 유저 박스 왼쪽(이미지) */}
       <div className={styles.userBox_left}>
-        <img 
+        {userData && <img 
         className={styles.user_img}
         alt='User Img' 
         style={{"width":"150px"}}
-        src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
+        src={userData.imageUrl}/>}
         {/* <button className={styles.profileBtn}>프로필 변경</button> */}
       </div>
       <div className={styles.user_box_middle}>
         <p>
-          <div className={styles.inputLabel}>Name : API 호출 안 되는 거 물어보기</div>
+          {userData && <div className={styles.inputLabel}>Name : {userData.nickName}</div>}
         </p>
         <TechFieldContainer>
         <TechField onChange={handleUserInterest}/>

@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import styles from './SignUp.module.css';
 import { useNavigate } from 'react-router-dom';
+import userBasicImg from '../../../../image/userBasic.png';
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -15,6 +16,8 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwdCheck, setpwdCheck] = useState('');
+  const [bjId, setBjId] = useState('');
+  const [isBjIdExist, setIsBjIdExist] = useState(false);
   const [validEmail, setValidEmail] = useState(true);
   const [ableBtn, setAbleBtn] = useState(true);
   const [IsSamePwd, setIsSamePwd] = useState(false);
@@ -48,14 +51,42 @@ export default function SignUp() {
     reader.readAsDataURL(file);
   }
 
+  // 백준 아이디 존재하는 지 확인
+  const checkBjId = async() => {
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+    
+    axios.get(`https://solved.ac/api/v3/search/user?query=${bjId}`, { headers })
+      .then(response => {
+        // API 호출 성공 시 실행할 코드
+        const { data } = response;
+        console.log(data);
+        setIsBjIdExist(true);
+      })
+      .catch(error => {
+        // API 호출 실패 시 실행할 코드
+        console.error(error);
+        alert('아이디가 존재하지 않습니다!');
+      });
+  }
+
   const handleSignUpBtn = async() => {
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('nickName', nickName);
     formData.append('email', email);
     formData.append('password', pwd);
-    formData.append('image', image); // 이미지 추가
-
+    if(image == null) {
+      const imgFile = new File([userBasicImg], 'userBasicImg.png', { type: 'image/png' });
+      formData.append('image', imgFile);
+    }
+    else {
+      formData.append('image', image); // 이미지 추가
+      console.log(typeof image);
+    }
+    
     await axios.post(`${BASE_URL}/join`, formData, {
       headers: {
         'Content-type': 'multipart/form-data',
@@ -70,7 +101,8 @@ export default function SignUp() {
       setPwd('');
       setpwdCheck('');
       navigate('/login');
-    });
+    })
+    .catch((err) => alert(err));
   }
 
 return (
@@ -117,6 +149,24 @@ return (
       </div>
     </div>
     <div className={styles.pwdWrap}>
+      <div className={styles.bjIdWrap}>
+      <Input
+      className={styles.inputs}    
+      color="primary"
+      disabled={isBjIdExist}
+      placeholder="백준 아이디"
+      size="lg"
+      variant="outlined"
+      value={bjId}
+      onChange={(e)=>setBjId(e.target.value)}
+      type='text'
+      />
+      <button 
+      className={styles.bjIdCheck}
+      onClick={checkBjId}>
+        아이디 확인
+      </button>
+      </div>
       <Input
       className={styles.inputs}    
       color="primary"

@@ -56,16 +56,6 @@ export default function UserInfo(Member) {
     relatedSite: [],
   });
 
-  const handleUserInterest = (selectedTechStack) => {
-    const trueTechStack =  Object.entries(selectedTechStack).
-      filter(([key, value]) => value === true)
-      .map(([key]) => key); // trueTechStack은 선택되어 true값을 가지는 techField의 배열을 반환합니다. 이 배열을 사용하셔서 setState에 사용하시면 됩니다.
-    setMember((prevUser) => ({
-      ...prevUser,
-      interest: trueTechStack
-    }))
-  }
-
   // member interest 설정
     useEffect(() => {
       if (selectedInterest == '선택하기') {
@@ -80,14 +70,6 @@ export default function UserInfo(Member) {
       }));
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
-
-  const handleMember = () => {
-    console.log(member);
-  }
-
-  const handleSelectedStack = (event, values) => {
-    setSelectedStack(values);
-  };
 
   function handleClick(url) {
   if(url.includes('https://')) window.open(`${url}`);
