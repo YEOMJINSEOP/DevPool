@@ -67,6 +67,9 @@ function TeamForm(){
     }));
   }
 
+  useEffect(() => {
+    console.log('🔫', team.category)
+  }, [team])
 
   const handleTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeam((prevTeam) => ({

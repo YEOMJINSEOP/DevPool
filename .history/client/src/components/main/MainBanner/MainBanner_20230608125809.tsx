@@ -30,7 +30,7 @@ function MainBanner() {
       .then((res) => setRecruitInfoList(res.data))
       .catch(console.error)
 
-    axios.get('http://52.79.36.138/rank')
+    axios.get('http:/52.79.36.138/rank')
       .then((res) => setBaekJoonRank(res.data))
   },[])
 
