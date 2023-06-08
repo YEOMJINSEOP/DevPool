@@ -63,10 +63,9 @@ function TeamForm(){
     console.log('🔥', event.target.value);
     setTeam((prevTeam) => ({
       ...prevTeam,
-      category: {name: event.target.value},
+      ['category']: {name: event.target.value},
     }));
   }
-
 
   const handleTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeam((prevTeam) => ({
