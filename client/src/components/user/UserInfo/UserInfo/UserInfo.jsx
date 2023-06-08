@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import BasicModal from '../BasicModal';
 import styles from './UserInfo.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
-import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
-import StackTags from '../StackTags';
 import StackField from '../StackField';
-import TechField from '../../../common/TechField/TechField';
 import styled from '@emotion/styled';
-import axios from 'axios';
-import { getMemberId } from '../LogIn/LogIn';
 import { useLocation, useParams } from 'react-router-dom';
 
 export const stackOptions = [
@@ -128,8 +122,8 @@ export default function UserInfo(Member) {
         <li id={"project " + item.id}
          key={idx}>
           <span>
+          {idx+1}. 
           {item.name}
-          {idx+1}.
           </span>
           {stackOptions.filter(option => 
             userProjectStack.includes(option.label)

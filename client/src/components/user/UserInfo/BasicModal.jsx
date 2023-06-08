@@ -21,7 +21,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({project, handleProject, projectStack, handleProjectStack, projectStart, handleProjectStart, projectEnd, handleProjectEnd, handleAddBtn}) {
+export default function BasicModal({project, handleProject, projectStack, handleProjectStack, projectStart, handleProjectStart, projectEnd, handleProjectEnd, handleAddBtn, projectUrl, handleProjectUrl}) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -63,6 +63,14 @@ export default function BasicModal({project, handleProject, projectStack, handle
           value={projectEnd}
           onChange={handleProjectEnd}
           type='month'/>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            프로젝트 URL
+          </Typography>
+          <input
+          className={styles.project_nameInput}
+          value={projectUrl}
+          onChange={handleProjectUrl}
+          type='text'/>
           <p></p><button id='project' onClick={(e)=>{handleAddBtn(e); handleClose();}} className={styles.project_submitBtn}>제출하기</button>
           <p></p><button onClick={handleClose} className={styles.project_closeBtn}>창닫기</button>
         </Box>

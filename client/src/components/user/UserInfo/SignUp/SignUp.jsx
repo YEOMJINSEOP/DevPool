@@ -31,8 +31,8 @@ export default function SignUp() {
   }, [email]);
 
   useEffect(() => {
-    setAbleBtn(!((name != '' && email != '' && pwd != '' && pwdCheck != '') && !validEmail && IsSamePwd));
-  }, [name, email, IsSamePwd]);
+    setAbleBtn(!((name != '' && email != '' && pwd != '' && pwdCheck != '') && !validEmail && IsSamePwd && isBjIdExist));
+  }, [name, email, IsSamePwd, isBjIdExist]);
 
   useEffect(() => {
     pwd === pwdCheck && pwd != '' && pwdCheck != '' ? setIsSamePwd(true) : setIsSamePwd(false);
@@ -53,16 +53,24 @@ export default function SignUp() {
 
   // 백준 아이디 존재하는 지 확인
   const checkBjId = async() => {
-    const headers = {
-      'Content-Type': 'application/json'
+    const content = {
+      params: {
+        userId: bjId
+      }
     };
     
-    axios.get(`https://solved.ac/api/v3/search/user?query=${bjId}`, { headers })
+    axios.get(`http://52.79.36.138/id-check`, content)
       .then(response => {
         // API 호출 성공 시 실행할 코드
         const { data } = response;
-        console.log(data);
-        setIsBjIdExist(true);
+        console.log(data.idCheck);
+        if(data.idCheck) {
+
+          setIsBjIdExist(true);
+        }
+        else {
+          alert('존재하지 않는 아이디 입니다.')
+        }
       })
       .catch(error => {
         // API 호출 실패 시 실행할 코드
@@ -74,6 +82,7 @@ export default function SignUp() {
   const handleSignUpBtn = async() => {
 
     const formData = new FormData();
+    formData.append('BJId', bjId);
     formData.append('name', name);
     formData.append('nickName', nickName);
     formData.append('email', email);

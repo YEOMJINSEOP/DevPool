@@ -52,6 +52,7 @@ export default function UserInfo(Member) {
   const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState([]);
   const [ProjectStackIcons, setProjectStackIcons] = useState([]);
+  const [projectUrl, setProjectUrl] = useState('');
   // 관련 사이트
   const [relatedSite, setRelatedSite] = useState([]);
   const [relatedSiteId, setRelatedSiteId] = useState(1);
@@ -176,7 +177,8 @@ export default function UserInfo(Member) {
           content: project,
           start: projectStart,
           end: projectEnd,
-          stack: newProjectStack
+          stack: newProjectStack,
+          url: projectUrl
         });
         return {
           ...prev,
@@ -188,6 +190,7 @@ export default function UserInfo(Member) {
       setProjectStart('');
       setProjectEnd('');
       setProjectId(count => count + 1);
+      setProjectUrl('');
     }
   }
 
@@ -269,10 +272,10 @@ export default function UserInfo(Member) {
       })
       projectForSubmit.push({
         name: item.content,
-        startDate: projectStart,
+        startDate: item.start,
         stack: projcectStackForSubmit,
-        endDate: projectEnd,
-        url: "qwer"
+        endDate: item.end,
+        url: item.url 
       })
       projcectStackForSubmit = [];
     })
@@ -292,20 +295,26 @@ export default function UserInfo(Member) {
       site: relatedSiteForSubmit
     });
 
-    axios.post(`${BASE_URL}/api/member_pool`, {
+    axios.post(`${BASE_URL}/api/member-pool`, {
       memberId: memberId,
       techField: interestForSubmit,
       stack: stackForSubmit,
       project: projectForSubmit,
       certificate: certificateForSubmit,
       site: relatedSiteForSubmit
-    }).then((res) => console.log(res)).catch((err) => console.log(err));
+    }).then((res) => {
+      console.log(res);
+      if(res.data.status == 201) {
+        alert('Devpool 등록이 완료 되었습니다!')
+      }
+    }).catch((err) => console.log(err));
 
   }
 
   const handleProject = (e) => {setProject(e.target.value)};
   const handleProjectStart = (e) => setProjectStart(e.target.value);
   const handleProjectEnd = (e) => setProjectEnd(e.target.value);
+  const handleProjectUrl = (e) => {setProjectUrl(e.target.value)};
 
   const handleSelectedStack = (event, values) => {
     setSelectedStack(values);
@@ -373,11 +382,15 @@ export default function UserInfo(Member) {
       handleProjectStart={handleProjectStart}
       projectEnd={projectEnd}
       handleProjectEnd={handleProjectEnd}
-      handleAddBtn={handleAddBtn}/>
+      handleAddBtn={handleAddBtn}
+      projectUrl={projectUrl}
+      handleProjectUrl={handleProjectUrl}
+      />
       {member.project.map((item, idx) => {
         return (
         <li id={"project " + item.id}
-         key={idx}>
+         key={idx}
+         >
           <span>
           {item.content} 
           </span>
@@ -387,6 +400,7 @@ export default function UserInfo(Member) {
           <span className={styles.project_span}>
           {item.start} ~ {item.end}
           </span>
+          <div>링크 : {item.url}</div>
           <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button>
         </li>
         )
