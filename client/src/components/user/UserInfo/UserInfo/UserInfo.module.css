@@ -14,7 +14,7 @@
     align-items: center;
     margin: auto;
     position: relative;
-    top: 170px;
+    top: 80px;
 }
 
 .user_wrapper {
@@ -108,27 +108,6 @@
 
 .interest_wrapper {
     margin: 32px 0 0 0;
-}
-
-.message_btn {
-    padding: 12px 20px;
-    font-family: var(--font-family-DoHyeon);
-    font-size: 16px;
-    color: #FFFFFF;
-    background-color: #FFA500;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.message_btn:hover {
-    background-color: #F25022;
-}
-
-.message_btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px #F25022(0, 123, 255, 0.5);
 }
 
 .user_stack_wrapper {

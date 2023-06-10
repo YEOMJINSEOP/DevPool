@@ -12,23 +12,23 @@ export default function Chat() {
   useEffect(() => {
     const memberId = getMemberId().memberId;
 
-    getChatLog();
-    getUserNickName();
+    getChatLog(memberId);
+    getUserNickName(memberId);
   }, []);
 
   useEffect(() => {
     getChatLog();
   }, [newMessage]);
 
-  const getChatLog = async () => {
-    await axios.get(`${BASE_URL}/api/latter/1`).then((res) => {
+  const getChatLog = async (memberId) => {
+    await axios.get(`${BASE_URL}/api/latter/${memberId}`).then((res) => {
       console.log(res.data.dataList);
       setChatLog([...res.data.dataList]);
     });
   };
 
-  const getUserNickName = () => {
-    axios.get(`${BASE_URL}/api/member/1`).then((res) => {
+  const getUserNickName = (memberId) => {
+    axios.get(`${BASE_URL}/api/member/${memberId}`).then((res) => {
       console.log(res.data);
       setMemberNickName(res.data.data.nickName);
       console.log(res.data.data.nickName);
@@ -55,7 +55,6 @@ export default function Chat() {
     try {
       await axios.post(`${BASE_URL}/api/latter`, message).then((res) => {
         setNewMessage('');
-        console.log('씨발');
       });
       // 메시지 전송 후 필요한 작업 수행
       // 예: 메시지 목록 갱신
@@ -94,20 +93,33 @@ export default function Chat() {
             <h2 style={{ margin: '20px 0 40px 0' }}>
               {selectedChat[0].senderNickName === memberNickName
                 ? selectedChat[0].receiverNickName
-                : selectedChat[0].senderNickName}님과 한 채팅
+                : selectedChat[0].senderNickName}님과의 채팅
             </h2>
-            {selectedChat.map((chat, idx) => (
-              <div
-                key={idx}
-                className={
-                  chat.senderNickName === memberNickName
-                    ? styles.myChat
-                    : styles.otherChat
-                }
-              >
-                {chat.content}
-              </div>
-            ))}
+            {selectedChat.map((chat, idx) => {
+              const timeString = chat.createTime;
+              const time = timeString.substring(11, 16);
+              return (
+                <div>
+                  <div
+                    key={idx}
+                    className={
+                      chat.senderNickName === memberNickName
+                        ? styles.myChat
+                        : styles.otherChat
+                    }
+                  >
+                    {chat.content}
+                  </div>
+                  <div className={
+                      chat.senderNickName === memberNickName
+                        ? styles.myTime
+                        : styles.otherTime
+                    }>
+                    {time}
+                  </div>
+                </div>
+              )
+            })}
           </div>
           <div className={styles.inputWrapper}>
             <input

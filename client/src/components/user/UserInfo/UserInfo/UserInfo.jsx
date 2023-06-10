@@ -5,6 +5,7 @@ import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, fa
 import StackField from '../StackField';
 import styled from '@emotion/styled';
 import { useLocation, useParams } from 'react-router-dom';
+import MessageModal from './MessageModal';
 
 export const stackOptions = [
   { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
@@ -101,7 +102,7 @@ export default function UserInfo(Member) {
         </div>
       </div>
       <div className='user_box_right'>
-        <button className={styles.message_btn}>쪽지 보내기</button>
+        <MessageModal receiverId={userId}/>
       </div>
     </div>
     <div className={styles.user_stack_wrapper}>
