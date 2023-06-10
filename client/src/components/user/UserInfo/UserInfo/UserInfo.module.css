@@ -14,7 +14,7 @@
     align-items: center;
     margin: auto;
     position: relative;
-    top: 200px;
+    top: 170px;
 }
 
 .user_wrapper {
@@ -43,6 +43,13 @@
     font-family: var(--font-family-DoHyeon);
     font-size: 20px;
     padding-left: 70px;
+}
+
+.nameLabel {
+    font-family: var(--font-family-DoHyeon);
+    font-size: 20px;
+    padding-left: 10px;
+    margin:0 0 36px 0;
 }
 
 .message_img {
@@ -128,7 +135,7 @@
     margin: 36px 0 0 0;
 }
 
-.user_project, .user_certificate, .user_relatedSite {
+.user_certificate, .user_relatedSite {
     margin:24px 0 0 0;
 }
 

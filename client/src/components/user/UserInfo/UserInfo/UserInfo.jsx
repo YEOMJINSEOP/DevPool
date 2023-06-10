@@ -85,7 +85,9 @@ export default function UserInfo(Member) {
       </div>
       <div className={styles.user_box_middle}>
         <p>
-          <div className={styles.inputLabel}>이름: {state.nickName}</div>
+          <div className={styles.nameLabel}>
+            <label>이름</label>
+          {state.nickName}</div>
         </p>
         <div className={styles.user_project}>
           <label>관심 분야</label>

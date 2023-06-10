@@ -38,6 +38,7 @@ function UserList(){
       useEffect(()=> {
         axios.get(`${BASE_URL}/api/member-pools`).then((res)=>{
           setMember(res.data.dataList);
+          setFilteredMember(res.data.dataList);
           console.log(res.data.dataList);
         })
         .catch((err) => console.log(err));

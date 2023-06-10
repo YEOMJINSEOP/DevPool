@@ -1,3 +1,103 @@
 .myChat {
     text-align: right;
 }
+
+.chat {
+    width: 1000px;
+    margin: 0 400px 0 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chatLog {
+    display: flex;
+    flex-direction: column;
+}
+
+.chattings {
+    margin-left: 200px;
+    width: 600px;
+    margin-bottom: 100px;
+}
+
+.chatwrapper {
+    cursor: pointer;    
+}
+
+.chatHeader {
+    /* chat header에 대한 스타일 */
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+  }
+  
+  .nickname {
+    /* nickname에 대한 스타일 */
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .chatContent {
+    /* 채팅 내용에 대한 스타일 */
+    padding: 10px;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .myChat {
+    /* 나의 채팅에 대한 스타일 */
+    text-align: right;
+    background-color: #F25022;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .otherChat {
+    /* 상대방의 채팅에 대한 스타일 */
+    text-align: left;
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .inputContainer {
+    /* input과 button을 감싸는 영역에 대한 스타일 */
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .inputWrapper {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    padding: 0 700px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .inputWrapper input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    height: 40px;
+  }
+  
+  .inputWrapper button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
