@@ -15,6 +15,7 @@ import SignUp from './components/user/UserInfo/SignUp/SignUp';
 import LogIn from './components/user/UserInfo/LogIn/LogIn';
 import UserList from './components/user/UserInfo/UserList/UserList';
 import Chat from './components/user/UserInfo/Chat';
+import TeamMaker from './components/team/TeamMaker/TeamMaker';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
@@ -33,7 +34,8 @@ const router = createBrowserRouter([
       {path: '/user/list', element: <UserList />},
       {path: '/team/create', element: <TeamForm />},
       {path: '/team/detail/:teamId', element: <TeamInfo />},
-      {path: '/team/list', element: <TeamList />}
+      {path: '/team/list', element: <TeamList />},
+      {path: '/teamMaker', element: <TeamMaker />}
     ]
   }
 ])
