@@ -41,6 +41,6 @@
   display: grid;
   grid-template-columns: repeat(4, auto);
   column-gap: 20px;
-  row-gap: 40px;
+  background-color: rebeccapurple;
   place-items: center;
 }
