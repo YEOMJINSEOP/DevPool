@@ -43,11 +43,8 @@ type Team = {
 };
 
 function TeamInfo(){
-  // 영진이와 상의 필요
-  // const [loggedInUser, setLoggedInUser] = useRecoilState(userState);
-  // const LoggedIn = useRecoilValue(isLoggedIn);
 
-  const [logginedUserId, setLoggedInUserId] = useState<string>('');
+  const [loggedInUserId, setLoggedInUserId] = useState<string>('');
   const navigate = useNavigate();
   const handleDeleteTeam = () => {
     axios.delete(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`);
@@ -56,8 +53,7 @@ function TeamInfo(){
 
   const params = useParams();
   useEffect(() => {
-
-    console.log(getMemberId().memberId);
+    setLoggedInUserId(getMemberId().memberId);
     // ✅ teamId에 해당하는 team 데이터를 받아오는 get API 필요
     axios.get(`${process.env.REACT_APP_API_URL}/api/team/${params.teamId}`).then(
       (res) => {
@@ -68,7 +64,11 @@ function TeamInfo(){
       .catch(
         console.error
       )
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    console.log('🔥', loggedInUserId);
+  }, [loggedInUserId])
 
   const [team, setTeam] = useState<Team>({
     teamId: 0,
@@ -132,9 +132,26 @@ function TeamInfo(){
             <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} value={team.content} readOnly></textarea>
         </div>
         <div className={`${styles.container} ${styles.button}`}>
-          <button className={styles.joinBtn} type="button">팀 참여하기</button>
+          <button className={styles.joinBtn} type="button" onClick={() => {
+            const participateDate = {
+              memberId: loggedInUserId,
+              teamId: team.teamId
+            }
+            console.log('🤴🏻', participateDate);
+            axios.post(`http://13.124.112.157/api/member-team/`, {},
+             {
+              params: {
+                memberId: loggedInUserId,
+                teamId: team.teamId
+              }
+             }
+            )
+             .then(console.log)
+             .catch(console.error)
+
+          }}>팀 참여하기</button>
           {
-            // LoggedIn && loggedInUser.id === team.hostMember.memberId.toString() && 
+            loggedInUserId && loggedInUserId.toString() === team.hostMember.memberId.toString() && 
             <button className={styles.removeBtn} onClick={handleDeleteTeam}>팀 삭제하기</button>
           }
         </div>

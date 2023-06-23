@@ -67,7 +67,7 @@ function TeamInfo(){
   }, []);
 
   useEffect(() => {
-    console.log(loggedInUserId);
+    console.log('🔥', loggedInUserId);
   }, [loggedInUserId])
 
   const [team, setTeam] = useState<Team>({
@@ -132,7 +132,24 @@ function TeamInfo(){
             <textarea className={styles.textareaReadOnly} name="content" id="content" cols={30} rows={10} maxLength={300} value={team.content} readOnly></textarea>
         </div>
         <div className={`${styles.container} ${styles.button}`}>
-          <button className={styles.joinBtn} type="button">팀 참여하기</button>
+          <button className={styles.joinBtn} type="button" onClick={() => {
+            const participateDate = {
+              memberId: loggedInUserId,
+              teamId: team.teamId
+            }
+            console.log('🤴🏻', participateDate);
+            axios.post(`http://13.124.112.157/api/member-team/`, {},
+             {
+              params: {
+                memberId: loggedInUserId,
+                teamId: team.teamId
+              }
+             }
+            )
+             .then(console.log)
+             .catch(console.error)
+
+          }}>팀 참여하기</button>
           {
             loggedInUserId && loggedInUserId.toString() === team.hostMember.memberId.toString() && 
             <button className={styles.removeBtn} onClick={handleDeleteTeam}>팀 삭제하기</button>

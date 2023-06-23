@@ -51,7 +51,7 @@ function TeamBlock(props: TeamProps): JSX.Element{
   return (
     <div className={styles.teamBlock} onClick={teamClickHandler}>
       <div className={styles.header}>
-        <div className={styles.hostImg}></  div>
+        {/* <div className={styles.hostImg}></  div> */}
         {/* <img className={styles.hostImg} src="" alt="host" /> */}
         <h2 className={styles.teamName}>{props.name}</h2>
       </div>
