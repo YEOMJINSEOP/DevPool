@@ -3,15 +3,16 @@
     font-family: var(--font-family-DoHyeon);
     font-size: 16px;
     color: #FFFFFF;
-    background-color: #FFA500;
+    background-color: #F25022;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
 .message_btn:hover {
-    background-color: #F25022;
+    background-color: #F03516;
 }
 
 .message_btn:focus {
@@ -107,4 +108,10 @@ textarea {
     border: 1px solid #eb1749;
     background: #fff;
     color: #eb1749;
+  }
+
+  textarea {
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
   }

@@ -62,6 +62,10 @@
     flex-direction: column;
 }
 
+.user_box_middle {
+    width: 370px;
+}
+
 .profileBtn {
   /* 기본 스타일링 제거 */
   appearance: none;
@@ -114,7 +118,7 @@
     margin: 36px 0 0 0;
 }
 
-.user_certificate, .user_relatedSite {
+.user_certificate, .user_relatedSite, .user_project {
     margin:24px 0 0 0;
 }
 
@@ -267,13 +271,23 @@ label {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
-.stack_item {
+.stack_item, .certificate_list {
     list-style: none;
     padding: 6px 0;
-    margin: 12px 0;
+    margin: 4px 8px;
     font-family: var(--font-family-DoHyeon);
     border: 1px solid #a9abaa;
     border-radius: 15px;
     text-align: center;
+    width: 102px;
+}
+
+.stack_list {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 6px;
 }
 

@@ -3,6 +3,7 @@ import styles from './MessageModal.module.css'
 import axios from 'axios';
 import { BASE_URL } from './UserInfo';
 import { getMemberId } from '../LogIn/LogIn';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 export default function MessageModal({ receiverId }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function MessageModal({ receiverId }) {
   
     return (
       <div>
-        <button onClick={openModal} className={styles.message_btn}>쪽지 보내기</button>
+        <button onClick={openModal} className={styles.message_btn}>쪽지 보내기<MailOutlineIcon/></button>
         {isOpen && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>

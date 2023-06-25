@@ -19,12 +19,12 @@ export default function UserBlock({ user }) {
   
   return (
     <div className={styles.userBlockWrapper} onClick={navToUserInfo}>
-        <div style={{display: 'flex'}}>
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
             <img className={styles.user_img} src={user.imageUrl}/>
             <h3 className={styles.user_nickName}>
                 {user.nickName}
             </h3>
-            <button className={styles.mailBtn}><MailOutlineIcon />쪽지 보내기</button>
+            <button className={styles.mailBtn}><MailOutlineIcon /></button>
         </div>
         <div className={styles.userBlockStackFiled}>
             {userStack && <StackField selectedStack={userStack} />}

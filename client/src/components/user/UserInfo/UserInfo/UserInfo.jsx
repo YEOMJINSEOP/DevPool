@@ -151,7 +151,7 @@ export default function UserInfo(Member) {
           className={styles.certificate_list}
           id={"certificate " + item.id}
           key={"certificate" + idx}>
-            {idx+1}. {item.name}
+            {item.name}
           </li>
         );
       })}

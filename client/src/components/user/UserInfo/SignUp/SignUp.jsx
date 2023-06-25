@@ -39,8 +39,8 @@ export default function SignUp() {
   }, [pwd, pwdCheck]);
 
   const handleImgInput = (event) => {
-    setImage(()=>event.target.files[0]);
     const file = event.target.files[0];
+    setImage(file);
     const reader = new FileReader();
     reader.onload = (event) => {
       const base64 = event.target.result;
@@ -117,6 +117,9 @@ export default function SignUp() {
 return (
   <div className={styles.signUp_wrapper}>
     <h1 className={styles.signUp_title}>Welcome to<span className={styles.signUp_title_logo}> Dev Pool!</span></h1>
+    <div className={styles.imagePreview}>
+      {imageURL && <img src={imageURL} className={styles.previewImg} alt="Preview" />}
+    </div>
     <Input
     className={styles.inputs}
     color="primary"
@@ -157,25 +160,25 @@ return (
         )}
       </div>
     </div>
-    <div className={styles.pwdWrap}>
-      <div className={styles.bjIdWrap}>
-      <Input
-      className={styles.inputs}    
-      color="primary"
-      disabled={isBjIdExist}
-      placeholder="백준 아이디"
-      size="lg"
-      variant="outlined"
-      value={bjId}
-      onChange={(e)=>setBjId(e.target.value)}
-      type='text'
-      />
-      <button 
-      className={styles.bjIdCheck}
-      onClick={checkBjId}>
-        아이디 확인
-      </button>
+    <div className={styles.bjIdWrap}>
+        <Input
+        className={styles.BJIDInput}    
+        color="primary"
+        disabled={isBjIdExist}
+        placeholder="백준 아이디"
+        size="lg"
+        variant="outlined"
+        value={bjId}
+        onChange={(e)=>setBjId(e.target.value)}
+        type='text'
+        />
+        <button 
+        className={styles.bjIdCheck}
+        onClick={checkBjId}>
+          ID 확인
+        </button>
       </div>
+    <div className={styles.pwdWrap}>
       <Input
       className={styles.inputs}    
       color="primary"
@@ -206,7 +209,7 @@ return (
     </div>
     <div>{image != null ? image.name : ''}</div>
     <Button variant="contained" component="label" sx={{ m: "16px" }}>
-        사진 업로드
+        프로필 사진 등록
         <input hidden accept="image/*" multiple type="file" onChange={handleImgInput}/>
     </Button>
     <Stack direction="row" spacing={2}>

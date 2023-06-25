@@ -348,7 +348,7 @@ export default function UserInfo(Member) {
       </div>
       <div className={styles.user_box_middle}>
         <p>
-          {userData && <div className={styles.inputLabel}>Name : {userData.nickName}</div>}
+          {userData && <><label className={styles.inputLabel}>이름</label> <span className={styles.name}>{userData.nickName}</span></>}
         </p>
         <TechFieldContainer>
         <TechField onChange={handleUserInterest}/>
@@ -441,14 +441,16 @@ export default function UserInfo(Member) {
           <button id="relatedSite" onClick={handleAddBtn} className={styles.relatedSiteBtn}>추가하기</button>
       {member.relatedSite.map((item, idx) => {
         return (
-          <li 
-          className={styles.certificate_list}
+          <div style={{display: 'flex'}}
           id={"relatedSite " + item.id}
-          key={"relatedSite" + idx}
-          onClick={()=>handleClick(item.content)}>
+          key={"relatedSite" + idx}>
+            <li 
+            className={styles.certificate_list}
+            onClick={()=>handleClick(item.content)}>
             {item.content}
+            </li>
             <button onClick={handleDeleteBtn2} className={styles.relatedSite_deleteBtn}>삭제</button>
-          </li>
+          </div>
         );
       })}
     </div>

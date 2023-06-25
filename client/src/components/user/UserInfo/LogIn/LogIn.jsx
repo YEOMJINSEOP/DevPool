@@ -65,7 +65,7 @@ export default function LogIn() {
       })
       .catch(()=>{
         setLoggedIn(true);
-        alert('아직 DevPool에 등록되지 않았습니다!');
+        alert('DevPool 이용을 위해 기본 정보를 등록해주세요!');
         navigate('/user/form');
       });
       } catch (error) { 

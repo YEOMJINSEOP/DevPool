@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 export default function StackTags({ selectedStack, handleSelectedStack }) {
   
   return (
-    <Stack spacing={3} sx={{ width: 500 }}>
+    <Stack spacing={3}>
       <Autocomplete
         multiple
         id="tags-standard"
