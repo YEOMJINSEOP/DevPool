@@ -43,16 +43,12 @@ function TeamMaker() {
   };
 
   const handleDownload = () => {
-    // 모든 팀 정보를 한 배열로 조합합니다.
-    let allTeams = [];
+    let newWorkbook = utils.book_new(); // 새 workbook 생성
+    // 각 팀을 순회하면서 시트를 만들고 추가합니다.
     teams.forEach((team, index) => {
-      allTeams.push({ 팀: `Team ${index + 1}` });  // 팀 정보를 추가합니다.
-      allTeams = allTeams.concat(team);  // 팀 멤버를 추가합니다.
+      let newWorksheet = utils.json_to_sheet(team);
+      utils.book_append_sheet(newWorkbook, newWorksheet, `Team ${index + 1}`);
     });
-  
-    let newWorksheet = utils.json_to_sheet(allTeams);  // 조합한 배열을 시트로 변환합니다.
-    let newWorkbook = utils.book_new();  // 새 workbook을 생성합니다.
-    utils.book_append_sheet(newWorkbook, newWorksheet, 'Teams');  // 시트를 workbook에 추가합니다.
   
     // workbook을 blob으로 쓴 다음, 이 blob을 사용하여 다운로드 링크를 생성합니다.
     const workbookBinary = write(newWorkbook, { type: 'array', bookType: 'xlsx' });

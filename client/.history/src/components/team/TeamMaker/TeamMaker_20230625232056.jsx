@@ -1,4 +1,4 @@
-import {write, read, utils} from 'xlsx';
+import {read, utils} from 'xlsx';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import styles from './TeamMaker.module.css';
@@ -42,47 +42,24 @@ function TeamMaker() {
     setTeams(newTeams);  // 생성된 팀들을 상태에 저장합니다.
   };
 
-  const handleDownload = () => {
-    // 모든 팀 정보를 한 배열로 조합합니다.
-    let allTeams = [];
-    teams.forEach((team, index) => {
-      allTeams.push({ 팀: `Team ${index + 1}` });  // 팀 정보를 추가합니다.
-      allTeams = allTeams.concat(team);  // 팀 멤버를 추가합니다.
-    });
-  
-    let newWorksheet = utils.json_to_sheet(allTeams);  // 조합한 배열을 시트로 변환합니다.
-    let newWorkbook = utils.book_new();  // 새 workbook을 생성합니다.
-    utils.book_append_sheet(newWorkbook, newWorksheet, 'Teams');  // 시트를 workbook에 추가합니다.
-  
-    // workbook을 blob으로 쓴 다음, 이 blob을 사용하여 다운로드 링크를 생성합니다.
-    const workbookBinary = write(newWorkbook, { type: 'array', bookType: 'xlsx' });
-    const blob = new Blob([workbookBinary], { type: 'application/octet-stream' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'teams.xlsx';  // 원하는 파일명을 설정합니다.
-    link.click();  // 다운로드를 시작합니다.
-  
-    // URL을 해제합니다.
-    URL.revokeObjectURL(url);
-  };
-  
+  useEffect(() => {
+    console.log(students);
+  }, [students])
+
+  useEffect(() => {
+    console.log(teams);
+  }, [teams])
   
   return (
     <div>
-      <div className={styles.header}>
-        <div className={styles.fileContainer}>
-          <p>Excel File 업로드</p>
-          <input className={styles.fileInput} type="file" accept=".xlsx" onChange={handleFileUpload} />
-        </div>        
+      <div className={styles.fileInput}>
+        <input type="file" accept=".xlsx" onChange={handleFileUpload} />
         <button className={styles.createBtn} onClick={() => handleGenerateTeams(5)}>팀 생성</button>
-        {teams && <button className={styles.downloadBtn} onClick={handleDownload}>팀 다운로드 </button>}
       </div>
-      <div className={styles.teamContainer}>
+      <div>
         {teams.map((team, index) => (
         <div key={index} className={styles.teamBlock}>
-          <h2 className={styles.teamHeader}>팀 {index + 1}</h2>
-          <div className={styles.divider}></div>
+          <h2>팀 {index + 1}</h2>
           {team.map(student => (
             <p key={student.번호}>{student.이름}</p>
           ))}
