@@ -49,7 +49,7 @@ function TeamList(){
       console.log(res.data.dataList);
     })
     .catch((err) => console.log('get teamList failed', err))
-  }, []);
+  }, [teamList]);
 
   const [filteredTeamList, setFilteredTeamList] = useState<Team[]>([]);
   
