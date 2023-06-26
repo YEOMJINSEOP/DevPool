@@ -19,16 +19,16 @@ export default function MessageModal({ receiverId }) {
   
     const handleSendMessage = () => {
       const senderId = getMemberId().memberId;
-      console.log(senderId);
   
       const newMessage = {
-        senderId: receiverId,
-        receiverId: senderId,
+        senderId: senderId,
+        receiverId: receiverId,
         content: message,
       };
 
+      console.log(senderId);
       console.log(receiverId);
-  
+      
       axios.post(`${BASE_URL}/api/latter`, newMessage)
         .then((res) => {
           console.log(res);

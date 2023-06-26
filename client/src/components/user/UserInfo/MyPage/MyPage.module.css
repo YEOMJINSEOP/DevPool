@@ -1,11 +1,41 @@
 @import '../../../../App.css';
 
-.user_wrapper {
-    max-width: 1100px;
-    /* border: solid 2px black; */
+.user {
+    /* width: var(--container-width);
+    border: solid 2px black;
     font-family: var(--font-family-DoHyeon);
     margin: auto;
-    padding: 60px;
+    padding: 60px; */
+    width: var(--container-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    margin-bottom: 25px;
+}
+
+.name {
+    font-size: 17px;
+    font-family: var(--font-family-DoHyeon);
+
+    margin-left: 12px;
+}
+
+.user_wrapper {
+    width: var(--subContainer-width);
+  
+    border: var(--subContainer-border);
+    border-radius: var(--subContainer-padding);
+  
+    padding: var(--subContainer-padding);
+
+    margin-top: 40px;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .user_box {
@@ -14,11 +44,11 @@
 }
 
 .user_box_middle {
-    padding-right: 290px;
+    padding-right: 20px;
 }
 
 .user_img {
-    border-radius: 5px;
+    border-radius: 50%;
 }
 
 .inputLabel {
@@ -112,13 +142,13 @@
 }
 
 .user_stack {
-    width: 950px;
-    height:150px;
+    width: 100%;
+    height:67px;
     border: 1px solid #ccc;
     border-radius: 6px;
     margin: 20px 0 0 0;
     display: flex;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .interest_input {
@@ -168,8 +198,8 @@
 }
 
 .icon {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin: 8px;
 }
 
@@ -242,6 +272,16 @@
   font-family: var(--font-family-DoHyeon);
 }
 
-.message_btn {
-    margin: 10px;
-}
+.project_list {
+    gap: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 0 0 0 30px;
+  }
+
+  .project_item {
+    padding-bottom: 10px;
+  }
+
+  .project_link {
+    margin-left: 24px;
+  }

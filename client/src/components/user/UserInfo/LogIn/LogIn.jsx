@@ -48,25 +48,26 @@ export default function LogIn() {
           alert('로그인 실패. 아이디 비밀번호를 확인해주세요.');
           return;
       }
-      console.log(res);
       localStorage.setItem("dev_access_token", res.data.accessToken);
       localStorage.setItem("dev_refresh_token", res.data.refreshToken);
       const memberInfo = getMemberId();
-      console.log(memberInfo.memberId);
       setId(memberId);
       
       // memberId로 DevPool에 등록되어 있나 확인해보고, 없다면 'user/form'으로 이동
-      axios.get(`${BASE_URL}/api/member_pool/${memberInfo.memberId}`)
+      axios.get(`${BASE_URL}/api/member-pool/${memberInfo.memberId}`)
       .then((res) => {
+        const data = res.data.data;
+        console.log(data.certificate === null);
+        if(data.certificate.length === 0 && data.project.length === 0 && data.site.length === 0 && data.techField.length === 0 && data.stack.length === 0) {
+          setLoggedIn(true);
+          alert('DevPool 이용을 위해 기본 정보를 등록해주세요!');
+          navigate('/user/form');
+          return;
+        }
         setLoggedIn(true);
         alert('DevPool에 오신 걸 환영합니다.');
         naviagte('/');
         console.log(res);
-      })
-      .catch(()=>{
-        setLoggedIn(true);
-        alert('DevPool 이용을 위해 기본 정보를 등록해주세요!');
-        navigate('/user/form');
       });
       } catch (error) {
           alert('로그인에 실패했습니다.')

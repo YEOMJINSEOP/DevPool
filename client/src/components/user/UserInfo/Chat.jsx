@@ -10,30 +10,30 @@ export default function Chat() {
   const [selectedChat, setSelectedChat] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const navigate = useNavigate();
+  const memberId = getMemberId().memberId;
 
   useEffect(() => {
     const memberId = getMemberId().memberId;
-
     getChatLog(memberId);
     getUserNickName(memberId);
   }, []);
 
   useEffect(() => {
-    getChatLog();
+    getChatLog(memberId);
   }, [newMessage]);
 
-  const getChatLog = async (memberId) => {
+  const getChatLog = async(memberId) => {
+    console.log(chatLog)
     await axios.get(`${BASE_URL}/api/latter/${memberId}`).then((res) => {
       console.log(res.data.dataList);
-      setChatLog([...res.data.dataList]);
+      const dataList = res.data.dataList;
+      setChatLog([...dataList]);
     });
   };
 
   const getUserNickName = (memberId) => {
     axios.get(`${BASE_URL}/api/member/${memberId}`).then((res) => {
-      console.log(res.data);
       setMemberNickName(res.data.data.nickName);
-      console.log(res.data.data.nickName);
     });
   };
 
@@ -42,7 +42,7 @@ export default function Chat() {
   };
 
   const handleSendMessage = async () => {
-    const senderId = 1;
+    const senderId = memberId;
     const receiverId =
       selectedChat[0].senderId === senderId
         ? selectedChat[0].receiverId
@@ -53,6 +53,13 @@ export default function Chat() {
       receiverId: receiverId,
       content: newMessage,
     };
+
+    console.log(senderId);
+    console.log(receiverId);
+
+    if(newMessage == null) {
+      return;
+    }
 
     try {
       await axios.post(`${BASE_URL}/api/latter`, message).then((res) => {
@@ -97,7 +104,7 @@ export default function Chat() {
           );
         })}
       </div>
-      <div style={{border: 'solid lightgray 2px', borderRadius: "12px", minHeight: "650px"}}>
+      <div style={{border: 'solid lightgray 2px', borderRadius: "12px", minHeight: "650px", minWidth: "717px"}}>
       {selectedChat.length > 0 && (
         <div className={styles.chattings}>
           <div>
@@ -142,7 +149,7 @@ export default function Chat() {
             <input
               type="text"
               value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
+              onChange={(e) => {setNewMessage(e.target.value); getChatLog(memberId);}}
               className={styles.input}
             />
             <button onClick={handleSendMessage}

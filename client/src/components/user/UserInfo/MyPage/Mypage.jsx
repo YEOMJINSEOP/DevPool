@@ -1,16 +1,44 @@
 import { useEffect, useState } from 'react';
 import BasicModal from '../BasicModal';
-import Tags from '../StackTags';
 import styles from './MyPage.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
 import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
+import StackTags from '../StackTags';
+import StackField from '../StackField';
+import TechField from '../../../common/TechField/TechField';
+import styled from '@emotion/styled';
+import axios from 'axios';
+import { getMemberId } from '../LogIn/LogIn';
+import { getMemberInfo } from '../../../../api/api';
+import { useNavigate } from 'react-router-dom';
 
-const interestList = ["선택하기", "Front-end", "Back-end", "IOS",  "Android", "AI"];
+export const stackOptions = [
+  { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
+  { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
+  { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
+  { id: '4', label: 'Vue.js', icon: <FontAwesomeIcon className={styles.icon} icon={faVuejs} size="xl" style={{color: "#4d8217",}} /> },
+  { id: '5', label: 'React.js', icon: <FontAwesomeIcon className={styles.icon} icon={faReact} size="xl" style={{color: "#3a8fcf",}} /> },
+  { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
+  { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
+  { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
+  { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
+  { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
+  { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
+  { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
+];
+
+const TechFieldContainer = styled.div`
+margin-top: 50px;
+`;
+
+export const BASE_URL = process.env.REACT_APP_API_URL;
 
 //나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
 export default function UserInfo(Member) {
+  // 이름을 받아옴
+  const [userData, setUserData] = useState();
   // certificate 입력값
   const [certificate, setCertificate] = useState('');
   const [certificateId, setCertificateId] = useState(1);
@@ -18,7 +46,6 @@ export default function UserInfo(Member) {
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
   // 선택된 스택 state
   const [selectedStack, setSelectedStack] = useState([]);
-  const [selectedStackIcons, setSelectedStackIcons] = useState([]);
   // Project state
   const [project, setProject] = useState('');
   const [projectId, setProjectId] = useState(1);
@@ -26,6 +53,7 @@ export default function UserInfo(Member) {
   const [projectEnd, setProjectEnd] = useState('');
   const [projectStack, setProjectStack] = useState([]);
   const [ProjectStackIcons, setProjectStackIcons] = useState([]);
+  const [projectUrl, setProjectUrl] = useState('');
   // 관련 사이트
   const [relatedSite, setRelatedSite] = useState([]);
   const [relatedSiteId, setRelatedSiteId] = useState(1);
@@ -39,21 +67,40 @@ export default function UserInfo(Member) {
     certificate: [],
     relatedSite: [],
   });
+  const navigate = useNavigate();
 
-  const stackOptions = [
-    { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
-    { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
-    { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
-    { id: '4', label: 'Vue.js', icon: <FontAwesomeIcon className={styles.icon} icon={faVuejs} size="xl" style={{color: "#4d8217",}} /> },
-    { id: '5', label: 'React.js', icon: <FontAwesomeIcon className={styles.icon} icon={faReact} size="xl" style={{color: "#3a8fcf",}} /> },
-    { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
-    { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
-    { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
-    { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
-    { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
-    { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
-    { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
-  ];
+  const handleUserInterest = (selectedTechStack) => {
+    const trueTechStack =  Object.entries(selectedTechStack).
+      filter(([key, value]) => value === true)
+      .map(([key]) => key); // trueTechStack은 선택되어 true값을 가지는 techField의 배열을 반환합니다. 이 배열을 사용하셔서 setState에 사용하시면 됩니다.
+    setMember((prevUser) => ({
+      ...prevUser,
+      interest: trueTechStack
+    }))
+  }
+
+  // 멤버의 이름 불러옴 
+  // 처음 페이지 로딩될 때 기존 정보로 member 초기화
+  useEffect(() => {
+    const memberInfo = getMemberId();
+    console.log(memberInfo.memberId)
+    axios.get(`${BASE_URL}/api/member/${memberInfo.memberId}`).then((res) => {
+      setUserData(res.data.data);
+    });
+    axios.get(`${BASE_URL}/api/member-pool/${memberInfo.memberId}`).then((res) => {
+      const data = res.data.data;
+      console.log(res.data.data);
+      setMember({
+        name: data.nickName,
+        email: data.email,
+        interest: data.techField, // interest 대신 techField로 변경
+        stack: data.stack,
+        project: data.project,
+        certificate: data.certificate,
+        relatedSite: data.site,
+      });
+    });
+  }, []);
 
   // member interest 설정
     useEffect(() => {
@@ -70,19 +117,12 @@ export default function UserInfo(Member) {
       setSelectedInterest("선택하기");
     }, [selectedInterest]);
 
-    useEffect(() => {
-      let projectIcons = member.project.map(now => stackOptions.filter(option => now.stack.includes(option.label)));
-      setProjectStackIcons(projectIcons);
-    }, [member.project]);
-
     // 멤버 stack 설정
     useEffect(() => {
       setMember((prev) => ({
         ...prev,
         stack: selectedStack,
       }));
-      // 스택의 Icon을 filter해서 보여줌
-      setSelectedStackIcons(stackOptions.filter(option => selectedStack.includes(option.label)));
     }, [selectedStack]);
 
   // 리스트에 추가하기
@@ -152,18 +192,20 @@ export default function UserInfo(Member) {
           content: project,
           start: projectStart,
           end: projectEnd,
-          stack: newProjectStack
+          stack: newProjectStack,
+          url: projectUrl
         });
         return {
           ...prev,
           project: newProject,
         };
       });
+      setProjectStack([]);
       setProject('');
       setProjectStart('');
       setProjectEnd('');
       setProjectId(count => count + 1);
-      setProjectStack([]);
+      setProjectUrl('');
     }
   }
 
@@ -213,26 +255,86 @@ export default function UserInfo(Member) {
     }
   }
 
-  const handleUserInput =  (e) => {
-    const { id, value } = e.target;
-    setMember((prev) => {
-      const cur = {...prev};
-      cur[id] = value;
-      return cur
-    })
-  }
-
-  const handleMember = () => {
+  const handleSubmit = () => {
+    const memberId = getMemberId().memberId;
     console.log(member);
+    const interestForSubmit = [];
+    const stackForSubmit = [];
+    let projcectStackForSubmit = [];
+    const certificateForSubmit = [];
+    const relatedSiteForSubmit = [];
+    const projectForSubmit = [];
+    member.interest.map((item) => {
+      interestForSubmit.push({
+        name: item
+      })
+    });
+    member.stack.map((item) => {
+      stackForSubmit.push({
+        name: item
+      })
+    })
+    member.certificate.map((item) => {
+      certificateForSubmit.push({  
+        name: item.content
+      })
+    })
+    member.project.map((item) => {
+      item.stack.map((current) => {
+        projcectStackForSubmit.push({
+          name: current
+        })
+      })
+      projectForSubmit.push({
+        name: item.content,
+        startDate: item.start,
+        stack: projcectStackForSubmit,
+        endDate: item.end,
+        url: item.url 
+      })
+      projcectStackForSubmit = [];
+    })
+    member.relatedSite.map((item) => {
+      relatedSiteForSubmit.push({
+        name: item.content,
+        url: item.content
+      })
+    })
+
+    console.log({
+      memberId: memberId,
+      techField: interestForSubmit,
+      stack: stackForSubmit,
+      project: projectForSubmit,
+      certificate: certificateForSubmit,
+      site: relatedSiteForSubmit
+    });
+
+    axios.post(`${BASE_URL}/api/member-pool`, {
+      memberId: memberId,
+      techField: interestForSubmit,
+      stack: stackForSubmit,
+      project: projectForSubmit,
+      certificate: certificateForSubmit,
+      site: relatedSiteForSubmit
+    }).then((res) => {
+      console.log(res);
+      if(res.data.status == 201) {
+        alert('Devpool 등록이 완료 되었습니다!')
+      }
+    }).catch((err) => console.log(err));
+    navigate('/user/list')
   }
 
   const handleProject = (e) => {setProject(e.target.value)};
   const handleProjectStart = (e) => setProjectStart(e.target.value);
   const handleProjectEnd = (e) => setProjectEnd(e.target.value);
+  const handleProjectUrl = (e) => {setProjectUrl(e.target.value)};
+
   const handleSelectedStack = (event, values) => {
     setSelectedStack(values);
-    console.log(values);
   };
+
   const handleProjectStack = (event, values) => {
     let newValues= [];
     values.map((value) => {
@@ -247,73 +349,40 @@ export default function UserInfo(Member) {
   }
 
   return (
-  <div className={styles.user_wrapper}>
+  <div className={styles.user}>
+    <div className={styles.user_wrapper}>
     <div className={styles.user_box}>
       {/* 유저 박스 왼쪽(이미지) */}
       <div className={styles.userBox_left}>
-        <img 
+        {userData && <img 
         className={styles.user_img}
         alt='User Img' 
-        style={{"width":"150px"}}
-        src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDFfMTI5%2FMDAxNjc1MjI5OTcyMzkx.BhdakINlrZwH50XjsGZy2q6mvbMNC68YKvx7HjkbQ9Yg.i6rCMpvj2Z5trsoKkmNy-SKv91NJir4g4DPa_NbHAKcg.PNG.soki17%2Fimage.png&type=a340'/>
+        style={{"width":"150px", height: "150px"}}
+        src={userData.imageUrl}/>}
         {/* <button className={styles.profileBtn}>프로필 변경</button> */}
       </div>
       <div className={styles.user_box_middle}>
         <p>
-          {/* 이름 :<input 
-          className={styles.name_input}
-          id='name'
-          name='name'
-          placeholder='이름' 
-          type="text" value={member.name} 
-          onChange={handleUserInput}/> */}
-          <div className={styles.inputLabel}>이름: 이영진</div>
+          {userData && <><label className={styles.inputLabel}>이름</label> <span className={styles.name}>{userData.nickName}</span></>}
         </p>
-        <div className={styles.interest_wrapper}>
-          <label htmlFor='interest' className={styles.inputLabel}>관심분야</label>
-          <select id="interest" value={selectedInterest} onChange={handleAddBtn} className={styles.interest_input}>
-            {interestList.map((item, idx) => {
-              return (
-                <option 
-                className={styles.interest_option}
-                value={item}
-                key={idx}>{item}</option>
-              );
-            })}
-          </select>
-          {member.interest.map((item, idx) => {
-            return (
-              <li 
-              className={styles.interest_list}
-              id={"interest " + item}
-              key={idx}>
-                {item}
-                <button onClick={handleDeleteBtn} className={styles.interest_deleteBtn}>삭제</button>
-              </li>
-            );
-          })}
-        </div>
+        <TechFieldContainer>
+        <TechField onChange={handleUserInterest}/>
+        </TechFieldContainer>
       </div>
       {/* 유저 박스 오른쪽(이메일, 이름, 관심분야) 관심분야(추가, 삭제 완료) */}
-      <div className={styles.user_box_right}>
-        <button className={styles.message_btn}>수정 완료</button>
-        <p></p>
-        <button className={styles.message_btn}>내 팀</button>
+      <div className='user_box_right'>
+        {/* <button className={styles.message_btn}>쪽지 보내기</button> */}
       </div>
     </div>
     <div className={styles.user_stack_wrapper}>
       <label htmlFor='stack'>기술 스택</label>
-      <Tags 
+      <StackTags
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
       />
-      <div className={styles.user_stack}>
-        {selectedStackIcons && selectedStackIcons.map((items) => {
-          return (
-            <div>{items.icon}</div>
-          )
-        })}
-      </div>
+      <StackField
+      selectedStack={selectedStack}
+      />
     </div>
     {/* 프로젝트 */}
     <div className={styles.user_project}>
@@ -328,11 +397,17 @@ export default function UserInfo(Member) {
       handleProjectStart={handleProjectStart}
       projectEnd={projectEnd}
       handleProjectEnd={handleProjectEnd}
-      handleAddBtn={handleAddBtn}/>
+      handleAddBtn={handleAddBtn}
+      projectUrl={projectUrl}
+      handleProjectUrl={handleProjectUrl}
+      />
+      <ul className={styles.project_list}>
       {member.project.map((item, idx) => {
         return (
         <li id={"project " + item.id}
-         key={idx}>
+         key={idx}
+         className={styles.project_item}
+         >
           <span>
           {item.content} 
           </span>
@@ -342,10 +417,12 @@ export default function UserInfo(Member) {
           <span className={styles.project_span}>
           {item.start} ~ {item.end}
           </span>
+          <span className={styles.project_link}>링크 : {item.url}</span>
           <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button>
         </li>
         )
       })}
+      </ul>
     </div>
     {/* 자격증 */}
     <div className={styles.user_certificate}>
@@ -382,18 +459,21 @@ export default function UserInfo(Member) {
           <button id="relatedSite" onClick={handleAddBtn} className={styles.relatedSiteBtn}>추가하기</button>
       {member.relatedSite.map((item, idx) => {
         return (
-          <li 
-          className={styles.certificate_list}
+          <div style={{display: 'flex'}}
           id={"relatedSite " + item.id}
-          key={"relatedSite" + idx}
-          onClick={()=>handleClick(item.content)}>
+          key={"relatedSite" + idx}>
+            <li 
+            className={styles.certificate_list}
+            onClick={()=>handleClick(item.content)}>
             {item.content}
+            </li>
             <button onClick={handleDeleteBtn2} className={styles.relatedSite_deleteBtn}>삭제</button>
-          </li>
+          </div>
         );
       })}
     </div>
-    <button onClick={handleMember} className={styles.submitBtn}>제출하기</button>
+    <button onClick={handleSubmit} className={styles.submitBtn}>수정완료</button>
+    </div>
   </div>
   )
 }
