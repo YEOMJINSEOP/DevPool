@@ -4,7 +4,7 @@
 
 .chat {
     width: 1000px;
-    margin: 0 400px 0 250px;
+    margin: 20px 400px 0 250px;
     display: flex;
     justify-content: space-between;
 }
@@ -87,7 +87,7 @@
     left: 0;
     width: 100%;
     background-color: transparent;
-    padding: 0 500px;
+    padding: 0 380px 0 620px;
     display: flex;
     align-items: center;
   }
