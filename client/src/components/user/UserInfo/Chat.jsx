@@ -136,7 +136,7 @@ export default function Chat() {
               }}
             >
               <div style={{display: "flex"}}>
-                <img src={imageUrl[0].imageUrl == undefined ? "" : imageUrl[0].imageUrl} alt='유저 이미지' style={{width: "50px", height: "50px", borderRadius: "100%"}}/>
+              <img src={imageUrl && imageUrl.length > 0 ? imageUrl[0].imageUrl : ''} alt='유저 이미지' style={{width: "50px", height: "50px", borderRadius: "100%"}}/>
                 <div style={{marginLeft: "17px"}}>
                   <div className={styles.chatHeader}>
                     <div className={styles.nickname}>{otherNickName}</div>
