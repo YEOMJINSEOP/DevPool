@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import styles from './SignUp.module.css';
 import { useNavigate } from 'react-router-dom';
-import userBasicImg from '../../../../image/userBasic.png';
+import userBasicImg from '../../../../image/userImage.jpeg';
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -31,7 +31,7 @@ export default function SignUp() {
   }, [email]);
 
   useEffect(() => {
-    setAbleBtn(!((name != '' && email != '' && pwd != '' && pwdCheck != '') && !validEmail && IsSamePwd && isBjIdExist));
+    setAbleBtn(!((name != '' && email != '' && pwd != '' && pwdCheck != '') && !validEmail && IsSamePwd));
   }, [name, email, IsSamePwd, isBjIdExist]);
 
   useEffect(() => {
@@ -87,9 +87,9 @@ export default function SignUp() {
     formData.append('nickName', nickName);
     formData.append('email', email);
     formData.append('password', pwd);
+
     if(image == null) {
-      const imgFile = new File([userBasicImg], 'userBasicImg.png', { type: 'image/png' });
-      formData.append('image', imgFile);
+      const imgFile = new File([userBasicImg], 'test.jpg', { type: 'image/jpg' });
     }
     else {
       formData.append('image', image); // 이미지 추가

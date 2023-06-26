@@ -63,7 +63,7 @@ export default function Chat() {
 
     try {
       await axios.post(`${BASE_URL}/api/latter`, message).then((res) => {
-        setNewMessage('');
+        setNewMessage(prevMessage => '');
       });
       // 메시지 전송 후 필요한 작업 수행
       // 예: 메시지 목록 갱신
