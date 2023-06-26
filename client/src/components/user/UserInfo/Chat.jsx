@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BASE_URL, getMemberId } from './LogIn/LogIn';
 import styles from './Chat.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Chat() {
   const [chatLog, setChatLog] = useState([]);
   const [memberNickName, setMemberNickName] = useState('');
   const [selectedChat, setSelectedChat] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const memberId = getMemberId().memberId;
@@ -67,7 +69,15 @@ export default function Chat() {
   return (
     <div className={styles.chat}>
       <div className={styles.chatLog}>
-        {chatLog.map((chatGroup, idx) => {
+        {chatLog.length === 0 ? (
+          <div style={{padding: "80px"}}>
+            <div className={styles.noMessages} style={{fontSize: "21px"}}>보낸 쪽지가 없습니다.</div>
+            <div 
+            onClick={()=>navigate('/')}
+            style={{cursor: "pointer", marginTop: "30px", color: "#F25022"}}>메인 페이지로 이동</div>
+          </div>
+        ) :
+        chatLog.map((chatGroup, idx) => {
           const otherNickName =
             chatGroup[0].senderNickName === memberNickName
               ? chatGroup[0].receiverNickName
@@ -99,7 +109,12 @@ export default function Chat() {
               const timeString = chat.createTime;
               const time = timeString.substring(11, 16);
               return (
-                <div>
+                <div style={{margin: "18px"}} 
+                className={
+                  chat.senderNickName === memberNickName
+                    ? styles.myWrapper
+                    : styles.otherWrapper
+                }>
                   <div
                     key={idx}
                     className={
@@ -114,7 +129,8 @@ export default function Chat() {
                       chat.senderNickName === memberNickName
                         ? styles.myTime
                         : styles.otherTime
-                    }>
+                    }
+                    style={{marginTop: "6px"}}>
                     {time}
                   </div>
                 </div>

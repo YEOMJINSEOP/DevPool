@@ -7,17 +7,20 @@
     margin: auto;
     padding: 60px; */
     width: var(--container-width);
-    height: var(--container-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
+
+    margin-bottom: 25px;
 }
 
 .name {
     font-size: 17px;
     font-family: var(--font-family-DoHyeon);
+
+    margin-left: 12px;
 }
 
 .user_wrapper {

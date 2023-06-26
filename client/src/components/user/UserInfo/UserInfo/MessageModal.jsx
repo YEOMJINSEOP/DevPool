@@ -22,10 +22,12 @@ export default function MessageModal({ receiverId }) {
       console.log(senderId);
   
       const newMessage = {
-        senderId: senderId,
-        receiverId: receiverId,
+        senderId: receiverId,
+        receiverId: senderId,
         content: message,
       };
+
+      console.log(receiverId);
   
       axios.post(`${BASE_URL}/api/latter`, newMessage)
         .then((res) => {

@@ -15,7 +15,7 @@
 }
 
 .chattings {
-    margin-left: 200px;
+    margin-left: 120px;
     width: 600px;
     margin-bottom: 100px;
 }
@@ -40,14 +40,15 @@
   
   .chatContent {
     /* 채팅 내용에 대한 스타일 */
-    padding: 10px;
+    padding: 8px;
     background-color: #eaeaea;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   
   .myChat {
     /* 나의 채팅에 대한 스타일 */
+    display: inline-block;
     text-align: right;
     background-color: #F25022;
     color: #fff;
@@ -56,15 +57,19 @@
   .otherChat {
     /* 상대방의 채팅에 대한 스타일 */
     text-align: left;
+    display: inline-block;
     background-color: #f2f2f2;
     color: #333;
+  }
 
+  .myWrapper {
+    text-align: right;
   }
 
   .myChat, .otherChat {
     padding: 10px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     font-size: 20px;
     font-family: var(--font-family-DoHyeon);
   }
@@ -82,7 +87,7 @@
     left: 0;
     width: 100%;
     background-color: transparent;
-    padding: 0 700px;
+    padding: 0 500px;
     display: flex;
     align-items: center;
   }
@@ -94,6 +99,7 @@
     border-radius: 5px;
     margin-right: 10px;
     height: 40px;
+
   }
   
   .inputWrapper button {
@@ -107,7 +113,7 @@
 
   .myTime, .otherTime {
     font-size: 14px;
-    margin: 0 10px 0 10px;
+    margin: 0 12px 0 10px;
   }
 
   .myTime {

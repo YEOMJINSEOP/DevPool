@@ -344,7 +344,7 @@ export default function UserInfo(Member) {
         {userData && <img 
         className={styles.user_img}
         alt='User Img' 
-        style={{"width":"150px"}}
+        style={{"width":"150px", height: "150px"}}
         src={userData.imageUrl}/>}
         {/* <button className={styles.profileBtn}>프로필 변경</button> */}
       </div>
