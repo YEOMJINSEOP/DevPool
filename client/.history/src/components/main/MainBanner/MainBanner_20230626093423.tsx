@@ -55,7 +55,7 @@ function MainBanner() {
         <ul className={styles.recruitInfoList}>
           {recruitInfoList.map((recruitInfo) => (
             <li className={styles.recruitInfoBlock}>
-              <a className={styles.anchorTag}href={`${recruitInfo.company === 'LINE' ? 'https://careers.linecorp.com/ko/jobs?ca=All&ci=Seoul,Bundang&co=East%20Asia' : 'https://recruit.navercorp.com/rcrt/list.do' }`}>
+              <a href={`${recruitInfo.company === 'LINE' ? 'https://careers.linecorp.com/ko/jobs?ca=All&ci=Seoul,Bundang&co=East%20Asia' : 'https://recruit.navercorp.com/rcrt/list.do' }`}>
                 <p className={styles.recruitTitle}>{recruitInfo.company}</p>
                 <p className={styles.recruitContent}>{recruitInfo.data}</p>
               </a>              

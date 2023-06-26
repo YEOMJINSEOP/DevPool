@@ -5,9 +5,7 @@ li {
 }
 .anchorTag {
   text-decoration: none;
-  color: black;
 }
-
 .title {
   font-family: var(--font-family-DoHyeon);
   font-size: 20px;
@@ -55,8 +53,6 @@ li {
   padding: 10px;
   border: 1px solid lightgray;
   border-radius: 10px;
-  display: flex;
-  align-items: center;
 }
 
 .recruitTitle {
