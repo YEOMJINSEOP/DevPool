@@ -5,7 +5,6 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import styles from './SignUp.module.css';
 import { useNavigate } from 'react-router-dom';
-import userBasicImg from '../../../../image/userImage.jpeg';
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -89,7 +88,7 @@ export default function SignUp() {
     formData.append('password', pwd);
 
     if(image == null) {
-      const imgFile = new File([userBasicImg], 'test.jpg', { type: 'image/jpg' });
+      const imgFile = 0;
     }
     else {
       formData.append('image', image); // 이미지 추가
