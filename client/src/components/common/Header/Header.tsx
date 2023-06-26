@@ -22,6 +22,8 @@ function Header(){
         }}>팀 모집하기</button>
         <div className={styles.divider}></div>
         <button onClick={()=> navigate('teamMaker')}>랜덤 팀 메이커</button>
+        <div className={styles.divider}></div>
+        <button onClick={()=> navigate('freeBoard')}>자유 게시판</button>
       </div>
       <div className={styles.loginAndUser_container}>
         {loggedIn ? (

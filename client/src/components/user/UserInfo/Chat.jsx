@@ -104,7 +104,6 @@ export default function Chat() {
           );
         })}
       </div>
-      <div style={{border: 'solid lightgray 2px', borderRadius: "12px", minHeight: "650px", minWidth: "717px"}}>
       {selectedChat.length > 0 && (
         <div className={styles.chattings}>
           <div>
@@ -158,6 +157,5 @@ export default function Chat() {
         </div>
       )}
       </div>
-    </div>
   );
 }

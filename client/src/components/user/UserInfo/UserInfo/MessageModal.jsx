@@ -4,10 +4,15 @@ import axios from 'axios';
 import { BASE_URL } from './UserInfo';
 import { getMemberId } from '../LogIn/LogIn';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { useRecoilState } from 'recoil';
+import { isLoggedIn } from '../../../../recoil/user';
+import { useNavigate } from 'react-router-dom';
 
 export default function MessageModal({ receiverId }) {
     const [isOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState('');
+    const [login, setIslogin] = useRecoilState(isLoggedIn);
+    const navigate = useNavigate();
   
     const openModal = () => {
       setIsOpen(true);
@@ -18,6 +23,11 @@ export default function MessageModal({ receiverId }) {
     };
   
     const handleSendMessage = () => {
+      if(login == false) {
+        alert('쪽지를 보내려면 로그인이 필요합니다');
+        navigate('/login');
+        return;
+      }
       const senderId = getMemberId().memberId;
   
       const newMessage = {
