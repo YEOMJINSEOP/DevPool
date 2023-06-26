@@ -29,6 +29,7 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: red;
 }
 
 .rankingContainer {
@@ -55,8 +56,6 @@ li {
   padding: 10px;
   border: 1px solid lightgray;
   border-radius: 10px;
-  display: flex;
-  align-items: center;
 }
 
 .recruitTitle {

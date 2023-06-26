@@ -175,7 +175,7 @@ function TeamForm(){
           <Label content="팀 소개"></Label>        
           <textarea className={styles.textareaCommon} name="content" id="content" cols={30} rows={10} maxLength={300} onChange={handleContentInput}></textarea>
         </div>
-        <div className={styles.btnContainer}>
+        <div>
           <button className={styles.submitBtn} type="button" onClick={handleSubmit}>팀 등록하기</button>
         </div>        
       </div>

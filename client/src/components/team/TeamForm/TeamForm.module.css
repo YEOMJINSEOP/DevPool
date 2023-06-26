@@ -169,6 +169,11 @@
   padding: 20px;
 }
 
+.btnContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .addBtn{
   font-family: var(--font-family-DoHyeon);
   width: 80px;
@@ -193,7 +198,6 @@
   background-color: #C5C5C5;
   color: black;
   border-radius: 10px;
-  transform: translateX(300px);
   margin: 10px;
 }
 
