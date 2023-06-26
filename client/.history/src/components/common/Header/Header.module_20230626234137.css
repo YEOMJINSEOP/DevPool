@@ -23,7 +23,7 @@
 }
 
 .category_container {
-  width: 830px;
+  width: 630px;
   height: 35px;
   display: flex;
   justify-content: space-evenly;
@@ -65,5 +65,5 @@
 }
 
 .headerBtn {
-  font-size: 15px;
+  font-size: 14px;
 }

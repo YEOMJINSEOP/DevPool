@@ -23,7 +23,7 @@
 }
 
 .category_container {
-  width: 830px;
+  width: 630px;
   height: 35px;
   display: flex;
   justify-content: space-evenly;
@@ -34,7 +34,7 @@
 }
 
 .loginAndUser_container {
-  width: 200px;
+  width: 300px;
   height: 35px;
   
   display: flex;
