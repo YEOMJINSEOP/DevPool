@@ -68,8 +68,7 @@ function ProjectRecom(props) {
         {
           isComplete && 
             <div className={styles.popUp}>
-              <h3>🚀 AI가 추천하는 프로젝트 주제 🚀</h3>
-              {recommendation && recommendation.map((theme) => <li key={theme}>{theme}</li> )}
+              {recommendation}
             </div>
         }
       </div>

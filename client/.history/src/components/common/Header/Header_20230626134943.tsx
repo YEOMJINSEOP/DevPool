@@ -23,8 +23,8 @@ function Header(){
         <div className={styles.divider}></div>
         <button onClick={()=> navigate('teamMaker')}>랜덤 팀 메이커</button>
         <div className={styles.divider}></div>
-        <button onClick={()=> navigate('/ai/project-recommend')}>🤖AI 프로젝트 추천</button>
-      </div>
+        <button onClick={()=> navigate('/ai/project-recommend')}>🧠AI 프로젝트 추천</button>
+      </div>🧠
       <div className={styles.loginAndUser_container}>
         {loggedIn ? (
         <>

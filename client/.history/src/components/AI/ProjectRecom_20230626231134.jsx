@@ -7,15 +7,12 @@ function ProjectRecom(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete]= useState(false);
   const [recommendation, setRecommenadation] = useState([]);
-
-  useEffect(() => {
-    console.log(recommendation);
-  }, [recommendation])
   const handleRecommend = (selectedCategory) => {
     setIsLoading(true);
     axios.get(`http://13.124.144.38/recommend/${selectedCategory}`)
     .then((res) => {
-      setRecommenadation(res.data.content.split('\n'));
+      console.log(res.data.content);
+      setRecommenadation(res.data.content);
       setIsLoading(false);
       setIsComplete(true);
     })
@@ -68,8 +65,7 @@ function ProjectRecom(props) {
         {
           isComplete && 
             <div className={styles.popUp}>
-              <h3>🚀 AI가 추천하는 프로젝트 주제 🚀</h3>
-              {recommendation && recommendation.map((theme) => <li key={theme}>{theme}</li> )}
+              {recommendation}
             </div>
         }
       </div>

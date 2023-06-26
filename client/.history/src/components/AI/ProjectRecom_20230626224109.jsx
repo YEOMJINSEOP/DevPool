@@ -4,38 +4,13 @@ import styles from './ProjectRecom.module.css';
 import axios from 'axios';
 
 function ProjectRecom(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isComplete, setIsComplete]= useState(false);
-  const [recommendation, setRecommenadation] = useState([]);
 
-  useEffect(() => {
-    console.log(recommendation);
-  }, [recommendation])
   const handleRecommend = (selectedCategory) => {
-    setIsLoading(true);
     axios.get(`http://13.124.144.38/recommend/${selectedCategory}`)
     .then((res) => {
-      setRecommenadation(res.data.content.split('\n'));
-      setIsLoading(false);
-      setIsComplete(true);
+      console.log(res);
     })
     .catch(console.error)
-  }
-
-  const renderContent = () => {
-    if (isLoading) {
-      return (
-        <div className={styles.spinner}>
-          <div className={styles.rect1}></div>
-          <div className={styles.rect2}></div>
-          <div className={styles.rect3}></div>
-          <div className={styles.rect4}></div>
-          <div className={styles.rect5}></div>
-        </div>
-      );
-    } else {
-      return;
-    }
   }
 
   return (
@@ -63,17 +38,6 @@ function ProjectRecom(props) {
           <p>BIG DATA</p>
         </div>
       </div>
-      <div className={styles.content}>
-        {renderContent()}
-        {
-          isComplete && 
-            <div className={styles.popUp}>
-              <h3>🚀 AI가 추천하는 프로젝트 주제 🚀</h3>
-              {recommendation && recommendation.map((theme) => <li key={theme}>{theme}</li> )}
-            </div>
-        }
-      </div>
-
       {/* <div className={styles.btnContainer}>
         <button className={styles.recommendBtn}>AI 프로젝트 추천받기</button>
       </div> */}

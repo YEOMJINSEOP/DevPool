@@ -121,18 +121,6 @@
   background-color: var(--color-white);
   position: relative;
   width: 80%;
-  min-height: 300px;
-  height: fit-content;
-  border: 3px solid var(--color-devPool);
-  border-radius: 10px;
-  transform: translateX(10%) translateY(-30%);
+  height: 600px;
   z-index: 999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.popUp > li { 
-  margin: 24px;
 }

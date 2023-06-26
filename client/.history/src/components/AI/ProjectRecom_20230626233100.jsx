@@ -15,6 +15,7 @@ function ProjectRecom(props) {
     setIsLoading(true);
     axios.get(`http://13.124.144.38/recommend/${selectedCategory}`)
     .then((res) => {
+      console.log(res.data.content);
       setRecommenadation(res.data.content.split('\n'));
       setIsLoading(false);
       setIsComplete(true);
