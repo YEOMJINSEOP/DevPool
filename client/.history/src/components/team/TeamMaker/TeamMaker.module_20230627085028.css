@@ -29,7 +29,7 @@
 .teamContainer {
   padding-top: 4px;
   padding-bottom: 4px;
-  min-height: 80.7vh;
+  height: 80.7vh;
   overflow: auto;
   display: grid;
   grid-template-columns: repeat(4, auto);
@@ -43,7 +43,7 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
   width: 20vw;
-  min-height: 200px;
+  height: 16vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,17 +85,8 @@
   background-color: var(--color-devPool);
   text-align: center;
   line-height: 40px;
-  color: var(--color-white);
 }
 
 .controller {
-  width: 20px;
-  height: 20px;
   font-size: 20px;
-  border-radius: 100%;
-  background-color: var(--color-devPool);
-  text-align: center;
-  color: white;
-  margin: 4px;
-  cursor: pointer;
 }
