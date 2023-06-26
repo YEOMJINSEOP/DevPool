@@ -6,7 +6,13 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
 
+    margin: 12px 0;
     padding: 30px;
+}
+
+.userBlockWrapper:hover {
+    transform: scale(1.02);
+    cursor: pointer;
 }
 
 /* .userBlockWrapper:hover {
