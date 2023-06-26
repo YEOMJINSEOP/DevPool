@@ -147,7 +147,7 @@ function TeamInfo(){
              }
             )
              .then(() => alert('팀에 참여했습니다!'))
-             .catch(() => alert('이미 팀에 참여했거나, 모집이 종료되었습니다.'))
+             .catch(console.error)
 
           }}>팀 참여하기</button>
           {
