@@ -33,7 +33,7 @@ function Header(){
           onClick={() => {
             navigate('/chat');
           }}>
-            쪽지함
+            채팅방
           </button>
           <button
             className={`${styles.sharedButtonStyle} ${styles.logoutButton}`}

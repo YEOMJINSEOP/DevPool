@@ -3,7 +3,7 @@ import styles from './MessageModal.module.css'
 import axios from 'axios';
 import { BASE_URL } from './UserInfo';
 import { getMemberId } from '../LogIn/LogIn';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { useRecoilState } from 'recoil';
 import { isLoggedIn } from '../../../../recoil/user';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +24,7 @@ export default function MessageModal({ receiverId }) {
   
     const handleSendMessage = () => {
       if(login == false) {
-        alert('쪽지를 보내려면 로그인이 필요합니다');
+        alert('채팅을 시작하려면 로그인이 필요합니다');
         navigate('/login');
         return;
       }
@@ -48,12 +48,12 @@ export default function MessageModal({ receiverId }) {
   
     return (
       <div>
-        <button onClick={openModal} className={styles.message_btn}>쪽지 보내기<MailOutlineIcon/></button>
+        <button onClick={openModal} className={styles.message_btn}>채팅<ChatBubbleIcon/></button>
         {isOpen && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
               <div>
-                <h2 style={{ marginBottom: '12px' }}>쪽지</h2>
+                <h2 style={{ marginBottom: '12px' }}>채팅</h2>
               </div>
               <div>
                 <textarea

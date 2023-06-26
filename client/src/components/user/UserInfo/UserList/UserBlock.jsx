@@ -1,7 +1,7 @@
 import React from 'react'
 import StackField from '../StackField'
 import styles from './UserBlock.module.css'
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { useNavigate } from 'react-router-dom';
 
 export default function UserBlock({ user }) {
@@ -24,7 +24,7 @@ export default function UserBlock({ user }) {
             <h3 className={styles.user_nickName}>
                 {user.nickName}
             </h3>
-            <button className={styles.mailBtn}><MailOutlineIcon /></button>
+            <button className={styles.mailBtn}><ChatBubbleIcon /></button>
         </div>
         <div className={styles.userBlockStackFiled}>
             {userStack && <StackField selectedStack={userStack} />}

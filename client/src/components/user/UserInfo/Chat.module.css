@@ -4,7 +4,7 @@
 
 .chat {
     width: 1000px;
-    margin: 20px 400px 0 250px;
+    margin: 20px 280px 0 200px;
     display: flex;
     justify-content: space-between;
 }
@@ -12,24 +12,35 @@
 .chatLog {
     display: flex;
     flex-direction: column;
+    border: 2px solid lightgray;
+    border-radius: 12px;
+    text-align: center;
+    margin-right: 20px;
 }
 
 .chattings {
-    margin-left: 120px;
-    width: 600px;
+    width: 630px;
     margin-bottom: 100px;
+    margin: auto;
+    max-height: 570px;
+    overflow-y: auto;
+    padding: 16px;
 }
 
 .chatwrapper {
-    cursor: pointer;    
+    cursor: pointer;
+    border: solid 1.5px lightgray;
+    padding: 8px 20px;
+    border-radius: 8px;
+    min-width: 220px;
+    max-height: 80vh;
+    text-align: center;
 }
 
 .chatHeader {
     /* chat header에 대한 스타일 */
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #f2f2f2;
+    text-align: center;
+    padding: 0 0 15px 0;
   }
   
   .nickname {

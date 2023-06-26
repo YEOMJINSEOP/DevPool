@@ -3,12 +3,15 @@ import axios from 'axios';
 import { BASE_URL, getMemberId } from './LogIn/LogIn';
 import styles from './Chat.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from "@tanstack/react-query";
 
 export default function Chat() {
   const [chatLog, setChatLog] = useState([]);
   const [memberNickName, setMemberNickName] = useState('');
   const [selectedChat, setSelectedChat] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const [clickedChat, setClickedChat] = useState();
+  const [memberPools, setMemberPools] = useState();
   const navigate = useNavigate();
   const memberId = getMemberId().memberId;
 
@@ -16,18 +19,40 @@ export default function Chat() {
     const memberId = getMemberId().memberId;
     getChatLog(memberId);
     getUserNickName(memberId);
+    axios.get(`${BASE_URL}/api/member-pools`)
+    .then((res) => {
+      console.log(res);
+      setMemberPools(res.data.dataList)
+    })
   }, []);
 
   useEffect(() => {
     getChatLog(memberId);
   }, [newMessage]);
 
+  const { isLoading, isError, stateQueryData } =
+    useQuery(
+      ["chatLog"],
+      () => {
+          getChatLog(memberId);
+      },
+      {
+        refetchOnWindowFocus: true,
+        refetchInterval: 500,
+        refetchIntervalInBackground: true,
+        retry: 0,
+      }
+    );
+
   const getChatLog = async(memberId) => {
     console.log(chatLog)
     await axios.get(`${BASE_URL}/api/latter/${memberId}`).then((res) => {
-      console.log(res.data.dataList);
       const dataList = res.data.dataList;
       setChatLog([...dataList]);
+    }).then(() => {
+      if(clickedChat != undefined) {
+        setSelectedChat(chatLog[clickedChat]);
+      }
     });
   };
 
@@ -76,40 +101,59 @@ export default function Chat() {
   return (
     <div className={styles.chat}>
       <div className={styles.chatLog}>
+        <h2 style={{margin: "20px", paddingBottom: "12px", borderBottom: "2px solid lightgray"}}>채팅방 목록</h2>
         {chatLog.length === 0 ? (
           <div style={{padding: "80px"}}>
             <div className={styles.noMessages} style={{fontSize: "21px"}}>보낸 쪽지가 없습니다.</div>
-            <div 
+            <div
             onClick={()=>navigate('/')}
             style={{cursor: "pointer", marginTop: "30px", color: "#F25022"}}>메인 페이지로 이동</div>
           </div>
         ) :
         chatLog.map((chatGroup, idx) => {
+          var imageUrl = "";
           const otherNickName =
             chatGroup[0].senderNickName === memberNickName
               ? chatGroup[0].receiverNickName
               : chatGroup[0].senderNickName;
+              const otherId =
+              chatGroup[0].senderId === memberId
+                ? chatGroup[0].receiverId
+                : chatGroup[0].senderId;
+                console.log(otherId);
+              if(memberPools != null) {
+                imageUrl = memberPools.filter((data) => data.memberId == otherId);
+              }
+              console.log(imageUrl);
           return (
             <div
-              style={{ margin: '40px' }}
+              style={{ margin: '14px 32px' }}
               className={styles.chatwrapper}
               key={idx}
-              onClick={() => handleChatClick(chatGroup)}
+              onClick={() => {
+                handleChatClick(chatGroup);
+                setClickedChat(idx);
+              }}
             >
-              <div className={styles.chatHeader}>
-                <div className={styles.nickname}>{otherNickName}</div>
+              <div style={{display: "flex"}}>
+                <img src={imageUrl[0].imageUrl == undefined ? "" : imageUrl[0].imageUrl} alt='유저 이미지' style={{width: "50px", height: "50px", borderRadius: "100%"}}/>
+                <div style={{marginLeft: "17px"}}>
+                  <div className={styles.chatHeader}>
+                    <div className={styles.nickname}>{otherNickName}</div>
+                  </div>
+                  <div>{`{${chatGroup[0].content}}`}</div>
+                </div>
               </div>
-              <div>{chatGroup[0].content}</div>
             </div>
           );
         })}
       </div>
       <div
-      className={chatLog.length > 0 ? 'box' : 'none'}>
-      {selectedChat.length > 0 && (
+      className={chatLog.length > 0 ? 'box' : 'none '}>
+      {selectedChat.length > 0 ? (
         <div className={styles.chattings}>
           <div>
-            <h2 style={{ margin: '20px 0 40px 0' }}>
+            <h2 style={{ margin: '20px 0 30px 0', textAlign: 'center', borderBottom: "solid 2px lightgray", paddingBottom: "12px" }}>
               {selectedChat[0].senderNickName === memberNickName
                 ? selectedChat[0].receiverNickName
                 : selectedChat[0].senderNickName}님과의 채팅
@@ -157,7 +201,7 @@ export default function Chat() {
             className={styles.button}>Send</button>
           </div>
         </div>
-      )}
+      ) : <div style={{padding: "50px"}}>선택된 쪽지가 없습니다.</div>}
       </div>
     </div>
   );

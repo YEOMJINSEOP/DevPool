@@ -169,7 +169,7 @@ export default function UserInfo(Member) {
             id={"relatedSite " + item.id}
             key={"relatedSite" + idx}
             onClick={()=>handleClick(item.name)}>
-              {idx+1}. {item.name}
+              {item.name}
             </li>
           );
         })}
