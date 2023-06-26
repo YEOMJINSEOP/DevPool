@@ -1,0 +1,10 @@
+.categoryBox {
+  display: flex;
+  justify-content: center;
+}
+
+
+.categoryLogo {
+  width: 200px;
+  height: 200px;
+}

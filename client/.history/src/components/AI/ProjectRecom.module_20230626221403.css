@@ -1,0 +1,11 @@
+.categoryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.categoryLogo {
+  width: 200px;
+  height: 200px;
+}
