@@ -80,20 +80,21 @@ export default function UserInfo(Member) {
         <img 
         className={styles.user_img}
         alt='User Img' 
-        style={{"width":"150px"}}
+        style={{"width":"150px", height: "150px"}}
         src={state.imageUrl}/>
         {/* <button className={styles.profileBtn}>프로필 변경</button> */}
       </div>
       <div className={styles.user_box_middle}>
         <p>
           <div className={styles.nameLabel}>
-            <label>이름</label>
-          {state.nickName}</div>
+            <label style={{marginRight: "20px"}}>이름</label>
+            <span style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.3)", padding: "4px", borderRadius: "6px"}}>{state.nickName}</span>
+          </div>
         </p>
         <div className={styles.user_project}>
           <label>관심 분야</label>
         </div>
-        <div className={styles.stack_list}>
+        <div className={state.techField.length == 0 ? 'stack_list' : 'stack_exist'}>
           {state.techField.map((item) => {
             return (
               <li className={styles.stack_item}>{item.name}</li>
@@ -115,7 +116,7 @@ export default function UserInfo(Member) {
       <div className={styles.user_project}>
         <label htmlFor='project'>프로젝트 경험</label>
       </div>
-      <div className={styles.project_wrapper}>
+      <div className={state.project.length === 0 ? 'project_wrapper' : 'project_exist'}>
       {state.project.map((item, idx) => {
           let userProjectStack = [];
           item.stack.map((current) => {
@@ -123,6 +124,7 @@ export default function UserInfo(Member) {
           });
         return (
         <li id={"project " + item.id}
+         className={styles.project_list}
          key={idx}>
           <span>
           {idx+1}. 
@@ -144,7 +146,7 @@ export default function UserInfo(Member) {
     <div className={styles.user_certificate}>
       <label htmlFor='certificate'>자격증</label>
     </div>
-    <div className={styles.certificate_wrapper}>
+    <div className={state.certificate.length === 0 ? 'certificate_wrapper' : 'exist'}>
       {state.certificate.map((item, idx) => {
         return (
           <li
@@ -159,7 +161,7 @@ export default function UserInfo(Member) {
       <div className={styles.user_relatedSite}>
         <label htmlFor='relatedSited'>관련 사이트</label>
       </div>
-        <div className={styles.relatedSite_wrapper}>
+        <div className={state.site.length === 0 ? 'relatedSite_wrapper' : 'exist'}>
         {state.site.map((item, idx) => {
           return (
             <li 

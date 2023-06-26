@@ -68,7 +68,8 @@ export default function LogIn() {
         alert('DevPool 이용을 위해 기본 정보를 등록해주세요!');
         navigate('/user/form');
       });
-      } catch (error) { 
+      } catch (error) {
+          alert('로그인에 실패했습니다.')
           console.log(error);
       }
   }

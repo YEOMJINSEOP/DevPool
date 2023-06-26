@@ -95,3 +95,39 @@ textarea {
 
   font-size: 16px;
 }
+
+.exist {
+  margin: 20px 0 0 0;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+}
+
+.project_exist {
+  margin: 20px 0 0 0;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  padding: 12px;
+}
+
+.project_wrapper, .certificate_wrapper, .relatedSite_wrapper {
+  margin: 20px 0 0 0;
+  height: 70px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.stack_exist {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 6px;
+}
+
+.stack_list {
+  height: 55px;
+  margin-top: 18px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+}

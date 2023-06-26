@@ -11,6 +11,7 @@ import styled from '@emotion/styled';
 import axios from 'axios';
 import { getMemberId } from '../LogIn/LogIn';
 import { getMemberInfo } from '../../../../api/api';
+import { useNavigate } from 'react-router-dom';
 
 export const stackOptions = [
   { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
@@ -66,6 +67,7 @@ export default function UserInfo(Member) {
     certificate: [],
     relatedSite: [],
   });
+  const navigate = useNavigate();
 
   const handleUserInterest = (selectedTechStack) => {
     const trueTechStack =  Object.entries(selectedTechStack).
@@ -308,7 +310,7 @@ export default function UserInfo(Member) {
         alert('Devpool 등록이 완료 되었습니다!')
       }
     }).catch((err) => console.log(err));
-
+    navigate('/user/list')
   }
 
   const handleProject = (e) => {setProject(e.target.value)};
@@ -386,10 +388,12 @@ export default function UserInfo(Member) {
       projectUrl={projectUrl}
       handleProjectUrl={handleProjectUrl}
       />
+      <ul className={styles.project_list}>
       {member.project.map((item, idx) => {
         return (
         <li id={"project " + item.id}
          key={idx}
+         className={styles.project_item}
          >
           <span>
           {item.content} 
@@ -400,11 +404,12 @@ export default function UserInfo(Member) {
           <span className={styles.project_span}>
           {item.start} ~ {item.end}
           </span>
-          <div>링크 : {item.url}</div>
+          <span className={styles.project_link}>링크 : {item.url}</span>
           <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button>
         </li>
         )
       })}
+      </ul>
     </div>
     {/* 자격증 */}
     <div className={styles.user_certificate}>

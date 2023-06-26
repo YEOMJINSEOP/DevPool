@@ -7,14 +7,13 @@
     margin: auto;
     padding: 60px; */
     width: var(--container-width);
-    height: var(--container-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
     position: relative;
-    top: 80px;
+    top: 40px;
 }
 
 .user_wrapper {
@@ -36,7 +35,7 @@
 }
 
 .user_img {
-    border-radius: 50%;
+    border-radius: 100%;
 }
 
 .inputLabel {
@@ -63,7 +62,7 @@
 }
 
 .user_box_middle {
-    width: 370px;
+    width: 500px;
 }
 
 .profileBtn {
@@ -227,7 +226,10 @@
 
 .certificate_wrapper, .relatedSite_wrapper {
     margin: 20px 0 0 0;
-}project_wrapper
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .submitBtn:hover {
     background-color: #a9abaa;
@@ -261,8 +263,12 @@ label {
     border-radius: 17px;
 }
 
-.project_wrapper {
-    margin: 24px 0 0 0;
+.project_list {
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin: 12px 42px;
+    padding: 8px;
 }
 
 .certificate_wrapper, .relatedSite_wrapper, .project_wrapper {
@@ -271,14 +277,29 @@ label {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
+.exist {
+    height: 200px;
+}
+
+.project_wrapper {
+    padding: 12px;
+}
+
+.relatedSite_wrapper, .certificate_wrapper {
+    padding: 18px;
+}
+
 .stack_item, .certificate_list {
     list-style: none;
-    padding: 6px 0;
+    padding: 6px 6px;
     margin: 4px 8px;
     font-family: var(--font-family-DoHyeon);
     border: 1px solid #a9abaa;
     border-radius: 15px;
     text-align: center;
+}
+
+.stack_item {
     width: 102px;
 }
 
@@ -290,4 +311,3 @@ label {
     border-radius: 15px;
     padding: 6px;
 }
-

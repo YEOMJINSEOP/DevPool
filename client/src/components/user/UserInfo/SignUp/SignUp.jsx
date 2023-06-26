@@ -65,7 +65,7 @@ export default function SignUp() {
         const { data } = response;
         console.log(data.idCheck);
         if(data.idCheck) {
-
+          alert('확인되었습니다!');
           setIsBjIdExist(true);
         }
         else {

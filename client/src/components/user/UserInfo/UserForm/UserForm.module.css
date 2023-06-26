@@ -145,7 +145,7 @@
     border-radius: 6px;
     margin: 20px 0 0 0;
     display: flex;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .interest_input {
@@ -268,3 +268,17 @@
   margin: 0 0 0 10px;
   font-family: var(--font-family-DoHyeon);
 }
+
+.project_list {
+    gap: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 0 0 0 30px;
+  }
+
+  .project_item {
+    padding-bottom: 10px;
+  }
+
+  .project_link {
+    margin-left: 24px;
+  }
