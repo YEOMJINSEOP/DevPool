@@ -104,6 +104,8 @@ export default function Chat() {
           );
         })}
       </div>
+      <div
+      className={chatLog.length > 0 ? 'box' : 'none'}>
       {selectedChat.length > 0 && (
         <div className={styles.chattings}>
           <div>
@@ -157,5 +159,6 @@ export default function Chat() {
         </div>
       )}
       </div>
+    </div>
   );
 }

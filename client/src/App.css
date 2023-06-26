@@ -131,3 +131,14 @@ textarea {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
 }
+
+.box {
+  border: solid lightgray 2px;
+   border-radius: 12px; 
+   min-height: 650px; 
+   min-width: 717px;
+}
+ 
+.none {
+  display: none;
+}
