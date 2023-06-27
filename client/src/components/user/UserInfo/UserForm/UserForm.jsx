@@ -411,7 +411,7 @@ export default function UserInfo(Member) {
           {item.content} 
           </div>
           {stackOptions.filter(option => item.stack.includes(option.label)).map((option, index) => (
-            <div key={index} className={styles.project_stack_icon}>{option.icon}</div>)
+            <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
           )}
           <div className={styles.project_span}>
           {item.start} ~ {item.end}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
 import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './UserForm/UserForm.module.css'
+import styles from './StackField.module.css'
 
 
 

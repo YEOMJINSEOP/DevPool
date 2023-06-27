@@ -198,9 +198,9 @@
 }
 
 .icon {
-    width: 50px;
-    height: 50px;
-    margin: 8px;
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
 }
 
 .project_span {
@@ -278,6 +278,7 @@
   }
 
   .project_item {
+    display: flex;
     padding-bottom: 10px;
     text-align: center;
     border: 1px solid gray;
