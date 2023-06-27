@@ -19,7 +19,7 @@ function Header(){
         <div className={styles.divider}></div>
         <button className={styles.headerBtn} onClick={() => {
           loggedIn ? navigate('/team/create') : alert('로그인이 필요합니다!');
-        }}>✋ 팀 만들기</button>
+        }}>✋ 팀 모집하기</button>
         <div className={styles.divider}></div>
         <button className={styles.headerBtn} onClick={()=> navigate('teamMaker')}>🎲 랜덤 팀 메이커</button>
         <div className={styles.divider}></div>
