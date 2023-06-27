@@ -12,6 +12,8 @@ import axios from 'axios';
 import { getMemberId } from '../LogIn/LogIn';
 import { getMemberInfo } from '../../../../api/api';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { isLoggedIn } from '../../../../recoil/user';
 
 export const stackOptions = [
   { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
@@ -67,6 +69,8 @@ export default function UserInfo(Member) {
     certificate: [],
     relatedSite: [],
   });
+  //로그인 여부 확인
+  const [login, setLogin] = useRecoilState(isLoggedIn);
   const navigate = useNavigate();
 
   const handleUserInterest = (selectedTechStack) => {
@@ -81,6 +85,11 @@ export default function UserInfo(Member) {
 
   // 멤버의 이름 불러옴 
   useEffect(() => {
+    if(login == false) {
+      alert('로그인 후 이용가능한 페이지입니다.');
+      navigate('/');
+      return;
+    }
     const memberInfo = getMemberId();
     console.log(memberInfo.memberId)
     axios.get(`${BASE_URL}/api/member/${memberInfo.memberId}`).then((res) => {
@@ -362,7 +371,9 @@ export default function UserInfo(Member) {
       </div>
     </div>
     <div className={styles.user_stack_wrapper}>
-      <label htmlFor='stack'>기술 스택</label>
+      <div style={{marginBottom: "14px"}}>
+        <label htmlFor='stack'>기술 스택</label>
+      </div>
       <StackTags
       selectedStack={selectedStack}
       handleSelectedStack={handleSelectedStack}
@@ -388,23 +399,24 @@ export default function UserInfo(Member) {
       projectUrl={projectUrl}
       handleProjectUrl={handleProjectUrl}
       />
-      <ul className={styles.project_list}>
+      <ul className={member.project.length === 0 ? 'project_wrapper' : 'project_exist'}>
       {member.project.map((item, idx) => {
         return (
         <li id={"project " + item.id}
          key={idx}
          className={styles.project_item}
+         style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
          >
-          <span>
+          <div>
           {item.content} 
-          </span>
+          </div>
           {stackOptions.filter(option => item.stack.includes(option.label)).map((option, index) => (
-            <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
+            <div key={index} className={styles.project_stack_icon}>{option.icon}</div>)
           )}
-          <span className={styles.project_span}>
+          <div className={styles.project_span}>
           {item.start} ~ {item.end}
-          </span>
-          <span className={styles.project_link}>링크 : {item.url}</span>
+          </div>
+          {item.url && <div className={styles.project_link}>링크 : {item.url}</div>}
           <button onClick={handleDeleteBtn2} className={styles.project_deleteBtn}>삭제</button>
         </li>
         )
@@ -422,13 +434,14 @@ export default function UserInfo(Member) {
         onChange={(event)=>setCertificate(event.target.value)}/>
         <button id="certificate" onClick={handleAddBtn} className={styles.certificateBtn}>추가하기</button>
     </div>
-    <div className={styles.certificate_wrapper}>
+    <div className={member.certificate.length === 0 ? 'certificate_wrapper' : 'exist'}>
       {member.certificate.map((item, idx) => {
         return (
           <li 
           className={styles.certificate_list}
           id={"certificate " + item.id}
-          key={"certificate" + idx}>
+          key={"certificate" + idx}
+          style={{border: '1px solid lightgray', borderRadius: '8px', padding: "4px 6px", margin: "0 6px"}}>
             {item.content}
             <button onClick={handleDeleteBtn2} className={styles.certificate_deleteBtn}>삭제</button>
           </li>
@@ -444,9 +457,10 @@ export default function UserInfo(Member) {
           value={relatedSite}
           onChange={(event)=>setRelatedSite(event.target.value)}/>
           <button id="relatedSite" onClick={handleAddBtn} className={styles.relatedSiteBtn}>추가하기</button>
+      <div className={member.relatedSite.length === 0 ? 'relatedSite_wrapper' : 'exist'}>
       {member.relatedSite.map((item, idx) => {
         return (
-          <div style={{display: 'flex'}}
+          <div style={{display: 'flex', border: '1px solid lightgray', borderRadius: '8px', padding: "4px 6px", margin: "0 6px"}}
           id={"relatedSite " + item.id}
           key={"relatedSite" + idx}>
             <li 
@@ -458,6 +472,7 @@ export default function UserInfo(Member) {
           </div>
         );
       })}
+      </div>
     </div>
     <button onClick={handleSubmit} className={styles.submitBtn}>제출하기</button>
     </div>

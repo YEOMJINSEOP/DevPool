@@ -154,8 +154,9 @@ export default function Chat() {
       <div
       className={chatLog.length > 0 ? 'box' : 'none '}>
       {selectedChat.length > 0 ? (
+        <>
         <div className={styles.chattings}>
-          <div>
+          <div style={{display: "flex", flexDirection: "column", minHeight: '535px'}}>
             <h2 style={{ margin: '20px 0 30px 0', textAlign: 'center', borderBottom: "solid 2px lightgray", paddingBottom: "12px" }}>
               {selectedChat[0].senderNickName === memberNickName
                 ? selectedChat[0].receiverNickName
@@ -193,17 +194,18 @@ export default function Chat() {
               )
             })}
           </div>
-          <div className={styles.inputWrapper}>
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => {setNewMessage(e.target.value); getChatLog(memberId);}}
-              className={styles.input}
-            />
-            <button onClick={handleSendMessage}
-            className={styles.button}>Send</button>
-          </div>
         </div>
+         <div className={styles.inputWrapper}>
+         <input
+           type="text"
+           value={newMessage}
+           onChange={(e) => {setNewMessage(e.target.value); getChatLog(memberId);}}
+           className={styles.input}
+         />
+         <button onClick={handleSendMessage}
+         className={styles.button}>Send</button>
+       </div>
+       </>
       ) : <div style={{padding: "50px"}}>선택된 쪽지가 없습니다.</div>}
       </div>
     </div>
