@@ -103,7 +103,7 @@ function TeamMaker() {
         <div key={index} className={styles.teamBlock}>
           <h2 className={styles.teamHeader}>팀 {index + 1}</h2>
           <div className={styles.divider}></div>
-          <div className={styles.studentList}>
+          <div>
             {team.map(student => (
               <p key={student.번호}>{student.이름}</p>
             ))}
