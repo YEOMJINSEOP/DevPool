@@ -215,11 +215,6 @@
 .chatBtn {
   background-color: var(--color-devPool);
   color: var(--color-white);
-  border-radius: 10px;
-  width: 60px;
-  height: 24px;
-  transform: translateY(-4px) translateX(4px);
-  font-size: 12px;
 }
 
 

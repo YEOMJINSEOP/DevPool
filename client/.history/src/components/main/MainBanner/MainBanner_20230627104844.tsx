@@ -72,7 +72,7 @@ function MainBanner() {
           <ul className={styles.rankingList}>
             {baekJoonRank.map((info, idx) => (
               <li className={styles.rankingBlock}>
-                <p className={styles.crown}>{idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '🏃🏻'}</p>
+                <p className={styles.crown}>{idx === 0 ? '👑' : ' '}</p>
                 <p className={styles.rankingId}>{info.userId}</p>
                 <div className={styles.rankingSolvedCount}>
                   <span>Solved: {info.solvedCount}</span>

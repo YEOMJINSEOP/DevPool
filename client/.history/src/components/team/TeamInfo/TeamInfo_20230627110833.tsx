@@ -7,7 +7,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isLoggedIn, userState } from '../../../recoil/user';
 import { getMemberId } from '../../user/UserInfo/LogIn/LogIn';
-import MessageModal from '../../user/UserInfo/UserInfo/MessageModal';
 
 type TechStack = {
   name: string;
@@ -166,18 +165,8 @@ function TeamInfo(){
         </div>
       </div>
     </div>
-    <div className={styles.teamMemberContainer}>
-      <div className={styles.teamMemberStatus}>
-        <h3 className={styles.teamMemberTitle}>현재 팀원 리스트</h3>
-        <div className={styles.divider}></div>
-        <ul className={styles.teamMemberList}>
-          {teamMemberList.map((member) => 
-          <li>
-            <div>👨🏻‍💻 {member.nickName} <button className={styles.chatBtn}>연락하기</button></div>
-          </li>
-          )}     
-        </ul>
-      </div>      
+    <div>
+      {teamMemberList.map((member) => <li>member</li>)}
     </div>
     <CommentBox teamId={team.teamId}/>
   </>

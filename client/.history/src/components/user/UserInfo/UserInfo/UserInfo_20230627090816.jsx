@@ -16,6 +16,7 @@ export const stackOptions = [
   { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
   { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
   { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
+
 ];
 
 const TechFieldContainer = styled.div`
@@ -27,16 +28,6 @@ export const BASE_URL = process.env.REACT_APP_API_URL;
 //나중에 axios로 회원 정보 가져와서 member의 초기 state로 설정할거임. 
 
 export default function UserInfo(Member) {
-  const stackOptions = [
-    { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
-    { id: '2', label: 'CSS', icon: <FontAwesomeIcon className={styles.icon} icon={faCss3Alt} size="xl" style={{color: "#104094",}} /> },
-    { id: '3', label: 'JavaScript', icon: <FontAwesomeIcon className={styles.icon} icon={faJsSquare} size="xl" style={{color: "#ebee20",}} /> },
-    { id: '4', label: 'Vue.js', icon: <FontAwesomeIcon className={styles.icon} icon={faVuejs} size="xl" style={{color: "#4d8217",}} /> },
-    { id: '5', label: 'React.js', icon: <FontAwesomeIcon className={styles.icon} icon={faReact} size="xl" style={{color: "#3a8fcf",}} /> },
-    { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
-    { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
-    { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
-  ];
 
   const { userId } = useParams();
   const { state } = useLocation();
@@ -134,20 +125,18 @@ export default function UserInfo(Member) {
         return (
         <li id={"project " + item.id}
          className={styles.project_list}
-         key={idx}
-         style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-         >
-          <div>
+         key={idx}>
+          <span>
           {item.name}
-          </div>
+          </span>
           {stackOptions.filter(option => 
             userProjectStack.includes(option.label)
           ).map((option, index) => (
-            <div key={index} className={styles.project_stack_icon}>{option.icon}</div>)
+            <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
           )}
-          <div className={styles.project_span}>
+          <span className={styles.project_span}>
           {item.startDate} ~ {item.endDate}
-          </div>
+          </span>
         </li>
         )
       })}
