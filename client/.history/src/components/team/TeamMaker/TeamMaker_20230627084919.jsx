@@ -90,9 +90,9 @@ function TeamMaker() {
         <div className={styles.countContainer}>
           <p>팀별 인원</p>
           <div className={styles.countController}>
-            <div className={styles.controller}onClick={addTeamCount}>+</div>
-            <div className={styles.teamCountInput}>{teamCount}</div>
-            <div className={styles.controller}onClick={reduceTeamCount}>-</div>
+            <div onClick={addTeamCount}>+</div>
+            <div className={styles.teamCountInput}>teamCount</div>
+            <div onClick={reduceTeamCount}>-</div>
           </div>          
         </div>       
         <button className={styles.createBtn} onClick={() => handleGenerateTeams(teamCount)}>팀 생성</button>

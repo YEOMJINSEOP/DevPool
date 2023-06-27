@@ -71,14 +71,6 @@ function TeamMaker() {
   const handleTeamCount = (e) => {
     setTeamCount(e.target.value);
   }
-
-  const addTeamCount = () => {
-    setTeamCount((prev) => prev+1);
-  }
-
-  const reduceTeamCount = () => {
-    setTeamCount((prev) => prev-1);
-  }
   
   return (
     <div>
@@ -89,11 +81,7 @@ function TeamMaker() {
         </div> 
         <div className={styles.countContainer}>
           <p>팀별 인원</p>
-          <div className={styles.countController}>
-            <div className={styles.controller}onClick={addTeamCount}>+</div>
-            <div className={styles.teamCountInput}>{teamCount}</div>
-            <div className={styles.controller}onClick={reduceTeamCount}>-</div>
-          </div>          
+          <input className={styles.teamCountInput} onChange={(e) => handleTeamCount(e)} type="number" />
         </div>       
         <button className={styles.createBtn} onClick={() => handleGenerateTeams(teamCount)}>팀 생성</button>
         {teams && <button className={styles.downloadBtn} onClick={handleDownload}>팀 다운로드 </button>}
