@@ -145,7 +145,7 @@ export default function Chat() {
                   <div className={styles.chatHeader}>
                     <div className={styles.nickname}>{otherNickName}</div>
                   </div>
-                  <div>{`{${chatGroup[0].content}}`}</div>
+                  <div>{`{${chatGroup[chatGroup.length - 1].content}}`}</div>
                 </div>
               </div>
             </div>
