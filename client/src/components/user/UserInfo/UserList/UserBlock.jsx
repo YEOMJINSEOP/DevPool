@@ -44,7 +44,7 @@ export default function UserBlock({ user }) {
     <div className={styles.userBlockWrapper} onClick={navToUserInfo}>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <img className={styles.user_img} src={user.imageUrl} alt="" />
-        <div>
+        <div style={{marginLeft: "12px"}}>
           <div style={{ display: 'flex' }}>
             <h3 className={styles.user_nickName} style={{ margin: 'auto' }}>
               {user.nickName}

@@ -166,7 +166,7 @@ export default function Chat() {
               const timeString = chat.createTime;
               const time = timeString.substring(11, 16);
               return (
-                <div style={{margin: "18px"}} 
+                <div style={{margin: "7px 12px"}} 
                 className={
                   chat.senderNickName === memberNickName
                     ? styles.myWrapper
