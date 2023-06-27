@@ -30,9 +30,9 @@
 .chatwrapper {
     cursor: pointer;
     border: solid 1.5px lightgray;
-    padding: 8px 20px;
+    padding: 8px 8px;
     border-radius: 8px;
-    min-width: 220px;
+    min-width: 260px;
     max-height: 80vh;
     text-align: center;
 }
@@ -40,13 +40,12 @@
 .chatHeader {
     /* chat header에 대한 스타일 */
     text-align: center;
-    padding: 0 0 15px 0;
+    padding: 0 0 12px 0;
   }
   
   .nickname {
     /* nickname에 대한 스타일 */
     font-weight: bold;
-    margin-right: 10px;
   }
   
   .chatContent {
@@ -98,7 +97,7 @@
     left: 0;
     width: 100%;
     background-color: transparent;
-    padding: 0 380px 0 620px;
+    padding: 0 355px 0 570px;
     display: flex;
     align-items: center;
   }
