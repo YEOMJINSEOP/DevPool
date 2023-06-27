@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './UserInfo.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHtml5, faJsSquare, faJava, faCss3Alt, faVuejs, faReact, faAngular, faNode, faApple, faAndroid } from '@fortawesome/free-brands-svg-icons'
+import { faMicrochip, faArrowsToEye } from '@fortawesome/free-solid-svg-icons';
 import StackField from '../StackField';
 import styled from '@emotion/styled';
 import { useLocation, useParams } from 'react-router-dom';
@@ -17,6 +18,10 @@ export const stackOptions = [
   { id: '6', label: 'Angular', icon: <FontAwesomeIcon className={styles.icon} icon={faAngular} size="xl" style={{color: "#b91d1b",}} /> },
   { id: '7', label: 'Node.js', icon: <FontAwesomeIcon className={styles.icon} icon={faNode} size="xl" style={{color: "#5fb922",}} /> },
   { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
+  { id: '9', label: 'Deep learning(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faMicrochip} size="xl" style={{color: "#235ab8",}} /> },
+  { id: '10', label: 'Computer Vision(AI)', icon: <FontAwesomeIcon className={styles.icon} icon={faArrowsToEye} size="xl" style={{color: "#298b9e",}} /> },
+  { id: '11', label: 'IOS', icon: <FontAwesomeIcon className={styles.icon} icon={faApple} size="xl" style={{color: "#0d0d0d",}} /> },
+  { id: '12', label: 'Android', icon: <FontAwesomeIcon className={styles.icon} icon={faAndroid} size="xl" style={{color: "#5fb922",}} /> },
 ];
 
 const TechFieldContainer = styled.div`
@@ -151,7 +156,7 @@ export default function UserInfo(Member) {
             <li id={"project " + item.id}
              className={styles.project_list}
              key={idx}
-             style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+             style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: "57px"}}
              >
               <div>
               {item.name}

@@ -39,12 +39,18 @@ export default function MessageModal({ receiverId }) {
 
       console.log(senderId);
       console.log(receiverId);
-      
-      axios.post(`${BASE_URL}/api/latter`, newMessage)
+
+      if(message == "") {
+        alert("내용을 입력해주세요")
+        return;
+      } else {
+        axios.post(`${BASE_URL}/api/latter`, newMessage)
         .then((res) => {
           console.log(res);
           setIsOpen(false);
         });
+      }
+      
     };
   
     return (

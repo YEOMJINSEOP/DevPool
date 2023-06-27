@@ -405,7 +405,7 @@ export default function UserInfo(Member) {
         <li id={"project " + item.id}
          key={idx}
          className={styles.project_item}
-         style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+         style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: "55px"}}
          >
           <div>
           {item.content} 

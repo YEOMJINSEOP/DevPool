@@ -82,7 +82,8 @@ export default function Chat() {
     console.log(senderId);
     console.log(receiverId);
 
-    if(newMessage == null) {
+    if(newMessage == "") {
+      alert("내용을 입력해주세요")
       return;
     }
 
