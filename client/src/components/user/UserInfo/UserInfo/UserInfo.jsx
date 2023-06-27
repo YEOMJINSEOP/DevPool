@@ -127,7 +127,6 @@ export default function UserInfo(Member) {
          className={styles.project_list}
          key={idx}>
           <span>
-          {idx+1}. 
           {item.name}
           </span>
           {stackOptions.filter(option => 

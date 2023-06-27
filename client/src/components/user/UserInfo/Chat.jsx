@@ -111,7 +111,9 @@ export default function Chat() {
           </div>
         ) :
         chatLog.map((chatGroup, idx) => {
-          var imageUrl = "";
+          var userUrl = [{
+            imageUrl: "abcd"
+          }]
           const otherNickName =
             chatGroup[0].senderNickName === memberNickName
               ? chatGroup[0].receiverNickName
@@ -122,9 +124,9 @@ export default function Chat() {
                 : chatGroup[0].senderId;
                 console.log(otherId);
               if(memberPools != null) {
-                imageUrl = memberPools.filter((data) => data.memberId == otherId);
+                userUrl = memberPools.filter((data) => data.memberId == otherId);
               }
-              console.log(imageUrl);
+              console.log(userUrl);
           return (
             <div
               style={{ margin: '14px 32px' }}
@@ -136,7 +138,7 @@ export default function Chat() {
               }}
             >
               <div style={{display: "flex"}}>
-              <img src={imageUrl == "" ? "" : imageUrl[0].imageUrl} alt='유저 이미지' style={{width: "50px", height: "50px", borderRadius: "100%"}}/>
+              <img src={userUrl[0].imageUrl} alt='유저 이미지' style={{width: "50px", height: "50px", borderRadius: "100%"}}/>
                 <div style={{marginLeft: "17px"}}>
                   <div className={styles.chatHeader}>
                     <div className={styles.nickname}>{otherNickName}</div>
