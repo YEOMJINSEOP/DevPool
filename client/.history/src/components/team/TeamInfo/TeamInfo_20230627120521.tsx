@@ -173,7 +173,7 @@ function TeamInfo(){
         <ul className={styles.teamMemberList}>
           {teamMemberList.map((member) => 
           <li>
-            <div> <span className={styles.memberIcon}>{member.memberId === team.hostMember.memberId ? '🚩 팀장' : '👨🏻‍💻'}</span> {member.nickName} <button className={styles.chatBtn} onClick={() => navigate(`/user/info/${member.memberId}`)}>연락하기</button></div>
+            <div> <span className={styles.memberIcon}>{member.memberId === team.hostMember.memberId ? '👑 팀장' : '👨🏻‍💻'}</span> {member.nickName} <button className={styles.chatBtn} onClick={() => navigate(`/user/info/${member.memberId}`)}>연락하기</button></div>
           </li>
           )}     
         </ul>
