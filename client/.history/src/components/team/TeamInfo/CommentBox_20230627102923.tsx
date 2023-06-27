@@ -29,7 +29,7 @@ type Comment = {
 function CommentBox(props: CommentBoxProps): JSX.Element {
 
   const teamId = props.teamId;
-  const [currentMemberId, setCurrentMemberId] = useState(1);
+  const [currentMemberId, setCurrentMemberId] = useState(1)
 
   useEffect(() => {
     setCurrentMemberId(getMemberId().memberId);
