@@ -8,23 +8,23 @@ import messageImg from '../img/messageIcon.png';
 const techField = [
   {
     name: 'Front-end',
-    icon: <img className={styles.recruitFieldIcon} src="/image/javaScript.png" alt="" />,
+    icon: <div className={styles.recruitFieldIcon}>Front-end</div>,
   },
   {
     name: 'Back-end',
-    icon: <img className={styles.recruitFieldIcon} src="/image/server.png" alt="" />,
+    icon: <div className={styles.recruitFieldIcon}>Back-end</div>,
   },
   {
     name: "Android",
-    icon: <img className={styles.recruitFieldIcon}src="/image/android.png" alt="" />,
+    icon: <div className={styles.recruitFieldIcon}>Android</div>,
   },
   {
     name: "IOS",
-    icon: <img className={styles.recruitFieldIcon}src="/image/apple-logo.png" alt="" />,
+    icon: <div className={styles.recruitFieldIcon}>IOS</div>,
   },
   {
     name: "AI",
-    icon: <img className={styles.recruitFieldIcon}src="/image/deep-learning.png" alt="" />,
+    icon: <div className={styles.recruitFieldIcon}>AI</div>,
   }
 ];
 
@@ -39,12 +39,13 @@ export default function UserBlock({ user }) {
   console.log(user);
 
   const userStack = user.stack.slice(0, 5).map((item) => item.name);
+  const displayedTechFields = user.techField.slice(0, 2);
 
   return (
     <div className={styles.userBlockWrapper} onClick={navToUserInfo}>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <img className={styles.user_img} src={user.imageUrl} alt="" />
-        <div style={{marginLeft: "12px"}}>
+        <div style={{marginLeft: "12px", width: "210px"}}>
           <div style={{ display: 'flex' }}>
             <h3 className={styles.user_nickName} style={{ margin: 'auto' }}>
               {user.nickName}
@@ -53,8 +54,8 @@ export default function UserBlock({ user }) {
               <img src={messageImg} alt="채팅 사진" style={{ width: '25px', height: '25px' }} />
             </button>
           </div>
-          <div style={{ marginTop: '8px' }}>
-            {user.techField.map((field) => {
+          <div style={{ marginTop: '16px', display: "flex"}}>
+            {displayedTechFields.map((field) => {
               const matchingField = techField.find((tech) => tech.name === field.name);
               return matchingField && matchingField.icon;
             })}
