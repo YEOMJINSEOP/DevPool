@@ -6,6 +6,7 @@ import StackField from '../StackField';
 import styled from '@emotion/styled';
 import { useLocation, useParams } from 'react-router-dom';
 import MessageModal from './MessageModal';
+import axios from 'axios';
 
 export const stackOptions = [
   { id: '1', label: 'HTML', icon: <FontAwesomeIcon className={styles.icon} icon={faHtml5} size="xl" style={{color: "#f77408",}} /> },
@@ -38,12 +39,11 @@ export default function UserInfo(Member) {
     { id: '8', label: 'Java(Spring)', icon: <FontAwesomeIcon className={styles.icon} icon={faJava} size="xl" style={{color: "#20426f",}} /> },
   ];
 
-  const { userId } = useParams();
   const { state } = useLocation();
-  const userStack = [];
-  state.stack.map((item) => {
-    userStack.push(item.name);
-  })
+
+  const [userInfo, setUserInfo] = useState();
+  const [userStack, setUserStack] = useState([]);
+  const { userId } = useParams();
 
   // 관심사 state
   const [selectedInterest, setSelectedInterest] = useState('선택하기');
@@ -59,6 +59,21 @@ export default function UserInfo(Member) {
     certificate: [],
     relatedSite: [],
   });
+  
+  useEffect(()=> {
+    axios.get(`${BASE_URL}/api/member-pool/${userId}`)
+    .then((res) => {
+      console.log(res.data.data);
+      setUserInfo(res.data.data);
+
+      const tmpStack = [];
+      res.data.data.stack.map((item) => {
+        tmpStack.push(item.name);
+      });
+
+      setUserStack(tmpStack);
+    })
+  }, [])
 
   // member interest 설정
     useEffect(() => {
@@ -82,109 +97,111 @@ export default function UserInfo(Member) {
 
   return (
   <div className={styles.user}>
-    <div className={styles.user_wrapper}>
-    <div className={styles.user_box}>
-      {/* 유저 박스 왼쪽(이미지) */}
-      <div className={styles.userBox_left}>
-        <img 
-        className={styles.user_img}
-        alt='User Img' 
-        style={{"width":"150px", height: "150px"}}
-        src={state.imageUrl}/>
-        {/* <button className={styles.profileBtn}>프로필 변경</button> */}
-      </div>
-      <div className={styles.user_box_middle}>
-        <p>
-          <div className={styles.nameLabel}>
-            <label style={{marginRight: "20px"}}>이름</label>
-            <span style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.3)", padding: "4px", borderRadius: "6px"}}>{state.nickName}</span>
+    {userInfo && 
+        <div className={styles.user_wrapper}>
+        <div className={styles.user_box}>
+          {/* 유저 박스 왼쪽(이미지) */}
+          <div className={styles.userBox_left}>
+            <img 
+            className={styles.user_img}
+            alt='User Img' 
+            style={{"width":"150px", height: "150px"}}
+            src={userInfo.imageUrl}/>
+            {/* <button className={styles.profileBtn}>프로필 변경</button> */}
           </div>
-        </p>
-        <div className={styles.user_project}>
-          <label>관심 분야</label>
+          <div className={styles.user_box_middle}>
+            <p>
+              <div className={styles.nameLabel}>
+                <label style={{marginRight: "20px"}}>이름</label>
+                <span style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.3)", padding: "4px", borderRadius: "6px"}}>{userInfo.nickName}</span>
+              </div>
+            </p>
+            <div className={styles.user_project}>
+              <label>관심 분야</label>
+            </div>
+            <div className={userInfo.techField.length == 0 ? 'stack_list' : 'stack_exist'}>
+              {userInfo.techField.map((item) => {
+                return (
+                  <li className={styles.stack_item}>{item.name}</li>
+                );
+              })}
+            </div>
+          </div>
+          <div className='user_box_right'>
+            <MessageModal receiverId={userId}/>
+          </div>
         </div>
-        <div className={state.techField.length == 0 ? 'stack_list' : 'stack_exist'}>
-          {state.techField.map((item) => {
+        <div className={styles.user_stack_wrapper}>
+          <label htmlFor='stack'>기술 스택</label>
+          {userStack && <StackField
+          selectedStack={userStack}
+          />}
+        </div>
+        {/* 프로젝트 */}
+          <div className={styles.user_project}>
+            <label htmlFor='project'>프로젝트 경험</label>
+          </div>
+          <div className={userInfo.project.length === 0 ? 'project_wrapper' : 'project_exist'}>
+          {userInfo.project.map((item, idx) => {
+              let userProjectStack = [];
+              item.stack.map((current) => {
+                userProjectStack.push(current.name);
+              });
             return (
-              <li className={styles.stack_item}>{item.name}</li>
+            <li id={"project " + item.id}
+             className={styles.project_list}
+             key={idx}
+             style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+             >
+              <div>
+              {item.name}
+              </div>
+              {stackOptions.filter(option => 
+                userProjectStack.includes(option.label)
+              ).map((option, index) => (
+                <div key={index} className={styles.project_stack_icon}>{option.icon}</div>)
+              )}
+              <div className={styles.project_span}>
+              {item.startDate} ~ {item.endDate}
+              </div>
+            </li>
+            )
+          })}
+        </div>
+        {/* 자격증 */}
+        <div className={styles.user_certificate}>
+          <label htmlFor='certificate'>자격증</label>
+        </div>
+        <div className={userInfo.certificate.length === 0 ? 'certificate_wrapper' : 'exist'}>
+          {userInfo.certificate.map((item, idx) => {
+            return (
+              <li
+              className={styles.certificate_list}
+              id={"certificate " + item.id}
+              key={"certificate" + idx}>
+                {item.name}
+              </li>
             );
           })}
         </div>
-      </div>
-      <div className='user_box_right'>
-        <MessageModal receiverId={userId}/>
-      </div>
-    </div>
-    <div className={styles.user_stack_wrapper}>
-      <label htmlFor='stack'>기술 스택</label>
-      <StackField
-      selectedStack={userStack}
-      />
-    </div>
-    {/* 프로젝트 */}
-      <div className={styles.user_project}>
-        <label htmlFor='project'>프로젝트 경험</label>
-      </div>
-      <div className={state.project.length === 0 ? 'project_wrapper' : 'project_exist'}>
-      {state.project.map((item, idx) => {
-          let userProjectStack = [];
-          item.stack.map((current) => {
-            userProjectStack.push(current.name);
-          });
-        return (
-        <li id={"project " + item.id}
-         className={styles.project_list}
-         key={idx}
-         style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-         >
-          <div>
-          {item.name}
+          <div className={styles.user_relatedSite}>
+            <label htmlFor='relatedSited'>관련 사이트</label>
           </div>
-          {stackOptions.filter(option => 
-            userProjectStack.includes(option.label)
-          ).map((option, index) => (
-            <div key={index} className={styles.project_stack_icon}>{option.icon}</div>)
-          )}
-          <div className={styles.project_span}>
-          {item.startDate} ~ {item.endDate}
+            <div className={userInfo.site.length === 0 ? 'relatedSite_wrapper' : 'exist'}>
+            {userInfo.site.map((item, idx) => {
+              return (
+                <li 
+                className={styles.certificate_list}
+                id={"relatedSite " + item.id}
+                key={"relatedSite" + idx}
+                onClick={()=>handleClick(item.name)}>
+                  {item.name}
+                </li>
+              );
+            })}
           </div>
-        </li>
-        )
-      })}
-    </div>
-    {/* 자격증 */}
-    <div className={styles.user_certificate}>
-      <label htmlFor='certificate'>자격증</label>
-    </div>
-    <div className={state.certificate.length === 0 ? 'certificate_wrapper' : 'exist'}>
-      {state.certificate.map((item, idx) => {
-        return (
-          <li
-          className={styles.certificate_list}
-          id={"certificate " + item.id}
-          key={"certificate" + idx}>
-            {item.name}
-          </li>
-        );
-      })}
-    </div>
-      <div className={styles.user_relatedSite}>
-        <label htmlFor='relatedSited'>관련 사이트</label>
-      </div>
-        <div className={state.site.length === 0 ? 'relatedSite_wrapper' : 'exist'}>
-        {state.site.map((item, idx) => {
-          return (
-            <li 
-            className={styles.certificate_list}
-            id={"relatedSite " + item.id}
-            key={"relatedSite" + idx}
-            onClick={()=>handleClick(item.name)}>
-              {item.name}
-            </li>
-          );
-        })}
-      </div>
-    </div>
+        </div>
+    }
   </div>
   )
 }
