@@ -44,8 +44,9 @@
 }
 
 .userBlockWrapper {
-  margin-top: 60px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  column-gap: 18px;
+  row-gap: 40px;
+  place-items: center;
 }

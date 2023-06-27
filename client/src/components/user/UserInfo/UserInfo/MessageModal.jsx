@@ -7,6 +7,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { useRecoilState } from 'recoil';
 import { isLoggedIn } from '../../../../recoil/user';
 import { useNavigate } from 'react-router-dom';
+import messageImg from '../img/messageIcon.png'
 
 export default function MessageModal({ receiverId }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function MessageModal({ receiverId }) {
   
     return (
       <div>
-        <button onClick={openModal} className={styles.message_btn}>채팅<ChatBubbleIcon/></button>
+        <button onClick={openModal} className={styles.message_btn}>채팅<img src={messageImg} alt='채팅 사진' style={{width: "28px", height: "28px", marginLeft: "8px"}}/></button>
         {isOpen && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
