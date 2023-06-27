@@ -123,7 +123,8 @@ export default function Chat() {
                 ? chatGroup[0].receiverId
                 : chatGroup[0].senderId;
                 console.log(otherId);
-              if(memberPools != null) {
+                console.log(typeof otherId);
+              if(memberPools != null && otherId != undefined) {
                 userUrl = memberPools.filter((data) => data.memberId == otherId);
               }
               console.log(userUrl);
@@ -138,7 +139,7 @@ export default function Chat() {
               }}
             >
               <div style={{display: "flex"}}>
-              <img src={userUrl[0].imageUrl} alt='유저 이미지' style={{width: "50px", height: "50px", borderRadius: "100%"}}/>
+              {userUrl && <img src={userUrl[0].imageUrl} alt='유저 이미지' style={{width: "50px", height: "50px", borderRadius: "100%"}}/>}
                 <div style={{marginLeft: "17px"}}>
                   <div className={styles.chatHeader}>
                     <div className={styles.nickname}>{otherNickName}</div>
