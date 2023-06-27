@@ -134,20 +134,18 @@ export default function UserInfo(Member) {
         return (
         <li id={"project " + item.id}
          className={styles.project_list}
-         key={idx}
-         style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-         >
-          <div>
+         key={idx}>
+          <span>
           {item.name}
-          </div>
+          </span>
           {stackOptions.filter(option => 
             userProjectStack.includes(option.label)
           ).map((option, index) => (
-            <div key={index} className={styles.project_stack_icon}>{option.icon}</div>)
+            <span key={index} className={styles.project_stack_icon}>{option.icon}</span>)
           )}
-          <div className={styles.project_span}>
+          <span className={styles.project_span}>
           {item.startDate} ~ {item.endDate}
-          </div>
+          </span>
         </li>
         )
       })}

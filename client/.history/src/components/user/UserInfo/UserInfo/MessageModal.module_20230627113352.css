@@ -1,0 +1,117 @@
+.message_btn {
+    padding: 12px 20px;
+    font-family: var(--font-family-DoHyeon);
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #F25022;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.message_btn:hover {
+    background-color: #F03516;
+}
+
+.message_btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #F25022(0, 123, 255, 0.5);
+}
+
+textarea {
+    height: 170px;
+    font-family: var(--font-family-DoHyeon);
+    font-size: 18px;
+}
+
+/* 모달을 화면 중앙에 정렬 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* 모달 창이 위에 오도록 설정 */
+  }
+  
+  /* 모달 내용을 감싸는 컨테이너 */
+  .modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 모달 닫기 버튼 */
+  .modalClose {
+    background-color: transparent;
+    border: none;
+    color: gray;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+  
+  /* 모달 내용 스타일링 */
+  .modalContent h2 {
+    margin-top: 0;
+  }
+  
+  .modalContent p {
+    margin-bottom: 0;
+  }
+
+  .modalContent input {
+    margin-bottom: 0;
+    background-color: antiquewhite;
+    margin: 8px
+  }
+
+  .modalContent textarea {
+    margin-bottom: 0;
+    background-color: antiquewhite;
+    width: 450px;
+    margin: 24px;
+  }
+
+  .modalContent input[type="file"] {
+    background-color: transparent;
+  }
+
+  .previewImage {
+    border-radius: 100%;
+  }
+  
+  .guideBtn{
+    background: #eb1749;
+    width: 80px;
+    height: 30px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+  .guideBtn {
+    background: #eb1749;
+    width: 80px;
+    height: 30px;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  .guideBtn:hover {
+    border: 1px solid #eb1749;
+    background: #fff;
+    color: #eb1749;
+  }
+
+  textarea {
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+  }

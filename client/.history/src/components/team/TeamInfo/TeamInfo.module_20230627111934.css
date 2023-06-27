@@ -65,7 +65,7 @@
   border: 1px solid lightgray;
   border-radius: 10px;
   height: 38px;
-  line-height: 38px;
+  line-height: 36px;
   font-size: 22px;
 }
 
@@ -212,14 +212,5 @@
   margin: 10px;
 }
 
-.chatBtn {
-  background-color: var(--color-devPool);
-  color: var(--color-white);
-  border-radius: 10px;
-  width: 60px;
-  height: 24px;
-  transform: translateY(-4px) translateX(4px);
-  font-size: 12px;
-}
 
 

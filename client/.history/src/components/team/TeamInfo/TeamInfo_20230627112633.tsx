@@ -173,7 +173,7 @@ function TeamInfo(){
         <ul className={styles.teamMemberList}>
           {teamMemberList.map((member) => 
           <li>
-            <div>👨🏻‍💻 {member.nickName} <button className={styles.chatBtn} onClick={() => navigate(`/user/info/${member.memberId}`)}>연락하기</button></div>
+            <div>👨🏻‍💻 {member.nickName} <MessageModal receiverId={member.memberId}/></div>
           </li>
           )}     
         </ul>

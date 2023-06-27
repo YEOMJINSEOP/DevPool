@@ -51,17 +51,15 @@ function MainBanner() {
         </div>
       </div> */}
       <div className={styles.recruitContainer}>
-        <div className={styles.title}>👨🏻‍💻 최신 개발자 채용 공고 👨🏻‍💻</div>
+        <div className={styles.title}>👨🏻‍💻 최신 채용 공고 👨🏻‍💻</div>
         <ul className={styles.recruitInfoList}>
           {recruitInfoList.map((recruitInfo) => (
             <li className={styles.recruitInfoBlock}>
-              <img className={styles.companyLogo} src={`/image/${recruitInfo.company === 'LINE' ? 'line.png' : 'naver.png'}`} alt="logo" />
               <a className={styles.anchorTag}href={`${recruitInfo.company === 'LINE' ? 'https://careers.linecorp.com/ko/jobs?ca=All&ci=Seoul,Bundang&co=East%20Asia' : 'https://recruit.navercorp.com/rcrt/list.do' }`}>                
-                <div className={styles.contentBox}>
-                  <p className={styles.recruitTitle}>{recruitInfo.company}</p>
-                  <div className={styles.divider}></div>
-                  <p className={styles.recruitContent}>{recruitInfo.data}</p>
-                </div>
+                <img src={`/image/${recruitInfo.company === 'LINE' ? 'line.png' : 'naver.png'}`} alt="" />
+                <p className={styles.recruitTitle}>{recruitInfo.company}</p>
+                <div className={styles.divider}></div>
+                <p className={styles.recruitContent}>{recruitInfo.data}</p>
               </a>              
             </li>
           ))}
@@ -72,7 +70,7 @@ function MainBanner() {
           <ul className={styles.rankingList}>
             {baekJoonRank.map((info, idx) => (
               <li className={styles.rankingBlock}>
-                <p className={styles.crown}>{idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '🏃🏻'}</p>
+                <p className={styles.crown}>{idx === 0 ? '👑' : ' '}</p>
                 <p className={styles.rankingId}>{info.userId}</p>
                 <div className={styles.rankingSolvedCount}>
                   <span>Solved: {info.solvedCount}</span>
