@@ -19,7 +19,6 @@
 .teamName{
   font-family: var(--font-family-DoHyeon);
   font-size: 20px;
-  transform: translateY(14px);
   text-align: center;
 }
 
@@ -27,7 +26,6 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  line-height: 20px;
 }
 
 .hostImg {
